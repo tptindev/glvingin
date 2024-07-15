@@ -3,6 +3,7 @@
 
 #include "EngineEnums.h"
 
+class SceneManager;
 class Engine
 {
 public:
@@ -12,6 +13,7 @@ public:
     void Quit();
 
 private:
+    SceneManager *m_sceneManager;
     EngineEnums::EnginState m_state;
     static Engine *s_instance;
     Engine();

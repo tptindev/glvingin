@@ -1,4 +1,6 @@
 #include "Engine.h"
+#include "../SceneManager/SceneManager.h"
+#include <GLFW/glfw3.h>
 
 Engine *Engine::s_instance = nullptr;
 Engine *Engine::instance()
@@ -12,6 +14,16 @@ Engine *Engine::instance()
 
 bool Engine::Initialize()
 {
+    if (!glfwInit())
+    {
+        return false;
+    }
+    this->m_sceneManager = SceneManager::instance();
+    if (this->m_sceneManager == nullptr)
+    {
+        return false;
+    }
+
     this->m_state = EngineEnums::ENGINE_RUNNING;
     return true;
 }
@@ -22,7 +34,7 @@ void Engine::Loop()
     {
         if (this->m_state == EngineEnums::ENGINE_RUNNING)
         {
-
+            this->m_sceneManager->UpdateScenes();
         }
         else if (this->m_state == EngineEnums::ENGINE_PAUSED)
         {

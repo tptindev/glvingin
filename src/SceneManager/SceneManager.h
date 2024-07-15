@@ -9,11 +9,13 @@ class SceneManager
 public:
     static SceneManager *instance();
     void LoadScene(AScene* scene);
+    void UpdateScenes();
     void RemoveScene(int id);
+    void Transition(int id);
 
 private:
-    AScene *m_first_scene;
-    AScene *m_second_scene;
+    AScene *m_first_scene{nullptr};
+    AScene *m_second_scene{nullptr};
     std::unordered_map<int, AScene*> m_scenes;
     static SceneManager *s_instance;
     SceneManager();
