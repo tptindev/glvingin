@@ -3,10 +3,11 @@
 
 #include "AScene.h"
 
+struct GLFWwindow;
 class MenuScene : public AScene
 {
 public:
-    MenuScene();
+    MenuScene(GLFWwindow* window);
 
     // AScene interface
 public:

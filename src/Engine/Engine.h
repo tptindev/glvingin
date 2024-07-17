@@ -2,7 +2,7 @@
 #define ENGINE_H
 
 #include "EngineEnums.h"
-
+struct GLFWwindow;
 class SceneManager;
 class Engine
 {
@@ -13,6 +13,7 @@ public:
     void Quit();
 
 private:
+    GLFWwindow* m_window;
     SceneManager *m_sceneManager;
     EngineEnums::EnginState m_state;
     static Engine *s_instance;

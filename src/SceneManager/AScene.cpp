@@ -15,9 +15,9 @@ void AScene::setId(int newId)
     m_id = newId;
 }
 
-GLFWwindow *AScene::buffer() const
+GLFWwindow *AScene::window() const
 {
-    return m_buffer;
+    return m_window;
 }
 
 int AScene::width() const
@@ -38,20 +38,6 @@ int AScene::height() const
 void AScene::setHeight(int newHeight)
 {
     m_height = newHeight;
-}
-
-void AScene::Setup()
-{
-    this->m_buffer = glfwCreateWindow(this->m_width, this->m_height, this->m_title, NULL, NULL);
-    if (this->m_buffer == nullptr)
-    {
-        glfwTerminate();
-    }
-    else
-    {
-        /* Make the window's context current */
-        glfwMakeContextCurrent(this->m_buffer);
-    }
 }
 
 void AScene::setTitle(const char *newTitle)
@@ -89,9 +75,9 @@ void AScene::setEnable(bool newEnable)
     m_enable = newEnable;
 }
 
-AScene::AScene()
+AScene::AScene(GLFWwindow* window)
 {
-
+    this->m_window = window;
 }
 
 AScene::~AScene()

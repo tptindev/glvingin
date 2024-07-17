@@ -1,12 +1,11 @@
 #ifndef ASCENE_H
 #define ASCENE_H
 
-#include <GLFW/glfw3.h>
-
+struct GLFWwindow;
 class AScene
 {
 public:
-    AScene();
+    AScene(GLFWwindow* window);
     virtual ~AScene();
     int id() const;
     const char *title() const;
@@ -21,8 +20,6 @@ public:
     void setWidth(int newWidth);
     int height() const;
     void setHeight(int newHeight);
-
-    void Setup();
     virtual void EventHandle() = 0;
     virtual void Update() = 0;
     virtual void Render() = 0;
@@ -31,7 +28,7 @@ public:
 
     void setId(int newId);
 
-    GLFWwindow *buffer() const;
+    GLFWwindow *window() const;
 
 private:
     int m_id{-1};
@@ -41,8 +38,7 @@ private:
     float m_opacity{1.0f};
     bool m_visible{true};
     bool m_enable{true};
-
-    GLFWwindow* m_buffer;
+    GLFWwindow* m_window;
 };
 
 #endif // ASCENE_H

@@ -8,7 +8,7 @@ class SceneManager
 {
 public:
     static SceneManager *instance();
-    void LoadScene(AScene* scene);
+    void LoadScene(AScene* scene, bool active = false);
     void UpdateScenes();
     void RenderScenes();
     void RemoveScene(int id);

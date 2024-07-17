@@ -2,11 +2,11 @@
 #define GAMESCENE_H
 
 #include "AScene.h"
-
+struct GLFWwindow;
 class GameScene : public AScene
 {
 public:
-    GameScene();
+    GameScene(GLFWwindow* window);
 
     // AScene interface
 public:

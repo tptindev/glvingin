@@ -1,6 +1,7 @@
 #include "SceneManager.h"
 #include <vector>
 #include <thread>
+#include <GLFW/glfw3.h>
 SceneManager *SceneManager::s_instance = nullptr;
 SceneManager *SceneManager::instance()
 {
@@ -11,12 +12,24 @@ SceneManager *SceneManager::instance()
     return SceneManager::s_instance;
 }
 
-void SceneManager::LoadScene(AScene *scene)
+void SceneManager::LoadScene(AScene *scene, bool active)
 {
     if (scene != nullptr)
     {
         scene->setId(m_scenes.size());
         this->m_scenes[scene->id()] = scene;
+//        if (this->m_scenes[scene->id()] != nullptr)
+//        {
+//            scene->EventHandle();
+//        }
+
+        if (active == true)
+        {
+            if (this->m_first_scene == nullptr)
+            {
+                this->m_first_scene = scene;
+            }
+        }
     }
 }
 
@@ -27,7 +40,6 @@ void SceneManager::UpdateScenes()
         if (scene == nullptr) return;
         if (scene->enable() && scene->visible())
         {
-            scene->EventHandle();
             scene->Update();
         }
     }, this->m_first_scene));
@@ -36,7 +48,6 @@ void SceneManager::UpdateScenes()
         if (scene == nullptr) return;
         if (scene->enable() && scene->visible())
         {
-            scene->EventHandle();
             scene->Update();
         }
     }, this->m_second_scene));
@@ -57,20 +68,17 @@ void SceneManager::RenderScenes()
     scene_threads.push_back(std::thread([](AScene *scene) {
         if (scene == nullptr) return;
         scene->Render();
-        glfwSwapBuffers(scene->buffer());
     }, this->m_first_scene));
 
     scene_threads.push_back(std::thread([](AScene *scene) {
         if (scene == nullptr) return;
         scene->Render();
-        glfwSwapBuffers(scene->buffer());
     }, this->m_second_scene));
 
     for (int i = 0; i < static_cast<int>(scene_threads.size()); i++)
     {
         scene_threads.at(i).join();
     }
-    glfwPollEvents();
 }
 
 void SceneManager::RemoveScene(int id)
