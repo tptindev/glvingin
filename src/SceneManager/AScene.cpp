@@ -15,6 +15,11 @@ void AScene::setId(int newId)
     m_id = newId;
 }
 
+GLFWwindow *AScene::buffer() const
+{
+    return m_buffer;
+}
+
 int AScene::width() const
 {
     return m_width;

@@ -31,6 +31,8 @@ public:
 
     void setId(int newId);
 
+    GLFWwindow *buffer() const;
+
 private:
     int m_id{-1};
     const char* m_title{"Unknow"};

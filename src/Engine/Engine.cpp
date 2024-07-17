@@ -1,7 +1,9 @@
 #include "Engine.h"
-#include "../SceneManager/SceneManager.h"
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include "../SceneManager/MenuScene.h"
+#include "../SceneManager/SceneManager.h"
+
 
 Engine *Engine::s_instance = nullptr;
 Engine *Engine::instance()
@@ -19,6 +21,12 @@ bool Engine::Initialize()
     {
         return false;
     }
+
+//    if (glewInit() != GLEW_OK)
+//    {
+//        return false;
+//    }
+
     this->m_sceneManager = SceneManager::instance();
     if (this->m_sceneManager == nullptr)
     {
@@ -49,7 +57,7 @@ void Engine::Loop()
 
 void Engine::Quit()
 {
-
+    glfwTerminate();
 }
 
 Engine::Engine()
@@ -59,5 +67,4 @@ Engine::Engine()
 
 Engine::~Engine()
 {
-
 }

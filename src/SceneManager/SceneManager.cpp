@@ -49,23 +49,28 @@ void SceneManager::UpdateScenes()
 
 void SceneManager::RenderScenes()
 {
+    /* Render here */
+    glClearColor(0, 0, 0, 1);
+    glClear(GL_COLOR_BUFFER_BIT);
+
     std::vector<std::thread> scene_threads;
     scene_threads.push_back(std::thread([](AScene *scene) {
         if (scene == nullptr) return;
-        /* Render here */
-        glClear(GL_COLOR_BUFFER_BIT);
         scene->Render();
+        glfwSwapBuffers(scene->buffer());
     }, this->m_first_scene));
 
     scene_threads.push_back(std::thread([](AScene *scene) {
         if (scene == nullptr) return;
         scene->Render();
+        glfwSwapBuffers(scene->buffer());
     }, this->m_second_scene));
 
     for (int i = 0; i < static_cast<int>(scene_threads.size()); i++)
     {
         scene_threads.at(i).join();
     }
+    glfwPollEvents();
 }
 
 void SceneManager::RemoveScene(int id)
@@ -73,6 +78,8 @@ void SceneManager::RemoveScene(int id)
     if (this->m_scenes[id] != nullptr)
     {
         this->m_scenes.erase(this->m_scenes.find(id), this->m_scenes.end());
+        delete this->m_scenes[id];
+        this->m_scenes[id] = nullptr;
     }
 }
 
