@@ -1,6 +1,7 @@
 #include "Engine.h"
 #include "../SceneManager/SceneManager.h"
 #include <GLFW/glfw3.h>
+#include "../SceneManager/MenuScene.h"
 
 Engine *Engine::s_instance = nullptr;
 Engine *Engine::instance()
@@ -24,6 +25,8 @@ bool Engine::Initialize()
         return false;
     }
 
+    this->m_sceneManager->LoadScene(new MenuScene());
+
     this->m_state = EngineEnums::ENGINE_RUNNING;
     return true;
 }
@@ -38,8 +41,9 @@ void Engine::Loop()
         }
         else if (this->m_state == EngineEnums::ENGINE_PAUSED)
         {
-
+            // Do nothing
         }
+        this->m_sceneManager->RenderScenes();
     }
 }
 

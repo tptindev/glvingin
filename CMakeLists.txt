@@ -24,8 +24,10 @@ add_executable(${PROJECT_NAME} src/main.cpp
     src/Engine/Engine.h src/Engine/Engine.cpp
     src/Engine/EngineEnums.h
     src/SceneManager/SceneManager.h src/SceneManager/SceneManager.cpp
-    src/SceneManager/AScene.h src/SceneManager/AScene.cpp)
-target_link_libraries(${PROJECT_NAME} PRIVATE "-lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf  -lglfw3 -lgdi32 -lopengl32")
+    src/SceneManager/AScene.h src/SceneManager/AScene.cpp
+    src/SceneManager/MenuScene.h src/SceneManager/MenuScene.cpp
+    src/SceneManager/GameScene.h src/SceneManager/GameScene.cpp)
+target_link_libraries(${PROJECT_NAME} PRIVATE "-lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf  -lglfw3 -lgdi32 -lopengl32 -lglew32 -lglew32s")
 
 include(GNUInstallDirs)
 install(TARGETS ${PROJECT_NAME}

@@ -10,6 +10,7 @@ public:
     static SceneManager *instance();
     void LoadScene(AScene* scene);
     void UpdateScenes();
+    void RenderScenes();
     void RemoveScene(int id);
     void Transition(int id);
 

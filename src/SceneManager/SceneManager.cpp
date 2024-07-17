@@ -15,6 +15,7 @@ void SceneManager::LoadScene(AScene *scene)
 {
     if (scene != nullptr)
     {
+        scene->setId(m_scenes.size());
         this->m_scenes[scene->id()] = scene;
     }
 }
@@ -29,7 +30,6 @@ void SceneManager::UpdateScenes()
             scene->EventHandle();
             scene->Update();
         }
-        scene->Render();
     }, this->m_first_scene));
 
     scene_threads.push_back(std::thread([](AScene *scene) {
@@ -39,6 +39,26 @@ void SceneManager::UpdateScenes()
             scene->EventHandle();
             scene->Update();
         }
+    }, this->m_second_scene));
+
+    for (int i = 0; i < static_cast<int>(scene_threads.size()); i++)
+    {
+        scene_threads.at(i).join();
+    }
+}
+
+void SceneManager::RenderScenes()
+{
+    std::vector<std::thread> scene_threads;
+    scene_threads.push_back(std::thread([](AScene *scene) {
+        if (scene == nullptr) return;
+        /* Render here */
+        glClear(GL_COLOR_BUFFER_BIT);
+        scene->Render();
+    }, this->m_first_scene));
+
+    scene_threads.push_back(std::thread([](AScene *scene) {
+        if (scene == nullptr) return;
         scene->Render();
     }, this->m_second_scene));
 
