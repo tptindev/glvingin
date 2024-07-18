@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(vingin LANGUAGES CXX)
+project(vingin LANGUAGES C CXX)
 
+set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # specify the ouput directory
@@ -22,11 +23,11 @@ set(LINKER_LIBS
     opengl32
 )
 file(COPY
-    "${CMAKE_SOURCE_DIR}/bin/glew32.dll"
     "${CMAKE_SOURCE_DIR}/bin/SDL2.dll"
     "${CMAKE_SOURCE_DIR}/bin/SDL2_image.dll"
     "${CMAKE_SOURCE_DIR}/bin/SDL2_mixer.dll"
     "${CMAKE_SOURCE_DIR}/bin/SDL2_ttf.dll"
+    "${CMAKE_SOURCE_DIR}/bin/glew32.dll"
     DESTINATION ${CMAKE_BINARY_DIR})
 
 include_directories(${INC_DIR})

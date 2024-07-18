@@ -29,11 +29,6 @@ bool Engine::Initialize()
         return false;
     }
 
-    if (!glewInit() != GLEW_OK)
-    {
-        return false;
-    }
-
     this->m_window = glfwCreateWindow(640, 480, "ViNgin", NULL, NULL);
     if (this->m_window == nullptr)
     {
@@ -43,6 +38,11 @@ bool Engine::Initialize()
 
     /* Make the window's context current */
     glfwMakeContextCurrent(this->m_window);
+
+    if (glewInit() != GLEW_OK)
+    {
+        return false;
+    }
 
     this->m_sceneManager = SceneManager::instance();
     if (this->m_sceneManager == nullptr)
