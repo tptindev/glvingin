@@ -18,16 +18,14 @@ void SceneManager::LoadScene(AScene *scene, bool active)
     {
         scene->setId(m_scenes.size());
         this->m_scenes[scene->id()] = scene;
-//        if (this->m_scenes[scene->id()] != nullptr)
-//        {
-//            scene->EventHandle();
-//        }
 
         if (active == true)
         {
+
             if (this->m_first_scene == nullptr)
             {
                 this->m_first_scene = scene;
+                this->m_first_scene->EventHandle();
             }
         }
     }
@@ -61,7 +59,7 @@ void SceneManager::UpdateScenes()
 void SceneManager::RenderScenes()
 {
     /* Render here */
-    glClearColor(0, 0, 0, 1);
+    glClearColor(1, 1, 1, 1);
     glClear(GL_COLOR_BUFFER_BIT);
 
     std::vector<std::thread> scene_threads;

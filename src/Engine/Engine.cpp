@@ -1,7 +1,7 @@
 #include "Engine.h"
-#include <iostream>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <iostream>
 #include "../SceneManager/MenuScene.h"
 #include "../SceneManager/GameScene.h"
 #include "../SceneManager/SceneManager.h"
@@ -29,10 +29,10 @@ bool Engine::Initialize()
         return false;
     }
 
-    //    if (glewInit() != GLEW_OK)
-    //    {
-    //        return false;
-    //    }
+    if (!glewInit() != GLEW_OK)
+    {
+        return false;
+    }
 
     this->m_window = glfwCreateWindow(640, 480, "ViNgin", NULL, NULL);
     if (this->m_window == nullptr)
@@ -40,13 +40,6 @@ bool Engine::Initialize()
         glfwTerminate();
         return false;
     }
-
-    glfwSetKeyCallback(this->m_window, [](GLFWwindow* window, int key, int scancode, int action, int mods) {
-        if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-        {
-            glfwSetWindowShouldClose(window, GLFW_TRUE);
-        }
-    });
 
     /* Make the window's context current */
     glfwMakeContextCurrent(this->m_window);
@@ -66,16 +59,9 @@ bool Engine::Initialize()
 
 void Engine::Loop()
 {
-    while (this->m_state != EngineEnums::ENGINE_STOPED)
+    while (!glfwWindowShouldClose(this->m_window))
     {
-        if (this->m_state == EngineEnums::ENGINE_RUNNING)
-        {
-            this->m_sceneManager->UpdateScenes();
-        }
-        else if (this->m_state == EngineEnums::ENGINE_PAUSED)
-        {
-            // Do nothing
-        }
+        this->m_sceneManager->UpdateScenes();
         this->m_sceneManager->RenderScenes();
 
         /* Swap front and back buffers */

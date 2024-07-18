@@ -17,6 +17,7 @@ set(LINKER_LIBS
     SDL2_mixer
     SDL2_ttf
     glfw3
+    glew32
     gdi32
     opengl32
 )
@@ -39,7 +40,7 @@ add_executable(${PROJECT_NAME} src/main.cpp
     src/SceneManager/MenuScene.h src/SceneManager/MenuScene.cpp
     src/SceneManager/GameScene.h src/SceneManager/GameScene.cpp)
 
-target_link_libraries( ${PROJECT_NAME} PRIVATE ${LINKER_LIBS})
+target_link_libraries( ${PROJECT_NAME} ${LINKER_LIBS})
 
 include(GNUInstallDirs)
 install(TARGETS ${PROJECT_NAME}

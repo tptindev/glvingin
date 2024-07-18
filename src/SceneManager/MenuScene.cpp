@@ -1,6 +1,6 @@
 #include "MenuScene.h"
 #include <GLFW/glfw3.h>
-#include <stdio.h>
+#include <iostream>
 
 MenuScene::MenuScene(GLFWwindow* window): AScene(window)
 {
