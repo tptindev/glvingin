@@ -4,7 +4,13 @@
 class EngineEnums
 {
 public:
-    enum EnginState
+    enum EngineMode
+    {
+        MODE_2D,
+        MODE_3D
+    };
+
+    enum EngineState
     {
         ENGINE_READY,
         ENGINE_RUNNING,
