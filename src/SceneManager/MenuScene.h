@@ -7,7 +7,7 @@ struct GLFWwindow;
 class MenuScene : public AScene
 {
 public:
-    MenuScene(GLFWwindow* window);
+    MenuScene(GLFWwindow* window, SceneManager* manager);
 
     // AScene interface
 public:

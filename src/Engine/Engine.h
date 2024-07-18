@@ -8,11 +8,15 @@ class Engine
 {
 public:
     static Engine *instance();
-    bool Initialize(EngineEnums::EngineMode mode);
+    bool Initialize(const char* title, EngineEnums::EngineMode mode);
     void Loop();
     void Quit();
 
+    const char *title() const;
+    void setTitle(const char *newTitle);
+
 private:
+    const char* m_title;
     GLFWwindow* m_window;
     SceneManager *m_sceneManager;
     EngineEnums::EngineMode m_mode;

@@ -3,10 +3,11 @@
 
 #include "AScene.h"
 struct GLFWwindow;
+struct SceneManager;
 class GameScene : public AScene
 {
 public:
-    GameScene(GLFWwindow* window);
+    GameScene(GLFWwindow* window, SceneManager* manager);
 
     // AScene interface
 public:

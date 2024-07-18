@@ -2,12 +2,14 @@
 #define ASCENE_H
 
 struct GLFWwindow;
+class SceneManager;
 class AScene
 {
 public:
-    AScene(GLFWwindow* window);
+    AScene(GLFWwindow* window, SceneManager* manager);
     virtual ~AScene();
     int id() const;
+    void setId(int newId);
     const char *title() const;
     void setTitle(const char *newName);
     float opacity() const;
@@ -24,11 +26,9 @@ public:
     virtual void Update() = 0;
     virtual void Render() = 0;
 
-
-
-    void setId(int newId);
-
     GLFWwindow *window() const;
+protected:
+    static SceneManager* manager();
 
 private:
     int m_id{-1};
@@ -39,6 +39,7 @@ private:
     bool m_visible{true};
     bool m_enable{true};
     GLFWwindow* m_window;
+    static SceneManager* s_manager;
 };
 
 #endif // ASCENE_H

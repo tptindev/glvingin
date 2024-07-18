@@ -2,6 +2,7 @@
 #include <vector>
 #include <thread>
 #include <GLFW/glfw3.h>
+#include <stdio.h>
 SceneManager *SceneManager::s_instance = nullptr;
 SceneManager *SceneManager::instance()
 {
@@ -26,6 +27,11 @@ void SceneManager::LoadScene(AScene *scene, bool active)
             {
                 this->m_first_scene = scene;
                 this->m_first_scene->EventHandle();
+
+                const char* title = glfwGetWindowTitle(this->m_first_scene->window());
+                char newTitle[255];
+                sprintf(newTitle, "%s[%s]", title, this->m_first_scene->title());
+                glfwSetWindowTitle(this->m_first_scene->window(), newTitle);
             }
         }
     }
@@ -101,6 +107,11 @@ void SceneManager::Transition(int id)
     {
         this->m_second_scene = scene;
     }
+    scene->EventHandle();
+    const char* title = glfwGetWindowTitle(scene->window());
+    char newTitle[255];
+    sprintf(newTitle, "%s[%s]", title, scene->title());
+    glfwSetWindowTitle(scene->window(), newTitle);
 }
 
 SceneManager::SceneManager()

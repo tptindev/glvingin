@@ -1,5 +1,6 @@
 #include "AScene.h"
 
+SceneManager* AScene::s_manager = nullptr;
 int AScene::id() const
 {
     return m_id;
@@ -18,6 +19,11 @@ void AScene::setId(int newId)
 GLFWwindow *AScene::window() const
 {
     return m_window;
+}
+
+SceneManager *AScene::manager()
+{
+    return AScene::s_manager;
 }
 
 int AScene::width() const
@@ -75,9 +81,10 @@ void AScene::setEnable(bool newEnable)
     m_enable = newEnable;
 }
 
-AScene::AScene(GLFWwindow* window)
+AScene::AScene(GLFWwindow* window, SceneManager* manager)
 {
     this->m_window = window;
+    s_manager = manager;
 }
 
 AScene::~AScene()

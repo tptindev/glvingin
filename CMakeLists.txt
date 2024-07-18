@@ -39,7 +39,10 @@ add_executable(${PROJECT_NAME} src/main.cpp
     src/SceneManager/SceneManager.h src/SceneManager/SceneManager.cpp
     src/SceneManager/AScene.h src/SceneManager/AScene.cpp
     src/SceneManager/MenuScene.h src/SceneManager/MenuScene.cpp
-    src/SceneManager/GameScene.h src/SceneManager/GameScene.cpp)
+    src/SceneManager/GameScene.h src/SceneManager/GameScene.cpp
+    src/ECS/AEntity.h src/ECS/AEntity.cpp
+    src/ECS/AComponent.h src/ECS/AComponent.cpp
+    src/ECS/ASystem.h src/ECS/ASystem.cpp)
 
 target_link_libraries( ${PROJECT_NAME} ${LINKER_LIBS})
 

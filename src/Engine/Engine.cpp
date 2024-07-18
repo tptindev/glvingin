@@ -18,8 +18,9 @@ Engine *Engine::instance()
     return Engine::s_instance;
 }
 
-bool Engine::Initialize(EngineEnums::EngineMode mode)
+bool Engine::Initialize(const char* title, EngineEnums::EngineMode mode)
 {
+    this->m_title = title;
     this->m_mode = mode;
     glfwSetErrorCallback([](int error, const char* description)
                          {
@@ -31,7 +32,7 @@ bool Engine::Initialize(EngineEnums::EngineMode mode)
         return false;
     }
 
-    this->m_window = glfwCreateWindow(640, 480, "ViNgin", NULL, NULL);
+    this->m_window = glfwCreateWindow(640, 480, this->m_title, NULL, NULL);
     if (this->m_window == nullptr)
     {
         glfwTerminate();
@@ -61,8 +62,8 @@ bool Engine::Initialize(EngineEnums::EngineMode mode)
         return false;
     }
 
-    this->m_sceneManager->LoadScene(new MenuScene(this->m_window), true);
-    this->m_sceneManager->LoadScene(new GameScene(this->m_window));
+    this->m_sceneManager->LoadScene(new MenuScene(this->m_window, this->m_sceneManager), true);
+    this->m_sceneManager->LoadScene(new GameScene(this->m_window, this->m_sceneManager));
 
     return true;
 }
@@ -90,6 +91,16 @@ void Engine::Quit()
     SDL_Quit();
     glfwDestroyWindow(this->m_window);
     glfwTerminate();
+}
+
+const char *Engine::title() const
+{
+    return m_title;
+}
+
+void Engine::setTitle(const char *newTitle)
+{
+    m_title = newTitle;
 }
 
 Engine::Engine()
