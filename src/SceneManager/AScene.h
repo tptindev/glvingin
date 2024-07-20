@@ -1,12 +1,14 @@
 #ifndef ASCENE_H
 #define ASCENE_H
 
+#include "../Utilities/IOC.h"
+
 struct GLFWwindow;
 class SceneManager;
 class AScene
 {
 public:
-    AScene(GLFWwindow* window, SceneManager* manager);
+    AScene(GLFWwindow* surface, SceneManager* manager);
     virtual ~AScene();
     int id() const;
     void setId(int newId);
@@ -26,7 +28,10 @@ public:
     virtual void Update() = 0;
     virtual void Render() = 0;
 
-    GLFWwindow *window() const;
+    GLFWwindow *surface() const;
+
+    Signal<void, const char *> &SignalNotifyTitleChanged();
+
 protected:
     static SceneManager* manager();
 
@@ -38,8 +43,9 @@ private:
     float m_opacity{1.0f};
     bool m_visible{true};
     bool m_enable{true};
-    GLFWwindow* m_window;
+    GLFWwindow* m_surface;
     static SceneManager* s_manager;
+    Signal<void, const char*> m_SignalNotifyTitleChanged;
 };
 
 #endif // ASCENE_H

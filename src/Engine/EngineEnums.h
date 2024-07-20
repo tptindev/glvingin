@@ -17,6 +17,11 @@ public:
         ENGINE_PAUSED,
         ENGINE_STOPED
     };
+
+    enum EngineSlot
+    {
+        ENGINE_WIN_TITLE_CHANGED
+    };
 };
 
 #endif // ENGINEENUMS_H

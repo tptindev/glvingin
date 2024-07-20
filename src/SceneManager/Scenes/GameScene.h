@@ -1,13 +1,13 @@
 #ifndef GAMESCENE_H
 #define GAMESCENE_H
 
-#include "AScene.h"
+#include "../AScene.h"
 struct GLFWwindow;
 struct SceneManager;
 class GameScene : public AScene
 {
 public:
-    GameScene(GLFWwindow* window, SceneManager* manager);
+    GameScene(GLFWwindow* surface, SceneManager* manager);
 
     // AScene interface
 public:

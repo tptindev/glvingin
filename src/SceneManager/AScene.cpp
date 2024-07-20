@@ -16,14 +16,19 @@ void AScene::setId(int newId)
     m_id = newId;
 }
 
-GLFWwindow *AScene::window() const
-{
-    return m_window;
-}
-
 SceneManager *AScene::manager()
 {
     return AScene::s_manager;
+}
+
+Signal<void, const char *> &AScene::SignalNotifyTitleChanged()
+{
+    return m_SignalNotifyTitleChanged;
+}
+
+GLFWwindow *AScene::surface() const
+{
+    return m_surface;
 }
 
 int AScene::width() const
@@ -81,9 +86,9 @@ void AScene::setEnable(bool newEnable)
     m_enable = newEnable;
 }
 
-AScene::AScene(GLFWwindow* window, SceneManager* manager)
+AScene::AScene(GLFWwindow* surface, SceneManager* manager)
 {
-    this->m_window = window;
+    this->m_surface = surface;
     s_manager = manager;
 }
 

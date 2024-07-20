@@ -1,13 +1,13 @@
 #ifndef MENUSCENE_H
 #define MENUSCENE_H
 
-#include "AScene.h"
+#include "../AScene.h"
 
 struct GLFWwindow;
 class MenuScene : public AScene
 {
 public:
-    MenuScene(GLFWwindow* window, SceneManager* manager);
+    MenuScene(GLFWwindow* surface, SceneManager* manager);
 
     // AScene interface
 public:

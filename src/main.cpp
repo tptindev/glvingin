@@ -2,7 +2,7 @@
 
 int main(void)
 {
-    if (Engine::instance()->Initialize("ViNgin", EngineEnums::MODE_2D))
+    if (Engine::instance()->Initialize("ViNgin[%s]", EngineEnums::MODE_2D))
     {
         Engine::instance()->Loop();
         Engine::instance()->Quit();

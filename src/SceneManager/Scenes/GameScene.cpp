@@ -1,6 +1,7 @@
 #include "GameScene.h"
 #include <GLFW/glfw3.h>
-GameScene::GameScene(GLFWwindow* window, SceneManager* manager): AScene(window, manager)
+#include "../SceneManager.h"
+GameScene::GameScene(GLFWwindow* surface, SceneManager* manager): AScene(surface, manager)
 {
     this->setTitle("Game");
     this->setWidth(640);
@@ -9,10 +10,10 @@ GameScene::GameScene(GLFWwindow* window, SceneManager* manager): AScene(window, 
 
 void GameScene::EventHandle()
 {
-    glfwSetKeyCallback(this->window(), [](GLFWwindow* window, int key, int scancode, int action, int mods) {
+    glfwSetKeyCallback(this->surface(), [](GLFWwindow* window, int key, int scancode, int action, int mods) {
         if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         {
-            glfwSetWindowShouldClose(window, GLFW_TRUE);
+            GameScene::manager()->Transition(0);
         }
     });
 }

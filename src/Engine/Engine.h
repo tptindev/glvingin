@@ -24,6 +24,7 @@ private:
     static Engine *s_instance;
     Engine();
     ~Engine();
+    void OnWindowTitleChanged(const char*title);
 };
 
 #endif // ENGINE_H

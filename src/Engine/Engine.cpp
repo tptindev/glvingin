@@ -3,8 +3,8 @@
 #include <GLFW/glfw3.h>
 #include <SDL2/SDL.h>
 #include <iostream>
-#include "../SceneManager/MenuScene.h"
-#include "../SceneManager/GameScene.h"
+#include "../SceneManager/Scenes/MenuScene.h"
+#include "../SceneManager/Scenes/GameScene.h"
 #include "../SceneManager/SceneManager.h"
 
 
@@ -62,9 +62,17 @@ bool Engine::Initialize(const char* title, EngineEnums::EngineMode mode)
         return false;
     }
 
-    this->m_sceneManager->LoadScene(new MenuScene(this->m_window, this->m_sceneManager), true);
-    this->m_sceneManager->LoadScene(new GameScene(this->m_window, this->m_sceneManager));
+    MenuScene *menuScene = new MenuScene(this->m_window, this->m_sceneManager);
+    GameScene *gameScene = new GameScene(this->m_window, this->m_sceneManager);
 
+    menuScene->SignalNotifyTitleChanged().Connect(EngineEnums::ENGINE_WIN_TITLE_CHANGED,
+                                                  std::bind(&Engine::OnWindowTitleChanged, this, std::placeholders::_1));
+    gameScene->SignalNotifyTitleChanged().Connect(EngineEnums::ENGINE_WIN_TITLE_CHANGED,
+                                                  std::bind(&Engine::OnWindowTitleChanged, this, std::placeholders::_1));
+
+
+    this->m_sceneManager->LoadScene(menuScene, true);
+    this->m_sceneManager->LoadScene(gameScene);
     return true;
 }
 
@@ -110,4 +118,11 @@ Engine::Engine()
 
 Engine::~Engine()
 {
+}
+
+void Engine::OnWindowTitleChanged(const char *title)
+{
+    char buffer[255];
+    sprintf(&buffer[0], this->title(), title);
+    glfwSetWindowTitle(this->m_window, buffer);
 }
