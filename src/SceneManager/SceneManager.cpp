@@ -28,7 +28,7 @@ void SceneManager::LoadScene(AScene *scene, bool active)
                 this->m_first_scene = scene;
                 this->m_first_scene->EventHandle();
             }
-            scene->SignalNotifyTitleChanged().Emit(scene->title());
+            scene->SignalNotifyTitleChanged().Emit(this->m_first_scene->title());
         }
     }
 }
@@ -99,7 +99,7 @@ void SceneManager::Transition(int id)
     {
         this->m_first_scene = scene;
     }
-    else
+    else if (this->m_second_scene == nullptr)
     {
         this->m_second_scene = scene;
     }
@@ -114,5 +114,12 @@ SceneManager::SceneManager()
 
 SceneManager::~SceneManager()
 {
-
+    std::unordered_map<int, AScene*>::iterator it = this->m_scenes.begin();
+    while (it != this->m_scenes.end())
+    {
+        this->m_scenes.erase(it);
+        delete it->second;
+        it->second = nullptr;
+        ++it;
+    }
 }

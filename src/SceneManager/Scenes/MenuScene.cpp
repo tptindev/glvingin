@@ -10,6 +10,11 @@ MenuScene::MenuScene(GLFWwindow* surface, SceneManager* manager): AScene(surface
     this->setHeight(420);
 }
 
+MenuScene::~MenuScene()
+{
+
+}
+
 void MenuScene::EventHandle()
 {
     glfwSetKeyCallback(this->surface(), [](GLFWwindow* window, int key, int scancode, int action, int mods) {

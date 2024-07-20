@@ -7,8 +7,8 @@ struct GLFWwindow;
 class MenuScene : public AScene
 {
 public:
-    MenuScene(GLFWwindow* surface, SceneManager* manager);
-
+    MenuScene(GLFWwindow *surface, SceneManager *manager);
+    ~MenuScene();
     // AScene interface
 public:
     virtual void EventHandle() override;

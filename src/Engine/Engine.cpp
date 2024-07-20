@@ -62,8 +62,9 @@ bool Engine::Initialize(const char* title, EngineEnums::EngineMode mode)
         return false;
     }
 
-    MenuScene *menuScene = new MenuScene(this->m_window, this->m_sceneManager);
-    GameScene *gameScene = new GameScene(this->m_window, this->m_sceneManager);
+    AScene *menuScene = new MenuScene(this->m_window, this->m_sceneManager);
+    AScene *gameScene = new GameScene(this->m_window, this->m_sceneManager);
+
 
     menuScene->SignalNotifyTitleChanged().Connect(EngineEnums::ENGINE_WIN_TITLE_CHANGED,
                                                   std::bind(&Engine::OnWindowTitleChanged, this, std::placeholders::_1));

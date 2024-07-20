@@ -2,6 +2,7 @@
 #define SCENEMANAGER_H
 
 #include <unordered_map>
+#include <memory>
 #include "AScene.h"
 
 class SceneManager

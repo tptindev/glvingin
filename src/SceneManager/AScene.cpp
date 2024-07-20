@@ -1,4 +1,5 @@
 #include "AScene.h"
+#include <iostream>
 
 SceneManager* AScene::s_manager = nullptr;
 int AScene::id() const
@@ -94,5 +95,5 @@ AScene::AScene(GLFWwindow* surface, SceneManager* manager)
 
 AScene::~AScene()
 {
-
+    std::cout << __FUNCTION__ << std::endl;
 }

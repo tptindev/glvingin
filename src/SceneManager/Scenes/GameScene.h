@@ -7,8 +7,8 @@ struct SceneManager;
 class GameScene : public AScene
 {
 public:
-    GameScene(GLFWwindow* surface, SceneManager* manager);
-
+    explicit GameScene(GLFWwindow *surface, SceneManager *manager);
+    ~GameScene();
     // AScene interface
 public:
     virtual void EventHandle() override;
