@@ -6,21 +6,27 @@ class EngineEnums
 public:
     enum EngineMode
     {
+        EngineMode_Min,
         MODE_2D,
-        MODE_3D
+        MODE_3D,
+        EngineMode_Max
     };
 
     enum EngineState
     {
+        EngineState_Min = EngineMode_Max,
         ENGINE_READY,
         ENGINE_RUNNING,
         ENGINE_PAUSED,
-        ENGINE_STOPED
+        ENGINE_STOPED,
+        EngineState_max
     };
 
-    enum EngineSlot
+    enum EngineNotify
     {
-        ENGINE_WIN_TITLE_CHANGED
+        EngineNotify_Min = EngineState_max,
+        ENGINE_WIN_TITLE_CHANGED,
+        EngineNotify_Max
     };
 };
 
