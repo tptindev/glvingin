@@ -12,21 +12,19 @@ MenuScene::MenuScene(GLFWwindow* surface, SceneManager* manager): AScene(surface
 
 MenuScene::~MenuScene()
 {
-
+    std::cout << __FUNCTION__ << ":" << this->title() << std::endl;
 }
 
-void MenuScene::EventHandle()
+void MenuScene::EventHandle(GLFWwindow *window, int key, int scancode, int action, int mods)
 {
-    glfwSetKeyCallback(this->surface(), [](GLFWwindow* window, int key, int scancode, int action, int mods) {
-        if (key == GLFW_KEY_ENTER && action == GLFW_PRESS)
-        {
-            MenuScene::manager()->Transition(1);
-        }
-        else if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-        {
-            glfwSetWindowShouldClose(window, GLFW_TRUE);
-        }
-    });
+    if (key == GLFW_KEY_ENTER && action == GLFW_PRESS)
+    {
+        MenuScene::manager()->Transition(1);
+    }
+    else if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+    {
+        glfwSetWindowShouldClose(window, GLFW_TRUE);
+    }
 }
 
 void MenuScene::Update()

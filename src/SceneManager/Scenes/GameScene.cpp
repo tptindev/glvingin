@@ -11,17 +11,15 @@ GameScene::GameScene(GLFWwindow* surface, SceneManager* manager): AScene(surface
 
 GameScene::~GameScene()
 {
-    std::cout << __FUNCTION__ << std::endl;
+    std::cout << __FUNCTION__ << ":" << this->title() << std::endl;
 }
 
-void GameScene::EventHandle()
+void GameScene::EventHandle(GLFWwindow *window, int key, int scancode, int action, int mods)
 {
-    glfwSetKeyCallback(this->surface(), [](GLFWwindow* window, int key, int scancode, int action, int mods) {
-        if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-        {
-            GameScene::manager()->Transition(0);
-        }
-    });
+    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+    {
+        GameScene::manager()->Transition(0);
+    }
 }
 
 void GameScene::Update()

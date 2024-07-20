@@ -24,8 +24,12 @@ public:
 
     bool Connect(int id, const SLOT& slot)
     {
-        this->m_slots[id] = slot;
-        return (slot == nullptr);
+        if (this->m_slots[id] != nullptr) return false;
+        else
+        {
+            this->m_slots[id] = slot;
+        }
+        return true;
     }
     bool Disconnect(int id)
     {
@@ -38,12 +42,13 @@ public:
     }
     void Emit(int id, Args&&... args) const
     {
-        if (this->m_slots[id] != nullptr)
+        typename std::unordered_map<int, SLOT>::const_iterator it = this->m_slots.find(id);
+        if (it != this->m_slots.end())
         {
-            this->m_slots[id]->second(std::forward<Args>(args)...);
+            it->second(std::forward<Args>(args)...);
         }
     }
-    void Emit(Args&&... args) const
+    void EmitAll(Args&&... args) const
     {
         typename std::unordered_map<int, SLOT>::const_iterator it = this->m_slots.begin();
         while (it != this->m_slots.end())

@@ -62,18 +62,14 @@ bool Engine::Initialize(const char* title, EngineEnums::EngineMode mode)
         return false;
     }
 
-    AScene *menuScene = new MenuScene(this->m_window, this->m_sceneManager);
-    AScene *gameScene = new GameScene(this->m_window, this->m_sceneManager);
+    this->m_sceneManager->NotifyWindowTitleChanged().Connect(
+        SceneManager::NOTIFY_SCENE_CHANGED,
+        std::bind(&Engine::OnWindowTitleChanged, this, std::placeholders::_1)
+        );
 
+    this->m_sceneManager->LoadScene(new MenuScene(this->m_window, this->m_sceneManager), true);
+    this->m_sceneManager->LoadScene(new GameScene(this->m_window, this->m_sceneManager));
 
-    menuScene->SignalNotifyTitleChanged().Connect(EngineEnums::ENGINE_WIN_TITLE_CHANGED,
-                                                  std::bind(&Engine::OnWindowTitleChanged, this, std::placeholders::_1));
-    gameScene->SignalNotifyTitleChanged().Connect(EngineEnums::ENGINE_WIN_TITLE_CHANGED,
-                                                  std::bind(&Engine::OnWindowTitleChanged, this, std::placeholders::_1));
-
-
-    this->m_sceneManager->LoadScene(menuScene, true);
-    this->m_sceneManager->LoadScene(gameScene);
     return true;
 }
 
@@ -97,6 +93,8 @@ void Engine::Loop()
 
 void Engine::Quit()
 {
+    delete this->m_sceneManager;
+    this->m_sceneManager = nullptr;
     SDL_Quit();
     glfwDestroyWindow(this->m_window);
     glfwTerminate();
@@ -105,11 +103,6 @@ void Engine::Quit()
 const char *Engine::title() const
 {
     return m_title;
-}
-
-void Engine::setTitle(const char *newTitle)
-{
-    m_title = newTitle;
 }
 
 Engine::Engine()

@@ -1,8 +1,6 @@
 #ifndef ASCENE_H
 #define ASCENE_H
 
-#include "../Utilities/IOC.h"
-
 struct GLFWwindow;
 class SceneManager;
 class AScene
@@ -24,14 +22,12 @@ public:
     void setWidth(int newWidth);
     int height() const;
     void setHeight(int newHeight);
-    virtual void EventHandle() = 0;
+    GLFWwindow *surface() const;
+    virtual void EventHandle(GLFWwindow* window, int key, int scancode, int action, int mods) = 0;
     virtual void Update() = 0;
     virtual void Render() = 0;
 
-    GLFWwindow *surface() const;
-
-    Signal<void, const char *> &SignalNotifyTitleChanged();
-
+    
 protected:
     static SceneManager* manager();
 
@@ -45,7 +41,6 @@ private:
     bool m_enable{true};
     GLFWwindow* m_surface;
     static SceneManager* s_manager;
-    Signal<void, const char*> m_SignalNotifyTitleChanged;
 };
 
 #endif // ASCENE_H

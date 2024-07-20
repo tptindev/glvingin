@@ -2,6 +2,7 @@
 #include <vector>
 #include <thread>
 #include <GLFW/glfw3.h>
+#include <iostream>
 #include <stdio.h>
 SceneManager *SceneManager::s_instance = nullptr;
 SceneManager *SceneManager::instance()
@@ -19,16 +20,15 @@ void SceneManager::LoadScene(AScene *scene, bool active)
     {
         scene->setId(m_scenes.size());
         this->m_scenes[scene->id()] = scene;
-
         if (active == true)
         {
+            SetEventHandle(scene);
+            this->NotifyWindowTitleChanged().Emit(NOTIFY_SCENE_CHANGED, scene->title());
 
             if (this->m_first_scene == nullptr)
             {
                 this->m_first_scene = scene;
-                this->m_first_scene->EventHandle();
             }
-            scene->SignalNotifyTitleChanged().Emit(this->m_first_scene->title());
         }
     }
 }
@@ -38,7 +38,7 @@ void SceneManager::UpdateScenes()
     std::vector<std::thread> scene_threads;
     scene_threads.push_back(std::thread([](AScene *scene) {
         if (scene == nullptr) return;
-        if (scene->enable() && scene->visible())
+        if (scene->enable())
         {
             scene->Update();
         }
@@ -46,7 +46,7 @@ void SceneManager::UpdateScenes()
 
     scene_threads.push_back(std::thread([](AScene *scene) {
         if (scene == nullptr) return;
-        if (scene->enable() && scene->visible())
+        if (scene->enable())
         {
             scene->Update();
         }
@@ -67,12 +67,18 @@ void SceneManager::RenderScenes()
     std::vector<std::thread> scene_threads;
     scene_threads.push_back(std::thread([](AScene *scene) {
         if (scene == nullptr) return;
-        scene->Render();
+        if (scene->visible())
+        {
+            scene->Render();
+        }
     }, this->m_first_scene));
 
     scene_threads.push_back(std::thread([](AScene *scene) {
         if (scene == nullptr) return;
-        scene->Render();
+        if (scene->visible())
+        {
+            scene->Render();
+        }
     }, this->m_second_scene));
 
     for (int i = 0; i < static_cast<int>(scene_threads.size()); i++)
@@ -95,16 +101,17 @@ void SceneManager::Transition(int id)
 {
     AScene *scene = this->m_scenes[id];
     if (scene == nullptr) return;
+    SetEventHandle(scene);
     if (this->m_first_scene == nullptr)
     {
         this->m_first_scene = scene;
     }
-    else if (this->m_second_scene == nullptr)
+    if (this->m_second_scene == nullptr)
     {
+        this->m_first_scene->setEnable(false);
         this->m_second_scene = scene;
     }
-    scene->EventHandle();
-    scene->SignalNotifyTitleChanged().Emit(scene->title());
+    this->NotifyWindowTitleChanged().Emit(NOTIFY_SCENE_CHANGED, scene->title());
 }
 
 SceneManager::SceneManager()
@@ -112,8 +119,27 @@ SceneManager::SceneManager()
 
 }
 
+void SceneManager::SetEventHandle(AScene *scene)
+{
+    static AScene *obj = nullptr;
+    if (scene != nullptr)
+    {
+        obj = scene;
+        std::cout << __FUNCTION__ << ":" << obj->title() << std::endl;
+        glfwSetKeyCallback(scene->surface(), [](GLFWwindow* window, int key, int scancode, int action, int mods){
+            obj->EventHandle(window, key, scancode, action, mods);
+        });
+    }
+}
+
+Signal<void, const char *> &SceneManager::NotifyWindowTitleChanged()
+{
+    return m_NotifyWindowTitleChanged;
+}
+
 SceneManager::~SceneManager()
 {
+    std::cout << __FUNCTION__ << std::endl;
     std::unordered_map<int, AScene*>::iterator it = this->m_scenes.begin();
     while (it != this->m_scenes.end())
     {

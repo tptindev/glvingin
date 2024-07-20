@@ -11,7 +11,7 @@ public:
     ~GameScene();
     // AScene interface
 public:
-    virtual void EventHandle() override;
+    virtual void EventHandle(GLFWwindow *window, int key, int scancode, int action, int mods) override;
     virtual void Update() override;
     virtual void Render() override;
 };

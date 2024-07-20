@@ -22,11 +22,6 @@ SceneManager *AScene::manager()
     return AScene::s_manager;
 }
 
-Signal<void, const char *> &AScene::SignalNotifyTitleChanged()
-{
-    return m_SignalNotifyTitleChanged;
-}
-
 GLFWwindow *AScene::surface() const
 {
     return m_surface;
@@ -69,6 +64,7 @@ void AScene::setOpacity(float newOpacity)
 
 bool AScene::visible() const
 {
+    if (m_opacity == 0.0f) return false;
     return m_visible;
 }
 
@@ -95,5 +91,5 @@ AScene::AScene(GLFWwindow* surface, SceneManager* manager)
 
 AScene::~AScene()
 {
-    std::cout << __FUNCTION__ << std::endl;
+    std::cout << __FUNCTION__ << ":" << this->title() << std::endl;
 }
