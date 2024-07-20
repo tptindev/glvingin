@@ -8,6 +8,10 @@ AEntity::AEntity()
 AEntity::~AEntity()
 {
     std::cout << __FUNCTION__ << ":" << this->name() << std::endl;
+    for (unsigned int i = 0; i < static_cast<unsigned int>(this->m_components.bits.size()); ++i)
+    {
+        RemoveComponent(i);
+    }
 }
 
 void AEntity::RemoveComponent(unsigned int index)

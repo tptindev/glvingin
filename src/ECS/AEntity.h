@@ -11,7 +11,7 @@ class AEntity
 public:
     typedef struct
     {
-        std::bitset<32> bits;
+        std::bitset<32> bits; // max 32 Components/1 Entity
         std::unordered_map<const char*, int> names;
         std::unordered_map<int, AComponent*> comps;
     } Components;
@@ -32,7 +32,8 @@ public:
     void AddComponent(Args&& ...args)
     {
         AComponent* comp = new T(std::forward<Args>(args)...);
-        for (unsigned int i = 0; i < static_cast<unsigned int>(this->m_components.bits.size()); ++i) {
+        for (unsigned int i = 0; i < static_cast<unsigned int>(this->m_components.bits.size()); ++i)
+        {
             if (this->m_components.bits[i] == 0)
             {
                 this->m_components.bits.set(i);
