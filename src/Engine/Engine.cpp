@@ -110,6 +110,10 @@ Engine::Engine()
 
 }
 
+void Engine::GetDesktopResolution(int &width, int &height)
+{
+}
+
 Engine::~Engine()
 {
 }
