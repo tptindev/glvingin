@@ -47,6 +47,7 @@ add_executable(${PROJECT_NAME} src/main.cpp
     src/Utilities/IOC.h
     src/ECS/Components/Transform2D.h src/ECS/Components/Transform2D.cpp
     src/ECS/Entities/Player.h src/ECS/Entities/Player.cpp
+    src/Utilities/Math/Vec2.h
 
 
 )

@@ -9,6 +9,10 @@
 class SceneManager
 {
 public:
+    SceneManager(const SceneManager &) = delete;
+    SceneManager(SceneManager &&) = delete;
+    SceneManager &operator=(const SceneManager &) = delete;
+    SceneManager &operator=(SceneManager &&) = delete;
     static SceneManager *instance();
     ~SceneManager();
 public:
