@@ -21,6 +21,7 @@ set(LINKER_LIBS
     glew32
     gdi32
     opengl32
+    glm
 )
 file(COPY
     "${CMAKE_SOURCE_DIR}/bin/SDL2.dll"
@@ -45,9 +46,13 @@ add_executable(${PROJECT_NAME} src/main.cpp
     src/ECS/AComponent.cpp
     src/ECS/ASystem.h src/ECS/ASystem.cpp
     src/Utilities/IOC.h
-    src/ECS/Components/Transform2D.h src/ECS/Components/Transform2D.cpp
+    src/ECS/Components/Transform2D.h
+    src/ECS/Components/Transform2D.cpp
     src/ECS/Entities/Player.h src/ECS/Entities/Player.cpp
     src/Utilities/Math/Vec2.h
+
+    src/ECS/ECSManager.h src/ECS/ECSManager.cpp
+
 
 
 )

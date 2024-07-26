@@ -19,6 +19,7 @@ void SceneManager::LoadScene(AScene *scene, bool active)
     if (scene != nullptr)
     {
         scene->setId(m_scenes.size());
+        scene->Initialize();
         this->m_scenes[scene->id()] = scene;
         if (active == true)
         {

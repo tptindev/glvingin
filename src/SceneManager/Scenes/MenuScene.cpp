@@ -15,6 +15,11 @@ MenuScene::~MenuScene()
     std::cout << __FUNCTION__ << ":" << this->title() << std::endl;
 }
 
+void MenuScene::Initialize()
+{
+
+}
+
 void MenuScene::EventHandle(GLFWwindow *window, int key, int scancode, int action, int mods)
 {
     if (key == GLFW_KEY_ENTER && action == GLFW_PRESS)

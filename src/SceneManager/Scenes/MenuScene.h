@@ -11,9 +11,10 @@ public:
     ~MenuScene();
     // AScene interface
 public:
-    virtual void EventHandle(GLFWwindow *window, int key, int scancode, int action, int mods) override;
-    virtual void Update() override;
-    virtual void Render() override;
+    void Initialize() override;
+    void EventHandle(GLFWwindow *window, int key, int scancode, int action, int mods) override;
+    void Update() override;
+    void Render() override;
 };
 
 #endif // MENUSCENE_H

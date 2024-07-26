@@ -23,6 +23,7 @@ public:
     int height() const;
     void setHeight(int newHeight);
     GLFWwindow *surface() const;
+    virtual void Initialize() = 0;
     virtual void EventHandle(GLFWwindow* window, int key, int scancode, int action, int mods) = 0;
     virtual void Update() = 0;
     virtual void Render() = 0;

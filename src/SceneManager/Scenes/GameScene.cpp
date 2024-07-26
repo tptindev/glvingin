@@ -2,6 +2,8 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include "../SceneManager.h"
+#include "../../ECS/Entities/Player.h"
+
 GameScene::GameScene(GLFWwindow* surface, SceneManager* manager): AScene(surface, manager)
 {
     this->setTitle("Game");
@@ -12,6 +14,11 @@ GameScene::GameScene(GLFWwindow* surface, SceneManager* manager): AScene(surface
 GameScene::~GameScene()
 {
     std::cout << __FUNCTION__ << ":" << this->title() << std::endl;
+}
+
+void GameScene::Initialize()
+{
+
 }
 
 void GameScene::EventHandle(GLFWwindow *window, int key, int scancode, int action, int mods)

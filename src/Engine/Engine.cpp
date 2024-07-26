@@ -7,7 +7,6 @@
 #include "../SceneManager/Scenes/GameScene.h"
 #include "../SceneManager/SceneManager.h"
 
-
 Engine *Engine::s_instance = nullptr;
 Engine *Engine::instance()
 {
