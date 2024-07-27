@@ -1,12 +1,13 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "../AEntity.h"
+#include "../Entity.h"
 
-class Player : public AEntity
+class Player : public Entity
 {
 public:
     Player();
+    ~Player();
 
     // AEntity interface
 public:

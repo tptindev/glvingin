@@ -18,7 +18,6 @@ void SceneManager::LoadScene(AScene *scene, bool active)
 {
     if (scene != nullptr)
     {
-        scene->setId(m_scenes.size());
         scene->Initialize();
         this->m_scenes[scene->id()] = scene;
         if (active == true)
@@ -92,7 +91,7 @@ void SceneManager::RemoveScene(int id)
 {
     if (this->m_scenes[id] != nullptr)
     {
-        this->m_scenes.erase(this->m_scenes.find(id), this->m_scenes.end());
+        this->m_scenes.erase(this->m_scenes.find(id));
         delete this->m_scenes[id];
         this->m_scenes[id] = nullptr;
     }

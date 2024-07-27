@@ -2,9 +2,11 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include "../SceneManager.h"
+#include "../../IDs/SceneIDs.h"
 
 MenuScene::MenuScene(GLFWwindow* surface, SceneManager* manager): AScene(surface, manager)
 {
+    this->setId(SCENE_MENU);
     this->setTitle("Menu");
     this->setWidth(640);
     this->setHeight(420);

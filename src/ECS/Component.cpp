@@ -1,22 +1,22 @@
-#include "AComponent.h"
+#include "Component.h"
 #include <iostream>
 
-AComponent::AComponent()
+Component::Component()
 {
     std::cout << __FUNCTION__ << ":" << this->name() << std::endl;
 }
 
-void AComponent::setName(const char *newName)
+void Component::setName(const char *newName)
 {
     m_name = newName;
 }
 
-AComponent::~AComponent()
+Component::~Component()
 {
     std::cout << __FUNCTION__ << ":" << this->name() << std::endl;
 }
 
-const char *AComponent::name() const
+const char *Component::name() const
 {
     return m_name;
 }

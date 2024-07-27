@@ -2,10 +2,13 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include "../SceneManager.h"
+#include "../../ECS/Manager.h"
+#include "../../IDs/SceneIDs.h"
 #include "../../ECS/Entities/Player.h"
 
 GameScene::GameScene(GLFWwindow* surface, SceneManager* manager): AScene(surface, manager)
 {
+    this->setId(SCENE_GAME);
     this->setTitle("Game");
     this->setWidth(640);
     this->setHeight(420);
@@ -18,7 +21,10 @@ GameScene::~GameScene()
 
 void GameScene::Initialize()
 {
+    Player player;
+//    Entity* player = new Player();
 
+//    EntityManager::instance()->LoadEntity(player, this);
 }
 
 void GameScene::EventHandle(GLFWwindow *window, int key, int scancode, int action, int mods)

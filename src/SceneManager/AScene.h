@@ -3,6 +3,7 @@
 
 struct GLFWwindow;
 class SceneManager;
+class EntityManager;
 class AScene
 {
 public:

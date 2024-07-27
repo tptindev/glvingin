@@ -16,11 +16,13 @@ public:
     {
         m_x = copy.m_x;
         m_y = copy.m_y;
+        return (*this);
     }
     Vec2<T> &operator=(Vec2<T> &&move)
     {
         m_x = std::move(move.m_x);
         m_y = std::move(move.m_y);
+        return (*this);
     }
 
     inline Vec2<T>& Zero()

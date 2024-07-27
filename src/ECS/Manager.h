@@ -1,10 +1,10 @@
-#ifndef ECSMANAGER_H
-#define ECSMANAGER_H
+#ifndef MANAGER_H
+#define MANAGER_H
 
 
 #include <unordered_map>
 #include <vector>
-#include "AEntity.h"
+#include "Entity.h"
 
 
 class EntityManager
@@ -18,14 +18,15 @@ public:
     ~EntityManager();
 
 public:
-    AEntity* CreateEntity(const char* name);
-    void DestroyEntity(AEntity* entity);
+    void LoadEntity(Entity* entity, void* scene);
+    void DestroyEntity(Entity* entity, void* scene);
+    void DestroyEntities();
 
 private:
     static EntityManager* s_instance;
     EntityManager();
-    std::unordered_map<const char*, AEntity*> m_entities;
+    std::unordered_map<void*, std::unordered_map<int, Entity*>> m_entities;
 
 };
 
-#endif // ECSMANAGER_H
+#endif // MANAGER_H

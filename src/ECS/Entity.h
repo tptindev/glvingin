@@ -1,23 +1,23 @@
-#ifndef AENTITY_H
-#define AENTITY_H
+#ifndef ENTITY_H
+#define ENTITY_H
 
 #include <functional>
 #include <unordered_map>
 #include <bitset>
-#include "AComponent.h"
+#include "Component.h"
 
-class AEntity
+class Entity
 {
 public:
     typedef struct
     {
         std::bitset<32> bits; // max 32 Components/1 Entity
         std::unordered_map<const char*, int> names;
-        std::unordered_map<int, AComponent*> comps;
+        std::unordered_map<int, Component*> comps;
     } Components;
 
-    AEntity();
-    virtual ~AEntity();
+    Entity();
+    virtual ~Entity();
 
     template<typename T>
     T* GetComponent() const
@@ -31,8 +31,8 @@ public:
     template<typename T, typename ...Args>
     void AddComponent(Args&& ...args)
     {
-        AComponent* comp = new T(std::forward<Args>(args)...);
-        for (unsigned int i = 0; i < static_cast<unsigned int>(this->m_components.bits.size()); ++i)
+        Component* comp = new T(std::forward<Args>(args)...);
+        for (size_t i = 0; i < this->m_components.bits.size(); ++i)
         {
             if (this->m_components.bits[i] == 0)
             {
@@ -45,7 +45,7 @@ public:
         return;
     }
 
-    void RemoveComponent(unsigned int index);
+    void RemoveComponent(int index);
     void RemoveComponent(const char* name);
 
 
@@ -60,9 +60,9 @@ public:
     virtual void Render();
 
 private:
-    unsigned int m_id;
+    int m_id;
     const char* m_name;
     Components m_components;
 };
 
-#endif // AENTITY_H
+#endif // ENTITY_H

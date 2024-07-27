@@ -41,20 +41,16 @@ add_executable(${PROJECT_NAME} src/main.cpp
     src/SceneManager/AScene.h src/SceneManager/AScene.cpp
     src/SceneManager/Scenes/MenuScene.h src/SceneManager/Scenes/MenuScene.cpp
     src/SceneManager/Scenes/GameScene.h src/SceneManager/Scenes/GameScene.cpp
-    src/ECS/AEntity.h src/ECS/AEntity.cpp
-    src/ECS/AComponent.h
-    src/ECS/AComponent.cpp
-    src/ECS/ASystem.h src/ECS/ASystem.cpp
+    src/ECS/Entity.h src/ECS/Entity.cpp
+    src/ECS/Component.h
+    src/ECS/Component.cpp
     src/Utilities/IOC.h
     src/ECS/Components/Transform2D.h
     src/ECS/Components/Transform2D.cpp
     src/ECS/Entities/Player.h src/ECS/Entities/Player.cpp
     src/Utilities/Math/Vec2.h
-
-    src/ECS/ECSManager.h src/ECS/ECSManager.cpp
-
-
-
+    src/ECS/Manager.h src/ECS/Manager.cpp
+    src/IDs/EntityIDs.h src/IDs/SceneIDs.h
 )
 
 target_link_libraries( ${PROJECT_NAME} ${LINKER_LIBS})
