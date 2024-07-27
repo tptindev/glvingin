@@ -1,19 +1,19 @@
 #ifndef TRANSFORM2D_H
 #define TRANSFORM2D_H
 
-#include "../AComponent.h"
-#include "../../Utilities/Math/Vec2.h"
+#include "AComponent.h"
+#include "glm/glm.hpp"
 
 class Transform2D : public AComponent
 {
 public:
     Transform2D();
-    Transform2D(Vec2<float> position, Vec2<float> rotation, Vec2<float> scale);
+    Transform2D(glm::vec2 position, glm::vec2 rotation, glm::vec2 scale);
 
 private:
-    Vec2<float> m_position;
-    Vec2<float> m_rotation;
-    Vec2<float> m_scale;
+    glm::vec2 m_position;
+    glm::vec2 m_rotation;
+    glm::vec2 m_scale;
 };
 
 #endif // TRANSFORM2D_H
