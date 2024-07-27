@@ -4,7 +4,7 @@
 
 Player::Player()
 {
-    this->setId(ENTITY_PLAYER);
+    this->setId(ENTITY_ID::ENTITY_PLAYER);
     this->setName("Player");
     std::cout << __FUNCTION__ << ":" << this->name() << std::endl;
 }

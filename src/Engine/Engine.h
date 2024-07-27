@@ -25,6 +25,7 @@ public:
 private:
     static Engine *s_instance;
     Engine();
+    void Connections();
     void GetDesktopResolution(int& width, int& height);
     void OnWindowTitleChanged(const char*title);
 

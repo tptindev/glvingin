@@ -1,15 +1,16 @@
 #include "MenuScene.h"
 #include <GLFW/glfw3.h>
 #include <iostream>
-#include "../SceneManager.h"
-#include "../../IDs/SceneIDs.h"
+#include <SceneManager.h>
+#include <SceneIDs.h>
 
-MenuScene::MenuScene(GLFWwindow* surface, SceneManager* manager): AScene(surface, manager)
+MenuScene::MenuScene()
 {
-    this->setId(SCENE_MENU);
+    this->setId(SCENE_ID::SCENE_MENU);
     this->setTitle("Menu");
     this->setWidth(640);
     this->setHeight(420);
+    std::cout << __FUNCTION__ << ":" << this->title() << std::endl;
 }
 
 MenuScene::~MenuScene()
@@ -26,7 +27,7 @@ void MenuScene::EventHandle(GLFWwindow *window, int key, int scancode, int actio
 {
     if (key == GLFW_KEY_ENTER && action == GLFW_PRESS)
     {
-        MenuScene::manager()->Transition(1);
+        SceneManager::Instance(nullptr)->Transition(SCENE_ID::SCENE_GAME);
     }
     else if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
     {

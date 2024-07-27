@@ -3,9 +3,8 @@
 #include <GLFW/glfw3.h>
 #include <SDL2/SDL.h>
 #include <iostream>
-#include "../SceneManager/Scenes/MenuScene.h"
-#include "../SceneManager/Scenes/GameScene.h"
-#include "../SceneManager/SceneManager.h"
+#include <functional>
+#include <SceneManager.h>
 
 Engine *Engine::s_instance = nullptr;
 Engine *Engine::Instance()
@@ -25,6 +24,14 @@ Engine::Engine()
 Engine::~Engine()
 {
     std::cout << __FUNCTION__ << std::endl;
+}
+
+void Engine::Connections()
+{
+    this->m_sceneManager->NotifyWindowTitleChanged().Connect(
+        SceneManager::NOTIFY_SCENE_CHANGED,
+        std::bind(&Engine::OnWindowTitleChanged, this, std::placeholders::_1)
+        );
 }
 
 void Engine::ResetInstance()
@@ -75,19 +82,13 @@ bool Engine::Initialize(const char* title, EngineEnums::EngineMode mode)
         }
     }
     
-    this->m_sceneManager = SceneManager::Instance();
+    this->m_sceneManager = SceneManager::Instance(this->m_window);
     if (this->m_sceneManager == nullptr)
     {
         return false;
     }
 
-    this->m_sceneManager->NotifyWindowTitleChanged().Connect(
-        SceneManager::NOTIFY_SCENE_CHANGED,
-        std::bind(&Engine::OnWindowTitleChanged, this, std::placeholders::_1)
-        );
-
-    this->m_sceneManager->LoadScene(new MenuScene(this->m_window, this->m_sceneManager), true);
-    this->m_sceneManager->LoadScene(new GameScene(this->m_window, this->m_sceneManager));
+    this->Connections();
 
     return true;
 }

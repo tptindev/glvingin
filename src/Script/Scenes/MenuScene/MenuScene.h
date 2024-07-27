@@ -1,13 +1,14 @@
-#ifndef GAMESCENE_H
-#define GAMESCENE_H
+#ifndef MENUSCENE_H
+#define MENUSCENE_H
 
-#include "../AScene.h"
+#include <AScene.h>
+
 struct GLFWwindow;
-class GameScene : public AScene
+class MenuScene : public AScene
 {
 public:
-    explicit GameScene(GLFWwindow *surface, SceneManager *manager);
-    ~GameScene();
+    MenuScene();
+    ~MenuScene();
     // AScene interface
 public:
     void Initialize() override;
@@ -16,4 +17,4 @@ public:
     void Render() override;
 };
 
-#endif // GAMESCENE_H
+#endif // MENUSCENE_H

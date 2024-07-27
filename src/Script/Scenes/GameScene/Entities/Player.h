@@ -1,7 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "../AEntity.h"
+#include <AEntity.h>
 
 class Player : public AEntity
 {

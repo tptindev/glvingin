@@ -6,11 +6,11 @@
 #include <stdio.h>
 #include "../ECS/Manager.h"
 SceneManager *SceneManager::s_instance = nullptr;
-SceneManager *SceneManager::Instance()
+SceneManager *SceneManager::Instance(GLFWwindow* window)
 {
     if (SceneManager::s_instance == nullptr)
     {
-        SceneManager::s_instance = new SceneManager();
+        SceneManager::s_instance = new SceneManager(window);
     }
     return SceneManager::s_instance;
 }
@@ -132,7 +132,7 @@ void SceneManager::SetEventHandle(AScene *scene)
     {
         obj = scene;
         std::cout << __FUNCTION__ << ":" << obj->title() << std::endl;
-        glfwSetKeyCallback(scene->surface(), [](GLFWwindow* window, int key, int scancode, int action, int mods){
+        glfwSetKeyCallback(this->m_window, [](GLFWwindow* window, int key, int scancode, int action, int mods){
             obj->EventHandle(window, key, scancode, action, mods);
         });
     }
@@ -143,8 +143,9 @@ Signal<void, const char *> &SceneManager::NotifyWindowTitleChanged()
     return m_NotifyWindowTitleChanged;
 }
 
-SceneManager::SceneManager()
+SceneManager::SceneManager(GLFWwindow* window)
 {
+    this->m_window = window;
     std::cout << __FUNCTION__ << std::endl;
 }
 

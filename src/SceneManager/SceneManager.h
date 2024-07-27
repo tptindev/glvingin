@@ -6,6 +6,7 @@
 #include "AScene.h"
 #include "../Utilities/IOC.h"
 
+class GLFWwindow;
 class SceneManager
 {
 public:
@@ -13,7 +14,7 @@ public:
     SceneManager(SceneManager &&) = delete;
     SceneManager &operator=(const SceneManager &) = delete;
     SceneManager &operator=(SceneManager &&) = delete;
-    static SceneManager *Instance();
+    static SceneManager *Instance(GLFWwindow* window);
     static void ResetInstance();
     ~SceneManager();
 public:
@@ -31,11 +32,12 @@ public:
 
 private:
     static SceneManager *s_instance;
-    SceneManager();
+    SceneManager(GLFWwindow* window);
 
     void SetEventHandle(AScene* scene);
 
 private:
+    GLFWwindow* m_window;
     AScene *m_first_scene{nullptr};
     AScene *m_second_scene{nullptr};
     std::unordered_map<int, AScene*> m_scenes;

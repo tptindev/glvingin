@@ -1,17 +1,18 @@
 #include "GameScene.h"
 #include <GLFW/glfw3.h>
 #include <iostream>
-#include "../SceneManager.h"
-#include "../../ECS/Manager.h"
-#include "../../IDs/SceneIDs.h"
-#include "../../ECS/Entities/Player.h"
+#include <SceneManager.h>
+#include <SceneIDs.h>
+#include <Manager.h>
+#include "Scenes/GameScene/Entities/Player.h"
 
-GameScene::GameScene(GLFWwindow* surface, SceneManager* manager): AScene(surface, manager)
+GameScene::GameScene()
 {
-    this->setId(SCENE_GAME);
+    this->setId(SCENE_ID::SCENE_GAME);
     this->setTitle("Game");
     this->setWidth(640);
     this->setHeight(420);
+    std::cout << __FUNCTION__ << ":" << this->title() << std::endl;
 }
 
 GameScene::~GameScene()
@@ -30,7 +31,7 @@ void GameScene::EventHandle(GLFWwindow *window, int key, int scancode, int actio
 {
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
     {
-        GameScene::manager()->Transition(0);
+        SceneManager::Instance(nullptr)->Transition(SCENE_ID::SCENE_MENU);
     }
 }
 
