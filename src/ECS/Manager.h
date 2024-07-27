@@ -4,7 +4,7 @@
 
 #include <unordered_map>
 #include <vector>
-#include "Entity.h"
+#include "AEntity.h"
 
 
 class EntityManager
@@ -18,14 +18,14 @@ public:
     ~EntityManager();
 
 public:
-    void LoadEntity(Entity* entity, void* scene);
-    void DestroyEntity(Entity* entity, void* scene);
+    void LoadEntity(AEntity* entity, void* scene);
+    void DestroyEntity(AEntity* entity, void* scene);
     void DestroyEntities();
 
 private:
     static EntityManager* s_instance;
     EntityManager();
-    std::unordered_map<void*, std::unordered_map<int, Entity*>> m_entities;
+    std::unordered_map<void*, std::unordered_map<int, AEntity*>> m_entities;
 
 };
 

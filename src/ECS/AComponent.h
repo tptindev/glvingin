@@ -1,21 +1,21 @@
-#ifndef COMPONENT_H
-#define COMPONENT_H
+#ifndef ACOMPONENT_H
+#define ACOMPONENT_H
 
 
-class Component
+class AComponent
 {
 public:
     const char *name() const;
     void setName(const char *newName);
-    virtual ~Component();
+    virtual ~AComponent();
 
 
 protected:
-    Component();
+    AComponent();
 
 private:
     const char* m_name;
 };
 
 
-#endif // COMPONENT_H
+#endif // ACOMPONENT_H

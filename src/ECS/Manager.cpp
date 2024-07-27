@@ -18,7 +18,7 @@ EntityManager::~EntityManager()
     DestroyEntities();
 }
 
-void EntityManager::LoadEntity(Entity *entity, void* scene)
+void EntityManager::LoadEntity(AEntity *entity, void* scene)
 {
     if (entity != nullptr)
     {
@@ -26,7 +26,7 @@ void EntityManager::LoadEntity(Entity *entity, void* scene)
     }
 }
 
-void EntityManager::DestroyEntity(Entity *entity, void* scene)
+void EntityManager::DestroyEntity(AEntity *entity, void* scene)
 {
     if (entity != nullptr)
     {
@@ -38,10 +38,10 @@ void EntityManager::DestroyEntity(Entity *entity, void* scene)
 
 void EntityManager::DestroyEntities()
 {
-    std::unordered_map<void*, std::unordered_map<int, Entity*>>::iterator it = this->m_entities.begin();
+    std::unordered_map<void*, std::unordered_map<int, AEntity*>>::iterator it = this->m_entities.begin();
     while (it != this->m_entities.end())
     {
-        std::unordered_map<int, Entity*>::iterator tmpIt = it->second.begin();
+        std::unordered_map<int, AEntity*>::iterator tmpIt = it->second.begin();
         while (tmpIt != it->second.end())
         {
             it->second.erase(tmpIt);

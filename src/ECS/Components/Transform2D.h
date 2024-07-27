@@ -1,10 +1,10 @@
 #ifndef TRANSFORM2D_H
 #define TRANSFORM2D_H
 
-#include "../Component.h"
+#include "../AComponent.h"
 #include "../../Utilities/Math/Vec2.h"
 
-class Transform2D : public Component
+class Transform2D : public AComponent
 {
 public:
     Transform2D();

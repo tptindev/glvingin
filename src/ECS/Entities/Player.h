@@ -1,9 +1,9 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "../Entity.h"
+#include "../AEntity.h"
 
-class Player : public Entity
+class Player : public AEntity
 {
 public:
     Player();

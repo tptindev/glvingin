@@ -41,9 +41,9 @@ add_executable(${PROJECT_NAME} src/main.cpp
     src/SceneManager/AScene.h src/SceneManager/AScene.cpp
     src/SceneManager/Scenes/MenuScene.h src/SceneManager/Scenes/MenuScene.cpp
     src/SceneManager/Scenes/GameScene.h src/SceneManager/Scenes/GameScene.cpp
-    src/ECS/Entity.h src/ECS/Entity.cpp
-    src/ECS/Component.h
-    src/ECS/Component.cpp
+    src/ECS/AEntity.h src/ECS/AEntity.cpp
+    src/ECS/AComponent.h
+    src/ECS/AComponent.cpp
     src/Utilities/IOC.h
     src/ECS/Components/Transform2D.h
     src/ECS/Components/Transform2D.cpp
