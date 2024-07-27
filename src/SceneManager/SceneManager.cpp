@@ -4,14 +4,25 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include <stdio.h>
+#include "../ECS/Manager.h"
 SceneManager *SceneManager::s_instance = nullptr;
-SceneManager *SceneManager::instance()
+SceneManager *SceneManager::Instance()
 {
     if (SceneManager::s_instance == nullptr)
     {
         SceneManager::s_instance = new SceneManager();
     }
     return SceneManager::s_instance;
+}
+
+void SceneManager::ResetInstance()
+{
+    if (SceneManager::s_instance != nullptr)
+    {
+        delete SceneManager::s_instance;
+        SceneManager::s_instance = nullptr;
+    }
+    return;
 }
 
 void SceneManager::LoadScene(AScene *scene, bool active)
@@ -114,11 +125,6 @@ void SceneManager::Transition(int id)
     this->NotifyWindowTitleChanged().Emit(NOTIFY_SCENE_CHANGED, scene->title());
 }
 
-SceneManager::SceneManager()
-{
-
-}
-
 void SceneManager::SetEventHandle(AScene *scene)
 {
     static AScene *obj = nullptr;
@@ -137,9 +143,13 @@ Signal<void, const char *> &SceneManager::NotifyWindowTitleChanged()
     return m_NotifyWindowTitleChanged;
 }
 
-SceneManager::~SceneManager()
+SceneManager::SceneManager()
 {
     std::cout << __FUNCTION__ << std::endl;
+}
+
+SceneManager::~SceneManager()
+{
     std::unordered_map<int, AScene*>::iterator it = this->m_scenes.begin();
     while (it != this->m_scenes.end())
     {
@@ -148,4 +158,6 @@ SceneManager::~SceneManager()
         it->second = nullptr;
         ++it;
     }
+    EntityManager::ResetInstance();
+    std::cout << __FUNCTION__ << std::endl;
 }

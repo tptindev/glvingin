@@ -13,7 +13,8 @@ public:
     SceneManager(SceneManager &&) = delete;
     SceneManager &operator=(const SceneManager &) = delete;
     SceneManager &operator=(SceneManager &&) = delete;
-    static SceneManager *instance();
+    static SceneManager *Instance();
+    static void ResetInstance();
     ~SceneManager();
 public:
     void LoadScene(AScene* scene, bool active = false);

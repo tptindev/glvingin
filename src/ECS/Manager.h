@@ -14,7 +14,8 @@ public:
     EntityManager(EntityManager &&) = delete;
     EntityManager &operator=(const EntityManager &) = delete;
     EntityManager &operator=(EntityManager &&) = delete;
-    static EntityManager *instance();
+    static EntityManager *Instance();
+    static void ResetInstance();
     ~EntityManager();
 
 public:

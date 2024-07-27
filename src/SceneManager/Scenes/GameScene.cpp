@@ -21,10 +21,9 @@ GameScene::~GameScene()
 
 void GameScene::Initialize()
 {
-    Player player;
-//    Entity* player = new Player();
+    AEntity* player = new Player();
 
-//    EntityManager::instance()->LoadEntity(player, this);
+    EntityManager::Instance()->LoadEntity(player, this);
 }
 
 void GameScene::EventHandle(GLFWwindow *window, int key, int scancode, int action, int mods)

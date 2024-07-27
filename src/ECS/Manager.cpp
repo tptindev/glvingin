@@ -3,7 +3,7 @@
 
 
 EntityManager *EntityManager::s_instance = nullptr;
-EntityManager *EntityManager::instance()
+EntityManager *EntityManager::Instance()
 {
     if (EntityManager::s_instance == nullptr)
     {
@@ -12,10 +12,20 @@ EntityManager *EntityManager::instance()
     return EntityManager::s_instance;
 }
 
+void EntityManager::ResetInstance()
+{
+    if (EntityManager::s_instance != nullptr)
+    {
+        delete EntityManager::s_instance;
+        EntityManager::s_instance = nullptr;
+    }
+    return;
+}
+
 EntityManager::~EntityManager()
 {
-    std::cout << __FUNCTION__ << std::endl;
     DestroyEntities();
+    std::cout << __FUNCTION__ << std::endl;
 }
 
 void EntityManager::LoadEntity(AEntity *entity, void* scene)

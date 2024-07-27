@@ -12,7 +12,8 @@ public:
     Engine(Engine &&) = delete;
     Engine &operator=(const Engine &) = delete;
     Engine &operator=(Engine &&) = delete;
-    static Engine *instance();
+    static Engine *Instance();
+    static void ResetInstance();
     ~Engine();
 
 public:

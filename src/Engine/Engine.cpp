@@ -8,13 +8,33 @@
 #include "../SceneManager/SceneManager.h"
 
 Engine *Engine::s_instance = nullptr;
-Engine *Engine::instance()
+Engine *Engine::Instance()
 {
     if (Engine::s_instance == nullptr)
     {
         Engine::s_instance = new Engine();
     }
     return Engine::s_instance;
+}
+
+Engine::Engine()
+{
+    std::cout << __FUNCTION__ << std::endl;
+}
+
+Engine::~Engine()
+{
+    std::cout << __FUNCTION__ << std::endl;
+}
+
+void Engine::ResetInstance()
+{
+    if (Engine::s_instance != nullptr)
+    {
+        delete Engine::s_instance;
+        Engine::s_instance = nullptr;
+    }
+    return;
 }
 
 bool Engine::Initialize(const char* title, EngineEnums::EngineMode mode)
@@ -54,8 +74,8 @@ bool Engine::Initialize(const char* title, EngineEnums::EngineMode mode)
             return false;
         }
     }
-
-    this->m_sceneManager = SceneManager::instance();
+    
+    this->m_sceneManager = SceneManager::Instance();
     if (this->m_sceneManager == nullptr)
     {
         return false;
@@ -92,8 +112,7 @@ void Engine::Loop()
 
 void Engine::Quit()
 {
-    delete this->m_sceneManager;
-    this->m_sceneManager = nullptr;
+    SceneManager::ResetInstance();
     SDL_Quit();
     glfwDestroyWindow(this->m_window);
     glfwTerminate();
@@ -104,16 +123,7 @@ const char *Engine::title() const
     return m_title;
 }
 
-Engine::Engine()
-{
-
-}
-
 void Engine::GetDesktopResolution(int &width, int &height)
-{
-}
-
-Engine::~Engine()
 {
 }
 

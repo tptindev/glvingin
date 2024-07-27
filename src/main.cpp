@@ -2,10 +2,11 @@
 
 int main(void)
 {
-    if (Engine::instance()->Initialize("ViNgin[%s]", EngineEnums::MODE_2D))
+    if (Engine::Instance()->Initialize("ViNgin[%s]", EngineEnums::MODE_2D))
     {
-        Engine::instance()->Loop();
-        Engine::instance()->Quit();
+        Engine::Instance()->Loop();
+        Engine::Instance()->Quit();
+        Engine::ResetInstance();
     }
     else
     {
