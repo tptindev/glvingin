@@ -1,10 +1,10 @@
 #include "Player.h"
 #include <iostream>
-#include "../../IDs/EntityIDs.h"
+#include <EntityIDs.h>
 
 Player::Player()
 {
-    this->setId(ENTITY_ID::ENTITY_PLAYER);
+    this->setId(EntityIDs::GameScene::PLAYER);
     this->setName("Player");
     std::cout << __FUNCTION__ << ":" << this->name() << std::endl;
 }

@@ -39,12 +39,12 @@ void AEntity::RemoveComponent(const char *name)
     }
 }
 
-unsigned int AEntity::id() const
+int AEntity::id() const
 {
     return m_id;
 }
 
-void AEntity::setId(unsigned int newId)
+void AEntity::setId(int newId)
 {
     m_id = newId;
 }

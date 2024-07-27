@@ -5,7 +5,6 @@
 #include <unordered_map>
 #include <bitset>
 #include "AComponent.h"
-
 class AEntity
 {
 public:
@@ -49,8 +48,8 @@ public:
     void RemoveComponent(const char* name);
 
 
-    unsigned int id() const;
-    void setId(unsigned int newId);
+    int id() const;
+    void setId(int newId);
 
     const char *name() const;
     void setName(const char *newName);
