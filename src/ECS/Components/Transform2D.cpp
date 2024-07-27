@@ -1,5 +1,5 @@
 #include "Transform2D.h"
-
+#include <iostream>
 Transform2D::Transform2D()
 {
     glm::vec2 vec(0.0f, 0.0f);
@@ -7,6 +7,9 @@ Transform2D::Transform2D()
     this->m_position = vec;
     this->m_rotation = vec;
     this->m_scale = vec;
+
+    this->setName(__FUNCTION__);
+    std::cout << __FUNCTION__ << ":" << this->name() << std::endl;
 }
 
 Transform2D::Transform2D(glm::vec2 position, glm::vec2 rotation, glm::vec2 scale)
@@ -14,4 +17,7 @@ Transform2D::Transform2D(glm::vec2 position, glm::vec2 rotation, glm::vec2 scale
     this->m_position = std::move(position);
     this->m_rotation = std::move(rotation);
     this->m_scale = std::move(scale);
+
+    this->setName(__FUNCTION__);
+    std::cout << __FUNCTION__ << ":" << this->name() << std::endl;
 }

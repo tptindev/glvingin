@@ -6,11 +6,11 @@ class AComponent
 {
 public:
     const char *name() const;
-    void setName(const char *newName);
     virtual ~AComponent();
 
 
 protected:
+    void setName(const char *newName);
     AComponent();
 
 private:
