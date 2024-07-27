@@ -42,5 +42,4 @@ void GameScene::Update()
 
 void GameScene::Render()
 {
-
 }

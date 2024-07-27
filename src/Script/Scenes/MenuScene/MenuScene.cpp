@@ -37,10 +37,8 @@ void MenuScene::EventHandle(GLFWwindow *window, int key, int scancode, int actio
 
 void MenuScene::Update()
 {
-
 }
 
 void MenuScene::Render()
 {
-
 }
