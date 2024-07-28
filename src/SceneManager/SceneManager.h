@@ -7,7 +7,8 @@
 #include <IOC.h>
 #include "AScene.h"
 
-class GLFWwindow;
+struct SDL_Window;
+struct GLFWwindow;
 class SceneManager
 {
 public:
@@ -15,7 +16,8 @@ public:
     SceneManager(SceneManager &&) = delete;
     SceneManager &operator=(const SceneManager &) = delete;
     SceneManager &operator=(SceneManager &&) = delete;
-    static SceneManager *Instance(GLFWwindow* window);
+    static SceneManager *Instance();
+
     static void ResetInstance();
     ~SceneManager();
 public:
@@ -33,13 +35,12 @@ public:
 
 private:
     static SceneManager *s_instance;
-    SceneManager(GLFWwindow* window);
+    SceneManager();
 
     void SetEventHandle(AScene* scene);
 
 private:
     std::mutex m_mutex;
-    GLFWwindow* m_window;
     AScene *m_first_scene{nullptr};
     AScene *m_second_scene{nullptr};
     std::unordered_map<int, AScene*> m_scenes;

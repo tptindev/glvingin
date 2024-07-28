@@ -5,6 +5,7 @@ add_library(sceneman_module ${SOURCE_FILES})
 
 target_link_libraries(sceneman_module PRIVATE
     ecs_module
+    engine_module
     utilities_module
 )
 # Include directories, if needed

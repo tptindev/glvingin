@@ -27,7 +27,7 @@ void SettingScene::EventHandle(GLFWwindow *window, int key, int scancode, int ac
 {
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
     {
-        SceneManager::Instance(nullptr)->Transition(SCENE_ID::MENU_SCENE);
+        SceneManager::Instance()->Transition(SCENE_ID::MENU_SCENE);
     }
 }
 

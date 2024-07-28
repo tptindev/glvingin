@@ -1,13 +1,14 @@
-#include <Engine.h>
+#include <Engine3D.h>
+#include <Engine2D.h>
 #include "Script/Script.h"
 int main(void)
 {
-    if (Engine::Instance()->Initialize("ViNgin[%s]", EngineEnums::MODE_2D))
+    if (Engine2D::Instance()->Initialize("ViNgin[%s]"))
     {
         Script::Instance()->Initialize();
-        Engine::Instance()->Loop();
-        Engine::Instance()->Quit();
-        Engine::ResetInstance();
+        Engine2D::Instance()->Loop();
+        Engine2D::Instance()->Quit();
+        Engine2D::ResetInstance();
     }
     else
     {

@@ -40,11 +40,11 @@ void MenuScene::EventHandle(GLFWwindow *window, int key, int scancode, int actio
 {
     if (key == GLFW_KEY_ENTER && action == GLFW_PRESS)
     {
-        SceneManager::Instance(nullptr)->Transition(SCENE_ID::GAME_SCENE);
+        SceneManager::Instance()->Transition(SCENE_ID::GAME_SCENE);
     }
     else if (key == GLFW_KEY_BACKSPACE && action == GLFW_PRESS)
     {
-        SceneManager::Instance(nullptr)->Transition(SCENE_ID::SETTING_SCENE);
+        SceneManager::Instance()->Transition(SCENE_ID::SETTING_SCENE);
     }
     else if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
     {

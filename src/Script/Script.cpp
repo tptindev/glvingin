@@ -33,7 +33,7 @@ Script::Script()
 
 void Script::Initialize()
 {
-    SceneManager::Instance(nullptr)->LoadScene(new MenuScene(), true);
-    SceneManager::Instance(nullptr)->LoadScene(new SettingScene());
-    SceneManager::Instance(nullptr)->LoadScene(new GameScene());
+    SceneManager::Instance()->LoadScene(new MenuScene(), true);
+    SceneManager::Instance()->LoadScene(new SettingScene());
+    SceneManager::Instance()->LoadScene(new GameScene());
 }

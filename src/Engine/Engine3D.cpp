@@ -1,53 +1,51 @@
-#include "Engine.h"
+#include "Engine3D.h"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <SDL2/SDL.h>
 #include <iostream>
 #include <functional>
 #include <SceneManager.h>
 
-Engine *Engine::s_instance = nullptr;
-Engine *Engine::Instance()
+Engine3D *Engine3D::s_instance = nullptr;
+Engine3D *Engine3D::Instance()
 {
-    if (Engine::s_instance == nullptr)
+    if (Engine3D::s_instance == nullptr)
     {
-        Engine::s_instance = new Engine();
+        Engine3D::s_instance = new Engine3D();
     }
-    return Engine::s_instance;
+    return Engine3D::s_instance;
 }
 
-Engine::Engine()
+Engine3D::Engine3D()
 {
     std::cout << __FUNCTION__ << std::endl;
 }
 
-Engine::~Engine()
+Engine3D::~Engine3D()
 {
     std::cout << __FUNCTION__ << std::endl;
 }
 
-void Engine::Connections()
+void Engine3D::Connections()
 {
     this->m_sceneManager->NotifyWindowTitleChanged().Connect(
         SceneManager::NOTIFY_SCENE_CHANGED,
-        std::bind(&Engine::OnWindowTitleChanged, this, std::placeholders::_1)
+        std::bind(&Engine3D::OnWindowTitleChanged, this, std::placeholders::_1)
         );
 }
 
-void Engine::ResetInstance()
+void Engine3D::ResetInstance()
 {
-    if (Engine::s_instance != nullptr)
+    if (Engine3D::s_instance != nullptr)
     {
-        delete Engine::s_instance;
-        Engine::s_instance = nullptr;
+        delete Engine3D::s_instance;
+        Engine3D::s_instance = nullptr;
     }
     return;
 }
 
-bool Engine::Initialize(const char* title, EngineEnums::EngineMode mode)
+bool Engine3D::Initialize(const char* title)
 {
     this->m_title = title;
-    this->m_mode = mode;
     glfwSetErrorCallback([](int error, const char* description)
                          {
                              fprintf(stderr, "Error: %s\n", description);
@@ -73,16 +71,7 @@ bool Engine::Initialize(const char* title, EngineEnums::EngineMode mode)
         return false;
     }
 
-    if (this->m_mode == EngineEnums::MODE_2D)
-    {
-        // Initialize SDL2
-        if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) {
-            std::cerr << "Failed to initialize SDL2: " << SDL_GetError() << std::endl;
-            return false;
-        }
-    }
-    
-    this->m_sceneManager = SceneManager::Instance(this->m_window);
+    this->m_sceneManager = SceneManager::Instance();
     if (this->m_sceneManager == nullptr)
     {
         return false;
@@ -93,11 +82,10 @@ bool Engine::Initialize(const char* title, EngineEnums::EngineMode mode)
     return true;
 }
 
-void Engine::Loop()
+void Engine3D::Loop()
 {
     while (!glfwWindowShouldClose(this->m_window))
     {
-        this->m_state = EngineEnums::ENGINE_RUNNING;
         /* Poll for and process events */
         glfwPollEvents();
 
@@ -111,26 +99,20 @@ void Engine::Loop()
     }
 }
 
-void Engine::Quit()
+void Engine3D::Quit()
 {
     SceneManager::ResetInstance();
-    SDL_Quit();
     glfwDestroyWindow(this->m_window);
     glfwTerminate();
 }
 
-const char *Engine::title() const
-{
-    return m_title;
-}
-
-void Engine::GetDesktopResolution(int &width, int &height)
+void Engine3D::GetDesktopResolution(int &width, int &height)
 {
 }
 
-void Engine::OnWindowTitleChanged(const char *title)
+void Engine3D::OnWindowTitleChanged(const char *title)
 {
     char buffer[255];
-    sprintf(&buffer[0], this->title(), title);
+    sprintf(&buffer[0], this->m_title, title);
     glfwSetWindowTitle(this->m_window, buffer);
 }

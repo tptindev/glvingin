@@ -1,16 +1,19 @@
 #include "SceneManager.h"
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
 #include <vector>
 #include <thread>
-#include <GLFW/glfw3.h>
 #include <iostream>
 #include <stdio.h>
 #include <Manager.h>
+#include <Engine3D.h>
+#include <Engine2D.h>
 SceneManager *SceneManager::s_instance = nullptr;
-SceneManager *SceneManager::Instance(GLFWwindow* window)
+SceneManager *SceneManager::Instance()
 {
     if (SceneManager::s_instance == nullptr)
     {
-        SceneManager::s_instance = new SceneManager(window);
+        SceneManager::s_instance = new SceneManager();
     }
     return SceneManager::s_instance;
 }
@@ -51,7 +54,6 @@ void SceneManager::UpdateScenes()
         if (scene == nullptr) return;
         if (scene->enable())
         {
-            std::cout << "First SCENE" << std::endl;
             scene->Update();
         }
     }, this->m_first_scene));
@@ -60,7 +62,6 @@ void SceneManager::UpdateScenes()
         if (scene == nullptr) return;
         if (scene->enable())
         {
-            std::cout << "SECOND SCENE" << std::endl;
             scene->Update();
         }
     }, this->m_second_scene));
@@ -73,10 +74,6 @@ void SceneManager::UpdateScenes()
 
 void SceneManager::RenderScenes()
 {
-    /* Render here */
-    glClearColor(1, 1, 1, 1);
-    glClear(GL_COLOR_BUFFER_BIT);
-
     std::vector<std::thread> scene_threads;
     scene_threads.push_back(std::thread([](AScene *scene) {
         if (scene == nullptr) return;
@@ -155,7 +152,7 @@ void SceneManager::SetEventHandle(AScene *scene)
         if (scene->enable())
         {
             obj = scene;
-            glfwSetKeyCallback(this->m_window, [](GLFWwindow* window, int key, int scancode, int action, int mods){
+            glfwSetKeyCallback(Engine3D::Instance()->m_window, [](GLFWwindow* window, int key, int scancode, int action, int mods){
                 obj->EventHandle(window, key, scancode, action, mods);
             });
             std::cout << __FUNCTION__ << ":" << obj->title() << std::endl;
@@ -168,9 +165,8 @@ Signal<void, const char *> &SceneManager::NotifyWindowTitleChanged()
     return m_NotifyWindowTitleChanged;
 }
 
-SceneManager::SceneManager(GLFWwindow* window)
+SceneManager::SceneManager()
 {
-    this->m_window = window;
     std::cout << __FUNCTION__ << std::endl;
 }
 
