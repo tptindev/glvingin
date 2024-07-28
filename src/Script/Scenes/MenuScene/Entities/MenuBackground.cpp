@@ -27,5 +27,5 @@ void MenuBackground::Update()
 
 void MenuBackground::Render()
 {
-
+    SystemManager::Instance()->Render<Sprite2D>(this);
 }

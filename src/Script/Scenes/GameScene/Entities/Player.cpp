@@ -35,5 +35,6 @@ void Player::Update()
 
 void Player::Render()
 {
-
+    SystemManager::Instance()->Render<HealthVisual>(this);
+    SystemManager::Instance()->Render<AnimatedSprite2D>(this);
 }

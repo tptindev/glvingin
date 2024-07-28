@@ -45,7 +45,14 @@ public:
     template<typename T>
     void Update(AEntity* entity)
     {
-        T* component = entity->GetComponent<T>();
+//        T* component = entity->GetComponent<T>();
+        return;
+    }
+
+    template<typename T>
+    void Render(AEntity* entity)
+    {
+//        T* component = entity->GetComponent<T>();
         return;
     }
 
