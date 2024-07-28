@@ -5,6 +5,7 @@ add_library(engine_module ${SOURCE_FILES})
 
 target_link_libraries(engine_module PRIVATE
     sceneman_module
+    utilities_module
 )
 # Include directories, if needed
 target_include_directories(engine_module PUBLIC

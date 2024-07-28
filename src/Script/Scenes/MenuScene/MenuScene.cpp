@@ -11,7 +11,7 @@
 
 MenuScene::MenuScene()
 {
-    this->setId(SCENE_ID::SCENE_MENU);
+    this->setId(SCENE_ID::MENU_SCENE);
     this->setTitle("Menu");
     this->setWidth(640);
     this->setHeight(420);
@@ -40,7 +40,11 @@ void MenuScene::EventHandle(GLFWwindow *window, int key, int scancode, int actio
 {
     if (key == GLFW_KEY_ENTER && action == GLFW_PRESS)
     {
-        SceneManager::Instance(nullptr)->Transition(SCENE_ID::SCENE_GAME);
+        SceneManager::Instance(nullptr)->Transition(SCENE_ID::GAME_SCENE);
+    }
+    else if (key == GLFW_KEY_BACKSPACE && action == GLFW_PRESS)
+    {
+        SceneManager::Instance(nullptr)->Transition(SCENE_ID::SETTING_SCENE);
     }
     else if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
     {

@@ -4,7 +4,7 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include <stdio.h>
-#include "../ECS/Manager.h"
+#include <Manager.h>
 SceneManager *SceneManager::s_instance = nullptr;
 SceneManager *SceneManager::Instance(GLFWwindow* window)
 {
@@ -51,6 +51,7 @@ void SceneManager::UpdateScenes()
         if (scene == nullptr) return;
         if (scene->enable())
         {
+            std::cout << "First SCENE" << std::endl;
             scene->Update();
         }
     }, this->m_first_scene));
@@ -59,6 +60,7 @@ void SceneManager::UpdateScenes()
         if (scene == nullptr) return;
         if (scene->enable())
         {
+            std::cout << "SECOND SCENE" << std::endl;
             scene->Update();
         }
     }, this->m_second_scene));
@@ -100,34 +102,46 @@ void SceneManager::RenderScenes()
 
 void SceneManager::RemoveScene(int id)
 {
-    if (this->m_scenes[id] != nullptr)
+    std::unordered_map<int, AScene*>::iterator it = this->m_scenes.find(id);
+    if (it != this->m_scenes.end())
     {
-        this->m_scenes.erase(this->m_scenes.find(id));
-        delete this->m_scenes[id];
-        this->m_scenes[id] = nullptr;
+        if (this->m_scenes[id] != nullptr)
+        {
+            this->m_scenes.erase(this->m_scenes.find(id));
+            delete this->m_scenes[id];
+            this->m_scenes[id] = nullptr;
+        }
     }
 }
 
 void SceneManager::Transition(int id)
 {
-    AScene *scene = this->m_scenes[id];
-    if (scene == nullptr) return;
-    scene->setEnable(true);
-    SetEventHandle(scene);
-    if (this->m_first_scene == nullptr)
+    std::lock_guard<std::mutex> guard(this->m_mutex);
+    std::unordered_map<int, AScene*>::iterator it = this->m_scenes.find(id);
+    if (it != this->m_scenes.end())
     {
-        if (this->m_second_scene != nullptr)
+        AScene *scene = this->m_scenes[id];
+        if (scene == nullptr)
         {
-            this->m_second_scene->setEnable(false);
+            return;
         }
-        this->m_first_scene = scene;
+        if (this->m_first_scene == nullptr)
+        {
+            if (this->m_second_scene != nullptr)
+            {
+                this->m_second_scene->setEnable(false);
+            }
+            this->m_first_scene = scene;
+        }
+        else if (this->m_second_scene == nullptr)
+        {
+            this->m_first_scene->setEnable(false);
+            this->m_second_scene = scene;
+        }
+        SetEventHandle(scene);
+
+        this->NotifyWindowTitleChanged().Emit(NOTIFY_SCENE_CHANGED, scene->title());
     }
-    else if (this->m_second_scene == nullptr)
-    {
-        this->m_first_scene->setEnable(false);
-        this->m_second_scene = scene;
-    }
-    this->NotifyWindowTitleChanged().Emit(NOTIFY_SCENE_CHANGED, scene->title());
 }
 
 void SceneManager::SetEventHandle(AScene *scene)
@@ -135,11 +149,15 @@ void SceneManager::SetEventHandle(AScene *scene)
     static AScene *obj = nullptr;
     if (scene != nullptr)
     {
-        obj = scene;
-        std::cout << __FUNCTION__ << ":" << obj->title() << std::endl;
-        glfwSetKeyCallback(this->m_window, [](GLFWwindow* window, int key, int scancode, int action, int mods){
-            obj->EventHandle(window, key, scancode, action, mods);
-        });
+        scene->setEnable(true);
+        if (scene->enable())
+        {
+            obj = scene;
+            glfwSetKeyCallback(this->m_window, [](GLFWwindow* window, int key, int scancode, int action, int mods){
+                obj->EventHandle(window, key, scancode, action, mods);
+            });
+            std::cout << __FUNCTION__ << ":" << obj->title() << std::endl;
+        }
     }
 }
 

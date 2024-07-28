@@ -3,7 +3,7 @@
 
 AComponent::AComponent()
 {
-    std::cout << __FUNCTION__ << std::endl;
+//    std::cout << __FUNCTION__ << std::endl;
 }
 
 void AComponent::setName(const char *newName)
@@ -13,7 +13,7 @@ void AComponent::setName(const char *newName)
 
 AComponent::~AComponent()
 {
-    std::cout << __FUNCTION__ << ":" << this->name() << std::endl;
+//    std::cout << __FUNCTION__ << ":" << this->name() << std::endl;
 }
 
 const char *AComponent::name() const

@@ -8,7 +8,7 @@
 
 GameScene::GameScene()
 {
-    this->setId(SCENE_ID::SCENE_GAME);
+    this->setId(SCENE_ID::GAME_SCENE);
     this->setTitle("Game");
     this->setWidth(640);
     this->setHeight(420);
@@ -31,7 +31,7 @@ void GameScene::EventHandle(GLFWwindow *window, int key, int scancode, int actio
 {
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
     {
-        SceneManager::Instance(nullptr)->Transition(SCENE_ID::SCENE_MENU);
+        SceneManager::Instance(nullptr)->Transition(SCENE_ID::MENU_SCENE);
     }
 }
 

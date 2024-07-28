@@ -2,8 +2,9 @@
 #define SCENEIDS_H
 
 enum SCENE_ID {
-    SCENE_MENU,
-    SCENE_GAME
+    MENU_SCENE,
+    SETTING_SCENE,
+    GAME_SCENE
 };
 
 #endif // SCENEIDS_H

@@ -1,6 +1,7 @@
 #include "Script.h"
 #include <SceneManager.h>
 #include "Scenes/MenuScene/MenuScene.h"
+#include "Scenes/SettingScene/SettingScene.h"
 #include "Scenes/GameScene/GameScene.h"
 Script *Script::s_instance = nullptr;
 Script *Script::Instance()
@@ -33,5 +34,6 @@ Script::Script()
 void Script::Initialize()
 {
     SceneManager::Instance(nullptr)->LoadScene(new MenuScene(), true);
+    SceneManager::Instance(nullptr)->LoadScene(new SettingScene());
     SceneManager::Instance(nullptr)->LoadScene(new GameScene());
 }

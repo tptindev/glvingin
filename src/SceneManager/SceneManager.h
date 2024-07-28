@@ -3,8 +3,9 @@
 
 #include <unordered_map>
 #include <memory>
+#include <mutex>
+#include <IOC.h>
 #include "AScene.h"
-#include "../Utilities/IOC.h"
 
 class GLFWwindow;
 class SceneManager
@@ -37,6 +38,7 @@ private:
     void SetEventHandle(AScene* scene);
 
 private:
+    std::mutex m_mutex;
     GLFWwindow* m_window;
     AScene *m_first_scene{nullptr};
     AScene *m_second_scene{nullptr};
