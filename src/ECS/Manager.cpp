@@ -36,6 +36,11 @@ void EntityManager::LoadEntity(AEntity *entity, void* scene)
     }
 }
 
+std::unordered_map<int, AEntity *> &EntityManager::GetEntities(void *scene)
+{
+    return this->m_entities[scene];
+}
+
 void EntityManager::DestroyEntity(AEntity *entity, void* scene)
 {
     if (entity != nullptr)

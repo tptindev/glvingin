@@ -37,9 +37,22 @@ void GameScene::EventHandle(GLFWwindow *window, int key, int scancode, int actio
 
 void GameScene::Update()
 {
-
+    std::unordered_map<int, AEntity *>& entities = EntityManager::Instance()->GetEntities(this);
+    std::unordered_map<int, AEntity *>::iterator it = entities.begin();
+    while (it != entities.end())
+    {
+        it->second->Update();
+        it++;
+    }
 }
 
 void GameScene::Render()
 {
+    std::unordered_map<int, AEntity *>& entities = EntityManager::Instance()->GetEntities(this);
+    std::unordered_map<int, AEntity *>::iterator it = entities.begin();
+    while (it != entities.end())
+    {
+        it->second->Render();
+        it++;
+    }
 }

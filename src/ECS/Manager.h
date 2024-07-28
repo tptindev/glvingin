@@ -20,6 +20,7 @@ public:
 
 public:
     void LoadEntity(AEntity* entity, void* scene);
+    std::unordered_map<int, AEntity*>& GetEntities(void* scene);
     void DestroyEntity(AEntity* entity, void* scene);
     void DestroyEntities();
 
