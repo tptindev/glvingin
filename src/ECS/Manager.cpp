@@ -72,3 +72,33 @@ EntityManager::EntityManager()
 {
     std::cout << __FUNCTION__  << std::endl;
 }
+
+SystemManager *SystemManager::s_instance = nullptr;
+SystemManager *SystemManager::Instance()
+{
+    if (SystemManager::s_instance == nullptr)
+    {
+        SystemManager::s_instance = new SystemManager();
+    }
+    return SystemManager::s_instance;
+}
+
+void SystemManager::ResetInstance()
+{
+    if (SystemManager::s_instance != nullptr)
+    {
+        delete SystemManager::s_instance;
+        SystemManager::s_instance = nullptr;
+    }
+    return;
+}
+
+SystemManager::~SystemManager()
+{
+    std::cout << __FUNCTION__  << std::endl;
+}
+
+SystemManager::SystemManager()
+{
+    std::cout << __FUNCTION__  << std::endl;
+}

@@ -31,4 +31,27 @@ private:
 
 };
 
+class SystemManager
+{
+public:
+    SystemManager(const SystemManager &) = delete;
+    SystemManager(SystemManager &&) = delete;
+    SystemManager &operator=(const SystemManager &) = delete;
+    SystemManager &operator=(SystemManager &&) = delete;
+    static SystemManager *Instance();
+    static void ResetInstance();
+    ~SystemManager();
+
+    template<typename T>
+    void Update(AEntity* entity)
+    {
+        T* component = entity->GetComponent<T>();
+        return;
+    }
+
+private:
+    static SystemManager* s_instance;
+    SystemManager();
+};
+
 #endif // MANAGER_H

@@ -5,6 +5,37 @@ AEntity::AEntity()
     std::cout << __FUNCTION__ << std::endl;
 }
 
+AEntity::AEntity(const AEntity &copy)
+{
+    this->m_id = copy.m_id;
+    this->m_name = copy.m_name;
+    this->m_components = copy.m_components;
+}
+
+AEntity::AEntity(AEntity &&move)
+{
+    this->m_id = std::move(move.m_id);
+    this->m_name = std::move(move.m_name);
+    this->m_components = std::move(move.m_components);
+}
+
+AEntity &AEntity::operator=(const AEntity &copy)
+{
+    this->m_id = copy.m_id;
+    this->m_name = copy.m_name;
+    this->m_components = copy.m_components;
+    return (*this);
+}
+
+AEntity &AEntity::operator=(AEntity &&move)
+{
+    this->m_id = std::move(move.m_id);
+    this->m_name = std::move(move.m_name);
+    this->m_components = std::move(move.m_components);
+    return (*this);
+}
+
+
 AEntity::~AEntity()
 {
     std::cout << __FUNCTION__ << ":" << this->name() << std::endl;

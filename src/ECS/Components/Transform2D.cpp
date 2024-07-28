@@ -12,6 +12,11 @@ Transform2D::Transform2D()
     std::cout << __FUNCTION__ << ":" << this->name() << std::endl;
 }
 
+Transform2D::~Transform2D()
+{
+    std::cout << __FUNCTION__ << ":" << this->name() << std::endl;
+}
+
 Transform2D::Transform2D(glm::vec2 position, glm::vec2 rotation, glm::vec2 scale)
 {
     this->m_position = std::move(position);

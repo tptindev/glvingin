@@ -8,6 +8,7 @@ class Transform2D : public AComponent
 {
 public:
     Transform2D();
+    ~Transform2D();
     explicit Transform2D(glm::vec2 position, glm::vec2 rotation, glm::vec2 scale);
 
 private:

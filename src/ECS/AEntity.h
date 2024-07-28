@@ -16,15 +16,26 @@ public:
     } Components;
 
     AEntity();
+    AEntity(const AEntity &);
+    AEntity(AEntity &&);
+    AEntity &operator=(const AEntity &);
+    AEntity &operator=(AEntity &&);
     virtual ~AEntity();
 
     template<typename T>
-    T* GetComponent() const
+    T* GetComponent()
     {
         T comp;
         const char* name = comp.name();
-        int idx = this->m_components.names.at(name);
-        return this->m_components.comps.at(idx);
+        const int idx = this->m_components.names.at(name);
+        return (T*)(this->m_components.comps[idx]);
+    }
+
+    template<typename T>
+    bool HasComponent()
+    {
+        const T* comp = GetComponent<T>();
+        return (comp != nullptr);
     }
 
     template<typename T, typename ...Args>

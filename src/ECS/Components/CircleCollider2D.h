@@ -7,6 +7,7 @@ class CircleCollider2D : public AComponent
 {
 public:
     CircleCollider2D();
+    ~CircleCollider2D();
 };
 
 #endif // CIRCLECOLLIDER2D_H

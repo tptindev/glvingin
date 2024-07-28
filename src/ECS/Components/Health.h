@@ -7,8 +7,9 @@ class Health: public AComponent
 {
 public:
     Health();
-    Health(float max);
-    Health(float current, float max);
+    ~Health();
+    explicit Health(float max);
+    explicit Health(float current, float max);
 
 private:
     float m_current;
