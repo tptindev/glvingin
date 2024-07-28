@@ -38,9 +38,9 @@ private:
 
 private:
     const char* m_title;
-    SDL_Window* m_window;
-    SDL_Renderer* m_renderer;
-    SceneManager* m_sceneManager;
+    SDL_Window* m_window{nullptr};
+    SDL_Renderer* m_renderer{nullptr};
+    SceneManager* m_sceneManager{nullptr};
     bool m_running{false};
 
 

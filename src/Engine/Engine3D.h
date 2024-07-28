@@ -36,8 +36,8 @@ private:
 
 private:
     const char* m_title;
-    GLFWwindow* m_window;
-    SceneManager* m_sceneManager;
+    GLFWwindow* m_window{nullptr};
+    SceneManager* m_sceneManager{nullptr};
 };
 
 #endif // !ENGINE3D_H

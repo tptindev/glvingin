@@ -67,11 +67,6 @@ bool Engine2D::Initialize(const char* title)
         return false;
     }
 
-    if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
-    {
-        return false;
-    }
-
     if (!(IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG)))
     {
         return false;

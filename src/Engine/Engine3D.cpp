@@ -35,12 +35,16 @@ void Engine3D::Connections()
 
 void Engine3D::Update()
 {
-
+    this->m_sceneManager->UpdateScenes();
 }
 
 void Engine3D::Render()
 {
-
+    glClearColor(1,1,1,1);
+    glClear(GL_COLOR_BUFFER_BIT);
+    this->m_sceneManager->RenderScenes();
+    /* Swap front and back buffers */
+    glfwSwapBuffers(this->m_window);
 }
 
 void Engine3D::ResetInstance()
@@ -98,14 +102,8 @@ void Engine3D::Loop()
     {
         /* Poll for and process events */
         glfwPollEvents();
-
-        /* Update Logics in scenes*/
-        this->m_sceneManager->UpdateScenes();
-
-        this->m_sceneManager->RenderScenes();
-
-        /* Swap front and back buffers */
-        glfwSwapBuffers(this->m_window);
+        this->Update();
+        this->Render();
     }
 }
 

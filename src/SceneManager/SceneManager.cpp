@@ -152,10 +152,13 @@ void SceneManager::SetEventHandle(AScene *scene)
         if (scene->enable())
         {
             obj = scene;
-//            glfwSetKeyCallback(Engine3D::Instance()->m_window, [](GLFWwindow* window, int key, int scancode, int action, int mods){
-//                obj->EventHandle(window, key, scancode, action, mods);
-//            });
-//            std::cout << __FUNCTION__ << ":" << obj->title() << std::endl;
+            std::cout << __FUNCTION__ << ":" << obj->title() << std::endl;
+            if (Engine3D::Instance()->m_window != nullptr)
+            {
+                glfwSetKeyCallback(Engine3D::Instance()->m_window, [](GLFWwindow* window, int key, int scancode, int action, int mods){
+                    obj->EventHandle(window, key, scancode, action, mods);
+                });
+            }
         }
     }
 }
