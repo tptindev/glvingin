@@ -6,4 +6,5 @@ add_library(utilities_module ${SOURCE_FILES})
 target_include_directories(utilities_module PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/Math
+    ${CMAKE_CURRENT_SOURCE_DIR}/DataStruct
 )
