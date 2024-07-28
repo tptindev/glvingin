@@ -8,9 +8,8 @@ add_library(engine_module ${SOURCE_FILES})
 target_link_libraries(engine_module PRIVATE
     sceneman_module
     utilities_module
+    ${LINKER_LIBRARY}
 )
-
-target_link_libraries(engine_module PUBLIC ${LINKER_LIBRARY})
 # Include directories, if needed
 target_include_directories(engine_module PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}

@@ -1,7 +1,6 @@
 #ifndef ENGINE2D_H
 #define ENGINE2D_H
 
-#include <memory>
 #include "IEngine.h"
 struct SDL_Window;
 struct SDL_Surface;
@@ -19,12 +18,6 @@ public:
     static void ResetInstance();
     ~Engine2D();
 
-private:
-    static Engine2D *s_instance;
-    Engine2D();
-    void GetDesktopResolution(int& width, int& height);
-    void OnWindowTitleChanged(const char*title);
-
     // IEngine interface
 public:
     bool Initialize(const char *title) override;
@@ -32,12 +25,25 @@ public:
     void Quit() override;
     void Connections() override;
 
+    // IEngine interface
+private:
+    void Update() override;
+    void Render() override;
+
+private:
+    static Engine2D *s_instance;
+    Engine2D();
+    void GetDesktopResolution(int& width, int& height);
+    void OnWindowTitleChanged(const char*title);
+
 private:
     const char* m_title;
     SDL_Window* m_window;
     SDL_Renderer* m_renderer;
     SceneManager* m_sceneManager;
+    bool m_running{false};
+
 
 };
 
-#endif // ENGINE2D_H
+#endif // !ENGINE2D_H

@@ -34,6 +34,19 @@ void Engine2D::Connections()
         );
 }
 
+void Engine2D::Update()
+{
+    this->m_sceneManager->UpdateScenes();
+}
+
+void Engine2D::Render()
+{
+    SDL_SetRenderDrawColor(this->m_renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_RenderClear(this->m_renderer);
+    this->m_sceneManager->RenderScenes();
+    SDL_RenderPresent(this->m_renderer);
+}
+
 void Engine2D::ResetInstance()
 {
     if (Engine2D::s_instance != nullptr)
@@ -89,17 +102,22 @@ bool Engine2D::Initialize(const char* title)
 
     this->Connections();
 
+    this->m_running = true;
     return true;
 }
 
 void Engine2D::Loop()
 {
-    while (true)
+    SDL_Event e;
+    while (m_running == true)
     {
-        SDL_RenderClear(this->m_renderer);
-        this->m_sceneManager->UpdateScenes();
-        this->m_sceneManager->RenderScenes();
-        SDL_RenderPresent(this->m_renderer);
+        while (SDL_PollEvent(&e) != 0) {
+            if (e.type == SDL_QUIT) {
+                m_running = false;
+            }
+        }
+        this->Update();
+        this->Render();
     }
 }
 

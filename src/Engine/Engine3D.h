@@ -1,7 +1,6 @@
 #ifndef ENGINE3D_H
 #define ENGINE3D_H
 
-#include <memory>
 #include "IEngine.h"
 struct GLFWwindow;
 class SceneManager;
@@ -11,7 +10,6 @@ class Engine3D: public IEngine
 public:
     Engine3D(const Engine3D &) = delete;
     Engine3D(Engine3D &&) = delete;
-    Engine3D(const char *title, GLFWwindow *window, SceneManager *sceneManager, const IEngine &);
     Engine3D &operator=(const Engine3D &) = delete;
     Engine3D &operator=(Engine3D &&) = delete;
     static Engine3D *Instance();
@@ -25,12 +23,16 @@ public:
     void Quit() override;
     void Connections() override;
 
+    // IEngine interface
+private:
+    void Update() override;
+    void Render() override;
+
 private:
     static Engine3D *s_instance;
     Engine3D();
     void GetDesktopResolution(int& width, int& height);
     void OnWindowTitleChanged(const char*title);
-
 
 private:
     const char* m_title;
@@ -38,4 +40,4 @@ private:
     SceneManager* m_sceneManager;
 };
 
-#endif // ENGINE3D_H
+#endif // !ENGINE3D_H

@@ -33,6 +33,16 @@ void Engine3D::Connections()
         );
 }
 
+void Engine3D::Update()
+{
+
+}
+
+void Engine3D::Render()
+{
+
+}
+
 void Engine3D::ResetInstance()
 {
     if (Engine3D::s_instance != nullptr)
