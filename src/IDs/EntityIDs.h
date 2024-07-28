@@ -7,6 +7,7 @@ class EntityIDs
 public:
     enum MenuScene
     {
+        BACKGROUND,
         START_BUTTON,
         SETTING_BUTTON,
         EXIT_BUTTON,

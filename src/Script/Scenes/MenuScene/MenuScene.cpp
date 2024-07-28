@@ -2,7 +2,12 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include <SceneManager.h>
+#include <Manager.h>
 #include <SceneIDs.h>
+#include "Entities/MenuBackground.h"
+#include "Entities/StartButton.h"
+#include "Entities/SettingButton.h"
+#include "Entities/ExitButton.h"
 
 MenuScene::MenuScene()
 {
@@ -20,7 +25,15 @@ MenuScene::~MenuScene()
 
 void MenuScene::Initialize()
 {
+    AEntity* bg = new MenuBackground();
+    AEntity* start = new StartButton();
+    AEntity* setting = new SettingButton();
+    AEntity* exit = new ExitButton();
 
+    EntityManager::Instance()->LoadEntity(bg, this);
+    EntityManager::Instance()->LoadEntity(start, this);
+    EntityManager::Instance()->LoadEntity(setting, this);
+    EntityManager::Instance()->LoadEntity(exit, this);
 }
 
 void MenuScene::EventHandle(GLFWwindow *window, int key, int scancode, int action, int mods)

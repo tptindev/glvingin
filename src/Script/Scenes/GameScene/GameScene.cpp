@@ -4,7 +4,7 @@
 #include <SceneManager.h>
 #include <SceneIDs.h>
 #include <Manager.h>
-#include "Scenes/GameScene/Entities/Player.h"
+#include "Entities/Player.h"
 
 GameScene::GameScene()
 {

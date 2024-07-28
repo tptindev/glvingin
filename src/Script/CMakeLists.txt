@@ -1,7 +1,8 @@
 file(GLOB_RECURSE SOURCE_FILES "*.h" "*.cpp")
 
 # Define the library in utils
-add_library(script_module ${SOURCE_FILES})
+add_library(script_module ${SOURCE_FILES}
+    Scenes/MenuScene/Entities/MenuBackground.h Scenes/MenuScene/Entities/MenuBackground.cpp)
 
 target_link_libraries(script_module PRIVATE
     ecs_module
