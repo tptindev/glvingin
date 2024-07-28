@@ -112,12 +112,17 @@ void SceneManager::Transition(int id)
 {
     AScene *scene = this->m_scenes[id];
     if (scene == nullptr) return;
+    scene->setEnable(true);
     SetEventHandle(scene);
     if (this->m_first_scene == nullptr)
     {
+        if (this->m_second_scene != nullptr)
+        {
+            this->m_second_scene->setEnable(false);
+        }
         this->m_first_scene = scene;
     }
-    if (this->m_second_scene == nullptr)
+    else if (this->m_second_scene == nullptr)
     {
         this->m_first_scene->setEnable(false);
         this->m_second_scene = scene;

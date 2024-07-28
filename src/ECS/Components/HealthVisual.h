@@ -7,6 +7,7 @@ class HealthVisual : public AComponent
 {
 public:
     HealthVisual();
+    ~HealthVisual();
 };
 
 #endif // HEALTHVISUAL_H

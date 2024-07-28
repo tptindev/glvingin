@@ -11,8 +11,8 @@ public:
     typedef struct
     {
         std::bitset<32> bits; // max 32 Components/1 Entity
-        std::unordered_map<const char*, int> names;
-        std::unordered_map<int, AComponent*> comps;
+        std::unordered_map<const char *, int> names;
+        std::unordered_map<int, AComponent *> comps;
     } Components;
 
     AEntity();
@@ -27,8 +27,17 @@ public:
     {
         T comp;
         const char* name = comp.name();
-        const int idx = this->m_components.names.at(name);
-        return (T*)(this->m_components.comps[idx]);
+        std::unordered_map<const char*, int>::iterator it = this->m_components.names.find(name);
+        if (it != this->m_components.names.end())
+        {
+            int idx = this->m_components.names[name];
+            std::unordered_map<int, AComponent*>::iterator x = this->m_components.comps.find(idx);
+            if (x != this->m_components.comps.end())
+            {
+                return (T*)(this->m_components.comps[idx]);
+            }
+        }
+        return nullptr;
     }
 
     template<typename T>
@@ -46,10 +55,10 @@ public:
         {
             if (this->m_components.bits[i] == 0)
             {
-                this->m_components.bits.set(i);
+                this->m_components.bits.set(i, 1);
                 this->m_components.names[comp->name()] = i;
                 this->m_components.comps[i] = std::move(comp);
-                break;
+                return;
             }
         }
         return;
