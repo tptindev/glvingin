@@ -9,7 +9,7 @@ MenuBackground::MenuBackground()
     this->setId(EntityIDs::MenuScene::BACKGROUND);
     this->setName("Background");
     this->AddComponent<Transform2D>(glm::vec2{0.0f, 0.0f}, glm::vec2{0.0f, 0.0f}, glm::vec2{0.0f, 0.0f});
-    this->AddComponent<Sprite2D>("", 0.5f);
+    this->AddComponent<Sprite2D>("res/images/bg.png", 0.5f);
     std::cout << __FUNCTION__ << ":" << this->name() << std::endl;
 }
 
