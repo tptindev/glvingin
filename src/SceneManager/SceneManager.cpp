@@ -116,7 +116,7 @@ void SceneManager::RemoveScene(int id)
 
 void SceneManager::Transition(int id)
 {
-    std::lock_guard<std::mutex> guard(this->m_mutex);
+    this->m_mutex.lock();
     std::unordered_map<int, AScene*>::iterator it = this->m_scenes.find(id);
     if (it != this->m_scenes.end())
     {
@@ -127,10 +127,6 @@ void SceneManager::Transition(int id)
         }
         if (this->m_first_scene == nullptr)
         {
-            if (this->m_second_scene != nullptr)
-            {
-                this->m_second_scene->setEnable(false);
-            }
             this->m_first_scene = scene;
         }
         else if (this->m_second_scene == nullptr)
@@ -138,10 +134,16 @@ void SceneManager::Transition(int id)
             this->m_first_scene->setEnable(false);
             this->m_second_scene = scene;
         }
+        else
+        {
+            this->m_first_scene = scene;
+            this->m_second_scene = nullptr;
+        }
         SetEventHandle(scene);
 
         this->NotifyWindowTitleChanged().Emit(NOTIFY_SCENE_CHANGED, scene->title());
     }
+    this->m_mutex.unlock();
 }
 
 void SceneManager::SetEventHandle(AScene *scene)
