@@ -14,7 +14,7 @@ bool Renderer2D::Initialize(IWindowWrapper* window)
     {
         return false;
     }
-    return true;
+    return (window != nullptr);
 }
 
 void Renderer2D::SetDrawColor()

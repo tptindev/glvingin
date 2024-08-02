@@ -9,7 +9,8 @@ Renderer3D::Renderer3D()
 
 bool Renderer3D::Initialize(IWindowWrapper* window)
 {
-    return false;
+    this->m_winWrapper = static_cast<GLWindowWrapper*>(window);
+    return (window != nullptr);
 }
 
 void Renderer3D::SetDrawColor()
@@ -24,6 +25,7 @@ void Renderer3D::Clear()
 
 void Renderer3D::Present()
 {
+    /* Swap front and back buffers */
     glfwSwapBuffers(this->m_winWrapper->window());
 }
 

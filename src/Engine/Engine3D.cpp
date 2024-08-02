@@ -42,11 +42,10 @@ void Engine3D::Update(float deltaTime)
 
 void Engine3D::Render()
 {
-    glClearColor(1,1,1,1);
-    glClear(GL_COLOR_BUFFER_BIT);
+    this->m_renderer3d->SetDrawColor();
+    this->m_renderer3d->Clear();
     this->m_sceneManager->RenderScenes(this->m_renderer3d);
-    /* Swap front and back buffers */
-    glfwSwapBuffers(this->m_winWrapper->window());
+    this->m_renderer3d->Present();
 }
 
 void Engine3D::ResetInstance()
@@ -75,7 +74,6 @@ bool Engine3D::Initialize(const char* title)
     this->m_winWrapper = new GLWindowWrapper();
     if (!this->m_winWrapper->CreateWindow(640, 480, this->m_title))
     {
-        glfwTerminate();
         return false;
     }
 
@@ -84,9 +82,6 @@ bool Engine3D::Initialize(const char* title)
     {
         return false;
     }
-
-    /* Make the window's context current */
-    glfwMakeContextCurrent(this->m_winWrapper->window());
 
     if (glewInit() != GLEW_OK)
     {
@@ -118,8 +113,8 @@ void Engine3D::Loop()
 void Engine3D::Quit()
 {
     SceneManager::ResetInstance();
-    glfwDestroyWindow(this->m_winWrapper->window());
-    glfwTerminate();
+    this->m_renderer3d->Destroy();
+    this->m_winWrapper->DestroyWindow();
 }
 
 void Engine3D::GetDesktopResolution(int &width, int &height)
