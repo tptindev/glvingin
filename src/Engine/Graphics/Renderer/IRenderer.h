@@ -6,7 +6,7 @@ class IRenderer
 {
 public:
     ~IRenderer() = default;
-    virtual void Initialize(IWindow* window) = 0;
+    virtual bool Initialize(IWindow* window) = 0;
     virtual void SetDrawColor() = 0;
     virtual void Clear() = 0;
     virtual void Present() = 0;

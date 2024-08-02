@@ -6,10 +6,15 @@ Renderer2D::Renderer2D()
     
 }
 
-void Renderer2D::Initialize(IWindow* window)
+bool Renderer2D::Initialize(IWindow* window)
 {
     this->m_window = static_cast<SDLWindow*>(window);
-    SDL_CreateRenderer(this->m_window->window(), -1, SDL_RENDERER_ACCELERATED);
+    this->m_renderer = SDL_CreateRenderer(this->m_window->window(), -1, SDL_RENDERER_ACCELERATED);
+    if (this->m_renderer == nullptr)
+    {
+        return false;
+    }
+    return true;
 }
 
 void Renderer2D::SetDrawColor()

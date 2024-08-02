@@ -5,9 +5,9 @@ Renderer3D::Renderer3D()
 
 }
 
-void Renderer3D::Initialize(IWindow* window)
+bool Renderer3D::Initialize(IWindow* window)
 {
-
+    return false;
 }
 
 void Renderer3D::SetDrawColor()

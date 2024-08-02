@@ -12,7 +12,7 @@ public:
 
     // ARenderer interface
 public:
-    void Initialize(IWindow* window) override;
+    bool Initialize(IWindow* window) override;
     void SetDrawColor() override;
     void Clear() override;
     void Present() override;

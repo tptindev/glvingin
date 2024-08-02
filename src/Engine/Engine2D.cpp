@@ -25,6 +25,17 @@ Engine2D::Engine2D()
 
 Engine2D::~Engine2D()
 {
+    if (this->m_renderer2d != nullptr)
+    {
+        delete this->m_renderer2d;
+        this->m_renderer2d = nullptr;
+    }
+
+    if (this->m_window != nullptr)
+    {
+        delete this->m_window;
+        this->m_window = nullptr;
+    }
     std::cout << __FUNCTION__ << std::endl;
 }
 
@@ -91,7 +102,10 @@ bool Engine2D::Initialize(const char* title)
     {
         return false;
     }
-    this->m_renderer2d->Initialize(this->m_window);
+    if (!this->m_renderer2d->Initialize(this->m_window))
+    {
+        return false;
+    }
 
     this->m_sceneManager = SceneManager::Instance();
     if (this->m_sceneManager == nullptr)
