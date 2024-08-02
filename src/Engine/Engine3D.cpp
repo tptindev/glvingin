@@ -24,6 +24,17 @@ Engine3D::Engine3D()
 
 Engine3D::~Engine3D()
 {
+    if (this->m_renderer3d != nullptr)
+    {
+        delete this->m_renderer3d;
+        this->m_renderer3d = nullptr;
+    }
+
+    if (this->m_winWrapper != nullptr)
+    {
+        delete this->m_winWrapper;
+        this->m_winWrapper = nullptr;
+    }
     std::cout << __FUNCTION__ << std::endl;
 }
 
