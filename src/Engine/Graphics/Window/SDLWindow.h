@@ -12,7 +12,7 @@ public:
 
     // IWindow interface
 public:
-    void CreateWindow(int width, int height, const char *title) override;
+    bool CreateWindow(int width, int height, const char *title) override;
     void DestroyWindow() override;
 
 private:

@@ -4,7 +4,7 @@
 class IWindow
 {
 public:
-    virtual void CreateWindow(int width, int height, const char* title) = 0;
+    virtual bool CreateWindow(int width, int height, const char* title) = 0;
     virtual void DestroyWindow() = 0;
 };
 

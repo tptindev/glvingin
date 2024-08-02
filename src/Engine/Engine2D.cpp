@@ -95,7 +95,10 @@ bool Engine2D::Initialize(const char* title)
     {
         return false;
     }
-    this->m_window->CreateWindow(640, 480, title);
+    if (!this->m_window->CreateWindow(640, 480, title))
+    {
+        return false;
+    }
 
     this->m_renderer2d = new Renderer2D();
     if (this->m_renderer2d == nullptr)
