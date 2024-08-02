@@ -1,13 +1,13 @@
-#ifndef SDLWINDOW_H
-#define SDLWINDOW_H
+#ifndef SDLWINDOWWRAPPER_H
+#define SDLWINDOWWRAPPER_H
 
-#include "IWindow.h"
+#include "IWindowWrapper.h"
 
 struct SDL_Window;
-class SDLWindow : public IWindow
+class SDLWindowWrapper : public IWindowWrapper
 {
 public:
-    SDLWindow();
+    SDLWindowWrapper();
     SDL_Window* window() const;
 
     // IWindow interface
@@ -19,4 +19,4 @@ private:
     SDL_Window* m_window;
 };
 
-#endif // SDLWINDOW_H
+#endif // SDLWINDOWWRAPPER_H

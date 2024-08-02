@@ -1,11 +1,11 @@
-#ifndef IWINDOW_H
-#define IWINDOW_H
+#ifndef IWINDOWWRAPPER_H
+#define IWINDOWWRAPPER_H
 
-class IWindow
+class IWindowWrapper
 {
 public:
     virtual bool CreateWindow(int width, int height, const char* title) = 0;
     virtual void DestroyWindow() = 0;
 };
 
-#endif // IWINDOW_H
+#endif // IWINDOWWRAPPER_H

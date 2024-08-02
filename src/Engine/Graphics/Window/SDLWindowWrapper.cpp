@@ -1,18 +1,18 @@
-#include "SDLWindow.h"
+#include "SDLWindowWrapper.h"
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <SDL2/SDL.h>
-SDLWindow::SDLWindow()
+SDLWindowWrapper::SDLWindowWrapper()
 {
 
 }
 
-SDL_Window *SDLWindow::window() const
+SDL_Window *SDLWindowWrapper::window() const
 {
     return this->m_window;
 }
 
-bool SDLWindow::CreateWindow(int width, int height, const char *title)
+bool SDLWindowWrapper::CreateWindow(int width, int height, const char *title)
 {
     this->m_window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, 0);
     if (this->m_window == nullptr)
@@ -22,7 +22,7 @@ bool SDLWindow::CreateWindow(int width, int height, const char *title)
     return true;
 }
 
-void SDLWindow::DestroyWindow()
+void SDLWindowWrapper::DestroyWindow()
 {
     SDL_DestroyWindow(this->m_window);
 }

@@ -2,8 +2,8 @@
 #define ENGINE3D_H
 
 #include "IEngine.h"
-struct GLFWwindow;
-class IRenderer;
+struct GLWindowWrapper;
+class Renderer3D;
 class SceneManager;
 class Engine3D: public IEngine
 {
@@ -37,8 +37,8 @@ private:
 
 private:
     const char* m_title;
-    GLFWwindow* m_window{nullptr};
-    IRenderer* m_renderer3d{nullptr};
+    GLWindowWrapper* m_winWrapper{nullptr};
+    Renderer3D* m_renderer3d{nullptr};
     SceneManager* m_sceneManager{nullptr};
 };
 

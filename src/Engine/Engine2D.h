@@ -2,7 +2,7 @@
 #define ENGINE2D_H
 
 #include "IEngine.h"
-class SDLWindow;
+class SDLWindowWrapper;
 class Renderer2D;
 class SceneManager;
 class Engine2D: public IEngine
@@ -37,7 +37,7 @@ private:
 
 private:
     const char* m_title;
-    SDLWindow* m_window{nullptr};
+    SDLWindowWrapper* m_winWrapper{nullptr};
     Renderer2D* m_renderer2d{nullptr};
     SceneManager* m_sceneManager{nullptr};
     bool m_running{false};

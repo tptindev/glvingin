@@ -5,7 +5,7 @@
 #include <iostream>
 #include <functional>
 #include <SceneManager.h>
-#include <SDLWindow.h>
+#include <SDLWindowWrapper.h>
 #include <Renderer2D.h>
 
 Engine2D *Engine2D::s_instance = nullptr;
@@ -30,11 +30,11 @@ Engine2D::~Engine2D()
         delete this->m_renderer2d;
         this->m_renderer2d = nullptr;
     }
-
-    if (this->m_window != nullptr)
+    
+    if (this->m_winWrapper != nullptr)
     {
-        delete this->m_window;
-        this->m_window = nullptr;
+        delete this->m_winWrapper;
+        this->m_winWrapper = nullptr;
     }
     std::cout << __FUNCTION__ << std::endl;
 }
@@ -89,13 +89,13 @@ bool Engine2D::Initialize(const char* title)
     {
         return false;
     }
-
-    this->m_window = new SDLWindow();
-    if (this->m_window == nullptr)
+    
+    this->m_winWrapper = new SDLWindowWrapper();
+    if (this->m_winWrapper == nullptr)
     {
         return false;
     }
-    if (!this->m_window->CreateWindow(640, 480, title))
+    if (!this->m_winWrapper->CreateWindow(640, 480, title))
     {
         return false;
     }
@@ -105,7 +105,7 @@ bool Engine2D::Initialize(const char* title)
     {
         return false;
     }
-    if (!this->m_renderer2d->Initialize(this->m_window))
+    if (!this->m_renderer2d->Initialize(this->m_winWrapper))
     {
         return false;
     }
@@ -144,7 +144,7 @@ void Engine2D::Quit()
     IMG_Quit();
     SDL_Quit();
     this->m_renderer2d->Destroy();
-    this->m_window->DestroyWindow();
+    this->m_winWrapper->DestroyWindow();
 }
 
 void Engine2D::GetDesktopResolution(int &width, int &height)
@@ -155,5 +155,5 @@ void Engine2D::OnWindowTitleChanged(const char *title)
 {
     char buffer[255];
     sprintf(&buffer[0], this->m_title, title);
-    SDL_SetWindowTitle(this->m_window->window(), buffer);
+    SDL_SetWindowTitle(this->m_winWrapper->window(), buffer);
 }

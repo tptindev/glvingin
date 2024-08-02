@@ -4,6 +4,8 @@
 #include <iostream>
 #include <functional>
 #include <SceneManager.h>
+#include <Renderer3D.h>
+#include <GLWindowWrapper.h>
 
 Engine3D *Engine3D::s_instance = nullptr;
 Engine3D *Engine3D::Instance()
@@ -44,7 +46,7 @@ void Engine3D::Render()
     glClear(GL_COLOR_BUFFER_BIT);
     this->m_sceneManager->RenderScenes(this->m_renderer3d);
     /* Swap front and back buffers */
-    glfwSwapBuffers(this->m_window);
+    glfwSwapBuffers(this->m_winWrapper->window());
 }
 
 void Engine3D::ResetInstance()
@@ -70,15 +72,21 @@ bool Engine3D::Initialize(const char* title)
         return false;
     }
 
-    this->m_window = glfwCreateWindow(640, 480, this->m_title, NULL, NULL);
-    if (this->m_window == nullptr)
+    this->m_winWrapper = new GLWindowWrapper();
+    if (!this->m_winWrapper->CreateWindow(640, 480, this->m_title))
     {
         glfwTerminate();
         return false;
     }
 
+    this->m_renderer3d = new Renderer3D();
+    if (!this->m_renderer3d->Initialize(this->m_winWrapper))
+    {
+        return false;
+    }
+
     /* Make the window's context current */
-    glfwMakeContextCurrent(this->m_window);
+    glfwMakeContextCurrent(this->m_winWrapper->window());
 
     if (glewInit() != GLEW_OK)
     {
@@ -98,7 +106,7 @@ bool Engine3D::Initialize(const char* title)
 
 void Engine3D::Loop()
 {
-    while (!glfwWindowShouldClose(this->m_window))
+    while (!glfwWindowShouldClose(this->m_winWrapper->window()))
     {
         /* Poll for and process events */
         glfwPollEvents();
@@ -110,7 +118,7 @@ void Engine3D::Loop()
 void Engine3D::Quit()
 {
     SceneManager::ResetInstance();
-    glfwDestroyWindow(this->m_window);
+    glfwDestroyWindow(this->m_winWrapper->window());
     glfwTerminate();
 }
 
@@ -122,5 +130,5 @@ void Engine3D::OnWindowTitleChanged(const char *title)
 {
     char buffer[255];
     sprintf(&buffer[0], this->m_title, title);
-    glfwSetWindowTitle(this->m_window, buffer);
+    glfwSetWindowTitle(this->m_winWrapper->window(), buffer);
 }

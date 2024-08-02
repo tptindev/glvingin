@@ -4,7 +4,7 @@
 #include "IRenderer.h"
 
 struct SDL_Renderer;
-class SDLWindow;
+class SDLWindowWrapper;
 class Renderer2D : public IRenderer
 {
 public:
@@ -12,15 +12,15 @@ public:
 
     // ARenderer interface
 public:
-    bool Initialize(IWindow* window) override;
+    bool Initialize(IWindowWrapper* window) override;
     void SetDrawColor() override;
     void Clear() override;
     void Present() override;
     void Destroy() override;
 
 private:
-    SDLWindow* m_window;
-    SDL_Renderer* m_renderer;
+    SDLWindowWrapper* m_winWrapper{nullptr};
+    SDL_Renderer* m_renderer{nullptr};
 };
 
 #endif // RENDERER2D_H
