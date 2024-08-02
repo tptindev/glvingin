@@ -90,7 +90,7 @@ void AEntity::setName(const char *newName)
     m_name = newName;
 }
 
-void AEntity::Update()
+void AEntity::Update(float deltaTime)
 {
 
 }

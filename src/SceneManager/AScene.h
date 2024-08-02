@@ -4,11 +4,11 @@
 struct GLFWwindow;
 class SceneManager;
 class EntityManager;
+class LayerManager;
 class AScene
 {
 public:
-    AScene();
-    virtual ~AScene();
+    virtual ~AScene() = default;
     int id() const;
     void setId(int newId);
     const char *title() const;
@@ -24,9 +24,10 @@ public:
     int height() const;
     void setHeight(int newHeight);
     virtual void Initialize() = 0;
-    virtual void EventHandle(GLFWwindow* window, int key, int scancode, int action, int mods) = 0;
-    virtual void Update() = 0;
+    virtual void HandleEvents() = 0;
+    virtual void Update(float deltaTime) = 0;
     virtual void Render() = 0;
+    virtual void Cleanup() = 0;
 
 private:
     int m_id{-1};

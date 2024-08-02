@@ -17,7 +17,7 @@ ExitButton::~ExitButton()
     std::cout << __FUNCTION__ << ":" << this->name() << std::endl;
 }
 
-void ExitButton::Update()
+void ExitButton::Update(float deltaTime)
 {
     
 }

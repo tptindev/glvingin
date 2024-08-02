@@ -12,9 +12,10 @@ public:
     // AScene interface
 public:
     void Initialize() override;
-    void EventHandle(GLFWwindow *window, int key, int scancode, int action, int mods) override;
-    void Update() override;
+    void HandleEvents() override;
+    void Update(float deltaTime) override;
     void Render() override;
+    void Cleanup() override;
 };
 
 #endif // MENUSCENE_H

@@ -71,12 +71,3 @@ void AScene::setEnable(bool newEnable)
 {
     m_enable = newEnable;
 }
-
-AScene::AScene()
-{
-}
-
-AScene::~AScene()
-{
-    std::cout << __FUNCTION__ << ":" << this->title() << std::endl;
-}

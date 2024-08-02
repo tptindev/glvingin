@@ -36,29 +36,17 @@ void MenuScene::Initialize()
     EntityManager::Instance()->LoadEntity(exit, this);
 }
 
-void MenuScene::EventHandle(GLFWwindow *window, int key, int scancode, int action, int mods)
+void MenuScene::HandleEvents()
 {
-    if (key == GLFW_KEY_ENTER && action == GLFW_PRESS)
-    {
-        SceneManager::Instance()->Transition(SCENE_ID::GAME_SCENE);
-    }
-    else if (key == GLFW_KEY_BACKSPACE && action == GLFW_PRESS)
-    {
-        SceneManager::Instance()->Transition(SCENE_ID::SETTING_SCENE);
-    }
-    else if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-    {
-        glfwSetWindowShouldClose(window, GLFW_TRUE);
-    }
 }
 
-void MenuScene::Update()
+void MenuScene::Update(float deltaTime)
 {
     std::unordered_map<int, AEntity *>& entities = EntityManager::Instance()->GetEntities(this);
     std::unordered_map<int, AEntity *>::iterator it = entities.begin();
     while (it != entities.end())
     {
-        it->second->Update();
+        it->second->Update(deltaTime);
         it++;
     }
 }
@@ -72,4 +60,9 @@ void MenuScene::Render()
         it->second->Render();
         it++;
     }
+}
+
+void MenuScene::Cleanup()
+{
+
 }

@@ -16,7 +16,7 @@ StartButton::~StartButton()
     std::cout << __FUNCTION__ << ":" << this->name() << std::endl;
 }
 
-void StartButton::Update()
+void StartButton::Update(float deltaTime)
 {
     
 }

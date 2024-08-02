@@ -47,22 +47,22 @@ void SceneManager::LoadScene(AScene *scene, bool active)
     }
 }
 
-void SceneManager::UpdateScenes()
+void SceneManager::UpdateScenes(float deltaTime)
 {
     std::vector<std::thread> scene_threads;
-    scene_threads.push_back(std::thread([](AScene *scene) {
+    scene_threads.push_back(std::thread([=](AScene *scene) {
         if (scene == nullptr) return;
-        if (scene->enable())
+        if (scene->enable() && scene->visible())
         {
-            scene->Update();
+            scene->Update(deltaTime);
         }
     }, this->m_first_scene));
 
-    scene_threads.push_back(std::thread([](AScene *scene) {
+    scene_threads.push_back(std::thread([=](AScene *scene) {
         if (scene == nullptr) return;
-        if (scene->enable())
+        if (scene->enable() && scene->visible())
         {
-            scene->Update();
+            scene->Update(deltaTime);
         }
     }, this->m_second_scene));
 
@@ -145,20 +145,12 @@ void SceneManager::Transition(int id)
 
 void SceneManager::SetEventHandle(AScene *scene)
 {
-    static AScene *obj = nullptr;
     if (scene != nullptr)
     {
         scene->setEnable(true);
         if (scene->enable())
         {
-            obj = scene;
-            std::cout << __FUNCTION__ << ":" << obj->title() << std::endl;
-            if (Engine3D::Instance()->m_window != nullptr)
-            {
-                glfwSetKeyCallback(Engine3D::Instance()->m_window, [](GLFWwindow* window, int key, int scancode, int action, int mods){
-                    obj->EventHandle(window, key, scancode, action, mods);
-                });
-            }
+            scene->HandleEvents();
         }
     }
 }

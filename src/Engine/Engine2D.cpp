@@ -34,9 +34,9 @@ void Engine2D::Connections()
         );
 }
 
-void Engine2D::Update()
+void Engine2D::Update(float deltaTime)
 {
-    this->m_sceneManager->UpdateScenes();
+    this->m_sceneManager->UpdateScenes(deltaTime);
 }
 
 void Engine2D::Render()
@@ -111,7 +111,7 @@ void Engine2D::Loop()
                 m_running = false;
             }
         }
-        this->Update();
+        this->Update(0.0f);
         this->Render();
     }
 }

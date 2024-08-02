@@ -23,20 +23,21 @@ void SettingScene::Initialize()
 
 }
 
-void SettingScene::EventHandle(GLFWwindow *window, int key, int scancode, int action, int mods)
+void SettingScene::HandleEvents()
 {
-    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-    {
-        SceneManager::Instance()->Transition(SCENE_ID::MENU_SCENE);
-    }
 }
 
-void SettingScene::Update()
+void SettingScene::Update(float deltaTime)
 {
 
 }
 
 void SettingScene::Render()
+{
+
+}
+
+void SettingScene::Cleanup()
 {
 
 }

@@ -15,7 +15,7 @@ SettingButton::~SettingButton()
     std::cout << __FUNCTION__ << ":" << this->name() << std::endl;
 }
 
-void SettingButton::Update()
+void SettingButton::Update(float deltaTime)
 {
     
 }

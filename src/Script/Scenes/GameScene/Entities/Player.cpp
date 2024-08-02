@@ -24,7 +24,7 @@ Player::~Player()
     std::cout << __FUNCTION__ << ":" << this->name() << std::endl;
 }
 
-void Player::Update()
+void Player::Update(float deltaTime)
 {
     SystemManager::Instance()->Update<Transform2D>(this);
     SystemManager::Instance()->Update<CircleCollider2D>(this);

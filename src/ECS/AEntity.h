@@ -75,7 +75,7 @@ public:
     void setName(const char *newName);
 
 
-    virtual void Update();
+    virtual void Update(float deltaTime);
     virtual void Render();
 
 private:

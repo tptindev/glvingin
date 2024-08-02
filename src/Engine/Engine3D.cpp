@@ -33,9 +33,9 @@ void Engine3D::Connections()
         );
 }
 
-void Engine3D::Update()
+void Engine3D::Update(float deltaTime)
 {
-    this->m_sceneManager->UpdateScenes();
+    this->m_sceneManager->UpdateScenes(deltaTime);
 }
 
 void Engine3D::Render()
@@ -102,7 +102,7 @@ void Engine3D::Loop()
     {
         /* Poll for and process events */
         glfwPollEvents();
-        this->Update();
+        this->Update(0.0f);
         this->Render();
     }
 }

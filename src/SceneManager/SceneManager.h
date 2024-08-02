@@ -22,7 +22,7 @@ public:
     ~SceneManager();
 public:
     void LoadScene(AScene* scene, bool active = false);
-    void UpdateScenes();
+    void UpdateScenes(float deltaTime);
     void RenderScenes();
     void RemoveScene(int id);
     void Transition(int id);

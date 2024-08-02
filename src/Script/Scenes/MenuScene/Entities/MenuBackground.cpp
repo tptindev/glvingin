@@ -19,7 +19,7 @@ MenuBackground::~MenuBackground()
     std::cout << __FUNCTION__ << ":" << this->name() << std::endl;
 }
 
-void MenuBackground::Update()
+void MenuBackground::Update(float deltaTime)
 {
     SystemManager::Instance()->Update<Transform2D>(this);
     SystemManager::Instance()->Update<Sprite2D>(this);

@@ -10,7 +10,7 @@ public:
     virtual void Connections() = 0;
 
 private:
-    virtual void Update() = 0;
+    virtual void Update(float deltaTime) = 0;
     virtual void Render() = 0;
 };
 

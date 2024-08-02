@@ -11,7 +11,7 @@ public:
 
     // AEntity interface
 public:
-    virtual void Update() override;
+    virtual void Update(float deltaTime) override;
     virtual void Render() override;
 };
 

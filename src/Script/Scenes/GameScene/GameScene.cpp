@@ -27,21 +27,18 @@ void GameScene::Initialize()
     EntityManager::Instance()->LoadEntity(player, this);
 }
 
-void GameScene::EventHandle(GLFWwindow *window, int key, int scancode, int action, int mods)
+void GameScene::HandleEvents()
 {
-    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-    {
-        SceneManager::Instance()->Transition(SCENE_ID::MENU_SCENE);
-    }
+
 }
 
-void GameScene::Update()
+void GameScene::Update(float deltaTime)
 {
     std::unordered_map<int, AEntity *>& entities = EntityManager::Instance()->GetEntities(this);
     std::unordered_map<int, AEntity *>::iterator it = entities.begin();
     while (it != entities.end())
     {
-        it->second->Update();
+        it->second->Update(deltaTime);
         it++;
     }
 }
@@ -55,4 +52,9 @@ void GameScene::Render()
         it->second->Render();
         it++;
     }
+}
+
+void GameScene::Cleanup()
+{
+
 }
