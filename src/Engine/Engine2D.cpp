@@ -43,7 +43,7 @@ void Engine2D::Render()
 {
     SDL_SetRenderDrawColor(this->m_renderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderClear(this->m_renderer);
-    this->m_sceneManager->RenderScenes();
+    this->m_sceneManager->RenderScenes(this->m_renderer2d);
     SDL_RenderPresent(this->m_renderer);
 }
 

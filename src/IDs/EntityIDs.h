@@ -3,7 +3,6 @@
 
 class EntityIDs
 {
-
 public:
     enum MenuScene
     {

@@ -3,6 +3,7 @@
 
 #include "IEngine.h"
 struct GLFWwindow;
+class ARenderer;
 class SceneManager;
 class Engine3D: public IEngine
 {
@@ -37,6 +38,7 @@ private:
 private:
     const char* m_title;
     GLFWwindow* m_window{nullptr};
+    ARenderer* m_renderer3d{nullptr};
     SceneManager* m_sceneManager{nullptr};
 };
 

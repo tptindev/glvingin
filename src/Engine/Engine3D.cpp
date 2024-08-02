@@ -42,7 +42,7 @@ void Engine3D::Render()
 {
     glClearColor(1,1,1,1);
     glClear(GL_COLOR_BUFFER_BIT);
-    this->m_sceneManager->RenderScenes();
+    this->m_sceneManager->RenderScenes(this->m_renderer3d);
     /* Swap front and back buffers */
     glfwSwapBuffers(this->m_window);
 }

@@ -2,7 +2,6 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include <SceneManager.h>
-#include <Manager.h>
 #include <SceneIDs.h>
 SettingScene::SettingScene()
 {
@@ -25,19 +24,4 @@ void SettingScene::Initialize()
 
 void SettingScene::HandleEvents()
 {
-}
-
-void SettingScene::Update(float deltaTime)
-{
-
-}
-
-void SettingScene::Render()
-{
-
-}
-
-void SettingScene::Cleanup()
-{
-
 }

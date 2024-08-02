@@ -1,5 +1,6 @@
 #include "AScene.h"
 #include <iostream>
+#include "LayerManager.h"
 
 int AScene::id() const
 {
@@ -34,6 +35,21 @@ int AScene::height() const
 void AScene::setHeight(int newHeight)
 {
     m_height = newHeight;
+}
+
+void AScene::Update(float deltaTime)
+{
+    LayerManager::Instance()->UpdateLayers(deltaTime, this->m_id);
+}
+
+void AScene::Render(ARenderer* renderer)
+{
+    LayerManager::Instance()->RenderLayers(this->m_id);
+}
+
+void AScene::Cleanup()
+{
+    LayerManager::Instance()->CleanupLayers(this->m_id);
 }
 
 void AScene::setTitle(const char *newTitle)

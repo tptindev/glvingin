@@ -72,22 +72,22 @@ void SceneManager::UpdateScenes(float deltaTime)
     }
 }
 
-void SceneManager::RenderScenes()
+void SceneManager::RenderScenes(ARenderer* renderer)
 {
     std::vector<std::thread> scene_threads;
-    scene_threads.push_back(std::thread([](AScene *scene) {
+    scene_threads.push_back(std::thread([&](AScene *scene) {
         if (scene == nullptr) return;
         if (scene->visible())
         {
-            scene->Render();
+            scene->Render(renderer);
         }
     }, this->m_first_scene));
 
-    scene_threads.push_back(std::thread([](AScene *scene) {
+    scene_threads.push_back(std::thread([&](AScene *scene) {
         if (scene == nullptr) return;
         if (scene->visible())
         {
-            scene->Render();
+            scene->Render(renderer);
         }
     }, this->m_second_scene));
 

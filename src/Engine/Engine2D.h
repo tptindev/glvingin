@@ -5,6 +5,7 @@
 struct SDL_Window;
 struct SDL_Surface;
 struct SDL_Renderer;
+class ARenderer;
 class SceneManager;
 class Engine2D: public IEngine
 {
@@ -40,6 +41,7 @@ private:
     const char* m_title;
     SDL_Window* m_window{nullptr};
     SDL_Renderer* m_renderer{nullptr};
+    ARenderer* m_renderer2d{nullptr};
     SceneManager* m_sceneManager{nullptr};
     bool m_running{false};
 

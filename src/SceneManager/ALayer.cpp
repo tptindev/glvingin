@@ -1,4 +1,5 @@
 #include "ALayer.h"
+#include <Manager.h>
 
 int ALayer::id() const
 {
@@ -8,14 +9,4 @@ int ALayer::id() const
 void ALayer::setId(int newId)
 {
     m_id = newId;
-}
-
-const char *ALayer::name() const
-{
-    return m_name;
-}
-
-void ALayer::setName(const char *newName)
-{
-    m_name = newName;
 }

@@ -9,6 +9,7 @@
 
 struct SDL_Window;
 struct GLFWwindow;
+class ARenderer;
 class SceneManager
 {
 public:
@@ -23,7 +24,7 @@ public:
 public:
     void LoadScene(AScene* scene, bool active = false);
     void UpdateScenes(float deltaTime);
-    void RenderScenes();
+    void RenderScenes(ARenderer* renderer);
     void RemoveScene(int id);
     void Transition(int id);
     enum SignalID

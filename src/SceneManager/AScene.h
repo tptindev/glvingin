@@ -2,6 +2,7 @@
 #define ASCENE_H
 
 struct GLFWwindow;
+class ARenderer;
 class SceneManager;
 class EntityManager;
 class LayerManager;
@@ -25,9 +26,9 @@ public:
     void setHeight(int newHeight);
     virtual void Initialize() = 0;
     virtual void HandleEvents() = 0;
-    virtual void Update(float deltaTime) = 0;
-    virtual void Render() = 0;
-    virtual void Cleanup() = 0;
+    virtual void Update(float deltaTime);
+    virtual void Render(ARenderer* renderer);
+    virtual void Cleanup();
 
 private:
     int m_id{-1};

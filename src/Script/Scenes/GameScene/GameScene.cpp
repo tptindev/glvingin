@@ -3,8 +3,6 @@
 #include <iostream>
 #include <SceneManager.h>
 #include <SceneIDs.h>
-#include <Manager.h>
-#include "Entities/Player.h"
 
 GameScene::GameScene()
 {
@@ -22,39 +20,9 @@ GameScene::~GameScene()
 
 void GameScene::Initialize()
 {
-    AEntity* player = new Player();
-
-    EntityManager::Instance()->LoadEntity(player, this);
 }
 
 void GameScene::HandleEvents()
-{
-
-}
-
-void GameScene::Update(float deltaTime)
-{
-    std::unordered_map<int, AEntity *>& entities = EntityManager::Instance()->GetEntities(this);
-    std::unordered_map<int, AEntity *>::iterator it = entities.begin();
-    while (it != entities.end())
-    {
-        it->second->Update(deltaTime);
-        it++;
-    }
-}
-
-void GameScene::Render()
-{
-    std::unordered_map<int, AEntity *>& entities = EntityManager::Instance()->GetEntities(this);
-    std::unordered_map<int, AEntity *>::iterator it = entities.begin();
-    while (it != entities.end())
-    {
-        it->second->Render();
-        it++;
-    }
-}
-
-void GameScene::Cleanup()
 {
 
 }

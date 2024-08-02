@@ -43,6 +43,36 @@ void LayerManager::RemoveLayer(std::shared_ptr<ALayer> layer, int sceneID)
     }
 }
 
+void LayerManager::UpdateLayers(float deltaTime, int sceneID)
+{
+    std::vector<std::shared_ptr<ALayer>> layers;
+    this->Layers(sceneID, layers);
+    for(int i = 0; i < static_cast<int>(layers.size()); i++)
+    {
+        layers.at(i)->update(deltaTime);
+    }
+}
+
+void LayerManager::RenderLayers(int sceneID)
+{
+    std::vector<std::shared_ptr<ALayer>> layers;
+    this->Layers(sceneID, layers);
+    for(int i = 0; i < static_cast<int>(layers.size()); i++)
+    {
+        layers.at(i)->render(nullptr);
+    }
+}
+
+void LayerManager::CleanupLayers(int sceneID)
+{
+    std::vector<std::shared_ptr<ALayer>> layers;
+    this->Layers(sceneID, layers);
+    for(int i = 0; i < static_cast<int>(layers.size()); i++)
+    {
+        layers.at(i)->cleanup();
+    }
+}
+
 LayerManager *LayerManager::Instance()
 {
     if (LayerManager::s_instance == nullptr)
