@@ -4,7 +4,12 @@
 #include <SDL2/SDL.h>
 SDLWindowWrapper::SDLWindowWrapper()
 {
+    std::cout << __FUNCTION__ << std::endl;
+}
 
+SDLWindowWrapper::~SDLWindowWrapper()
+{
+    std::cout << __FUNCTION__ << std::endl;
 }
 
 SDL_Window *SDLWindowWrapper::window() const

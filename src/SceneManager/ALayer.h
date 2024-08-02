@@ -1,7 +1,6 @@
 #ifndef ALAYER_H
 #define ALAYER_H
 
-struct SDL_Renderer;
 class IRenderer;
 class ALayer
 {

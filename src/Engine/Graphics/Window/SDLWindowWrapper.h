@@ -8,6 +8,7 @@ class SDLWindowWrapper : public IWindowWrapper
 {
 public:
     SDLWindowWrapper();
+    ~SDLWindowWrapper();
     SDL_Window* window() const;
 
     // IWindow interface

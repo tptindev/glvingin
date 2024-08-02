@@ -1,9 +1,15 @@
 #include "GLWindowWrapper.h"
+#include <iostream>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 GLWindowWrapper::GLWindowWrapper()
 {
+    std::cout << __FUNCTION__ << std::endl;
+}
 
+GLWindowWrapper::~GLWindowWrapper()
+{
+    std::cout << __FUNCTION__ << std::endl;
 }
 
 bool GLWindowWrapper::CreateWindow(int width, int height, const char *title)

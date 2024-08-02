@@ -7,6 +7,7 @@ class GLWindowWrapper : public IWindowWrapper
 {
 public:
     GLWindowWrapper();
+    ~GLWindowWrapper();
     GLFWwindow *window() const;
 
     // IWindow interface
