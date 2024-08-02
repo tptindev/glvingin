@@ -72,7 +72,7 @@ void SceneManager::UpdateScenes(float deltaTime)
     }
 }
 
-void SceneManager::RenderScenes(ARenderer* renderer)
+void SceneManager::RenderScenes(IRenderer* renderer)
 {
     std::vector<std::thread> scene_threads;
     scene_threads.push_back(std::thread([&](AScene *scene) {

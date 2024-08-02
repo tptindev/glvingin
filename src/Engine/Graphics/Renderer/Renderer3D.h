@@ -1,19 +1,20 @@
 #ifndef RENDERER3D_H
 #define RENDERER3D_H
 
-#include "ARenderer.h"
+#include "IRenderer.h"
 
-class Renderer3D : public ARenderer
+class Renderer3D : public IRenderer
 {
 public:
     Renderer3D();
 
     // ARenderer interface
 public:
-    void Initialize() override;
+    void Initialize(IWindow* window) override;
     void SetDrawColor() override;
     void Clear() override;
     void Present() override;
+    void Destroy() override;
 };
 
 #endif // RENDERER3D_H

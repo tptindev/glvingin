@@ -5,6 +5,8 @@
 #include <iostream>
 #include <functional>
 #include <SceneManager.h>
+#include <SDLWindow.h>
+#include <Renderer2D.h>
 
 Engine2D *Engine2D::s_instance = nullptr;
 Engine2D *Engine2D::Instance()
@@ -41,10 +43,10 @@ void Engine2D::Update(float deltaTime)
 
 void Engine2D::Render()
 {
-    SDL_SetRenderDrawColor(this->m_renderer, 0xFF, 0xFF, 0xFF, 0xFF);
-    SDL_RenderClear(this->m_renderer);
+    this->m_renderer2d->SetDrawColor();
+    this->m_renderer2d->Clear();
     this->m_sceneManager->RenderScenes(this->m_renderer2d);
-    SDL_RenderPresent(this->m_renderer);
+    this->m_renderer2d->Present();
 }
 
 void Engine2D::ResetInstance()
@@ -77,17 +79,19 @@ bool Engine2D::Initialize(const char* title)
         return false;
     }
 
-    this->m_window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 480, 0);
+    this->m_window = new SDLWindow();
     if (this->m_window == nullptr)
     {
         return false;
     }
+    this->m_window->CreateWindow(640, 480, title);
 
-    this->m_renderer = SDL_CreateRenderer(this->m_window, -1, SDL_RENDERER_ACCELERATED);
-    if (this->m_renderer == nullptr)
+    this->m_renderer2d = new Renderer2D();
+    if (this->m_renderer2d == nullptr)
     {
         return false;
     }
+    this->m_renderer2d->Initialize(this->m_window);
 
     this->m_sceneManager = SceneManager::Instance();
     if (this->m_sceneManager == nullptr)
@@ -119,11 +123,11 @@ void Engine2D::Loop()
 void Engine2D::Quit()
 {
     SceneManager::ResetInstance();
-    SDL_DestroyWindow(this->m_window);
-    SDL_DestroyRenderer(this->m_renderer);
     TTF_Quit();
     IMG_Quit();
     SDL_Quit();
+    this->m_renderer2d->Destroy();
+    this->m_window->DestroyWindow();
 }
 
 void Engine2D::GetDesktopResolution(int &width, int &height)
@@ -132,7 +136,7 @@ void Engine2D::GetDesktopResolution(int &width, int &height)
 
 void Engine2D::OnWindowTitleChanged(const char *title)
 {
-    char buffer[255];
-    sprintf(&buffer[0], this->m_title, title);
-    SDL_SetWindowTitle(this->m_window, buffer);
+//    char buffer[255];
+//    sprintf(&buffer[0], this->m_title, title);
+//    SDL_SetWindowTitle(this->m_window, buffer);
 }

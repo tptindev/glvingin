@@ -42,7 +42,7 @@ void AScene::Update(float deltaTime)
     LayerManager::Instance()->UpdateLayers(deltaTime, this->m_id);
 }
 
-void AScene::Render(ARenderer* renderer)
+void AScene::Render(IRenderer* renderer)
 {
     LayerManager::Instance()->RenderLayers(this->m_id);
 }

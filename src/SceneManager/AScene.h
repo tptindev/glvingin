@@ -2,7 +2,7 @@
 #define ASCENE_H
 
 struct GLFWwindow;
-class ARenderer;
+class IRenderer;
 class SceneManager;
 class EntityManager;
 class LayerManager;
@@ -27,7 +27,7 @@ public:
     virtual void Initialize() = 0;
     virtual void HandleEvents() = 0;
     virtual void Update(float deltaTime);
-    virtual void Render(ARenderer* renderer);
+    virtual void Render(IRenderer* renderer);
     virtual void Cleanup();
 
 private:
