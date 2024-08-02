@@ -153,7 +153,7 @@ void Engine2D::GetDesktopResolution(int &width, int &height)
 
 void Engine2D::OnWindowTitleChanged(const char *title)
 {
-//    char buffer[255];
-//    sprintf(&buffer[0], this->m_title, title);
-//    SDL_SetWindowTitle(this->m_window, buffer);
+    char buffer[255];
+    sprintf(&buffer[0], this->m_title, title);
+    SDL_SetWindowTitle(this->m_window->window(), buffer);
 }
