@@ -77,6 +77,7 @@ SDL_Renderer *Renderer2D::renderer() const
  */
 void Renderer2D::Render(ITexture *texture, glm::ivec2 position, int width, int height, bool fip)
 {
+    if (texture == nullptr) return;
     SDLTexture* sdlTexture = static_cast<SDLTexture*>(texture);
     SDL_Rect srcRect = {0, 0, width, height};
     SDL_Rect destRect = {position.x, position.y, width, height};

@@ -22,7 +22,7 @@ public:
     static void ResetInstance();
     ~SceneManager();
 public:
-    void LoadScene(AScene* scene, bool active = false);
+    void LoadScene(std::shared_ptr<AScene> scene, bool active = false);
     void UpdateScenes(float deltaTime);
     void RenderScenes(IRenderer* renderer);
     void RemoveScene(int id);
@@ -44,7 +44,7 @@ private:
     std::mutex m_mutex;
     AScene *m_first_scene{nullptr};
     AScene *m_second_scene{nullptr};
-    std::unordered_map<int, AScene*> m_scenes;
+    std::unordered_map<int, std::shared_ptr<AScene>> m_scenes;
     Signal<void, const char*> m_NotifyWindowTitleChanged;
 };
 

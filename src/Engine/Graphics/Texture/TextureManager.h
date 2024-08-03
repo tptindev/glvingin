@@ -17,7 +17,7 @@ public:
     static void ResetInstance();
     ~TextureManager();
 
-    ITexture* GetTextureByID(int id) const;
+    ITexture* GetTextureByID(int id);
     void Load(std::shared_ptr<ITexture> buffer, int id, const char* path);
     void Clean();
 

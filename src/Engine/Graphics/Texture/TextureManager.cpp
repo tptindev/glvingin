@@ -31,9 +31,14 @@ TextureManager::~TextureManager()
     std::cout << __FUNCTION__ << std::endl;
 }
 
-ITexture *TextureManager::GetTextureByID(int id) const
+ITexture *TextureManager::GetTextureByID(int id)
 {
-    return this->m_textures.at(id).get();
+    decltype(this->m_textures)::iterator it = this->m_textures.find(id);
+    if (it != this->m_textures.end())
+    {
+        return this->m_textures.at(id).get();
+    }
+    return nullptr;
 }
 
 /**

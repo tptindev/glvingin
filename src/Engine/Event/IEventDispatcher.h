@@ -6,7 +6,7 @@ class IEventDispatcher
 {
 public:
     virtual void AddListener() = 0;
-    virtual void RemoveListene() = 0;
+    virtual void RemoveListener() = 0;
     virtual void Dispatch() = 0;
 };
 

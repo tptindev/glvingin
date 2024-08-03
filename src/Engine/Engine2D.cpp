@@ -134,15 +134,15 @@ void Engine2D::Loop()
 
 void Engine2D::Quit()
 {
-    TTF_Quit();
-    IMG_Quit();
-    SDL_Quit();
     SceneManager::ResetInstance();
     TextureManager::Instance()->Clean();
     TextureManager::Instance()->ResetInstance();
     this->m_renderer2d->Destroy();
     this->m_winWrapper->DestroyWindow();
     Renderer2D::ResetInstance();
+    TTF_Quit();
+    IMG_Quit();
+    SDL_Quit();
 }
 
 void Engine2D::GetDesktopResolution(int &width, int &height)

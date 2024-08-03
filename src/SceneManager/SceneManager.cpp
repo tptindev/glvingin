@@ -26,7 +26,7 @@ void SceneManager::ResetInstance()
     return;
 }
 
-void SceneManager::LoadScene(AScene *scene, bool active)
+void SceneManager::LoadScene(std::shared_ptr<AScene> scene, bool active)
 {
     if (scene != nullptr)
     {
@@ -34,12 +34,12 @@ void SceneManager::LoadScene(AScene *scene, bool active)
         this->m_scenes[scene->id()] = scene;
         if (active == true)
         {
-            SetEventHandle(scene);
+            SetEventHandle(scene.get());
             this->NotifyWindowTitleChanged().Emit(NOTIFY_SCENE_CHANGED, scene->title());
 
             if (this->m_first_scene == nullptr)
             {
-                this->m_first_scene = scene;
+                this->m_first_scene = scene.get();
             }
         }
     }
@@ -48,7 +48,7 @@ void SceneManager::LoadScene(AScene *scene, bool active)
 void SceneManager::UpdateScenes(float deltaTime)
 {
     std::vector<std::thread> scene_threads;
-    scene_threads.push_back(std::thread([=](AScene *scene) {
+    scene_threads.push_back(std::thread([&](AScene *scene) {
         if (scene == nullptr) return;
         if (scene->enable() && scene->visible())
         {
@@ -56,7 +56,7 @@ void SceneManager::UpdateScenes(float deltaTime)
         }
     }, this->m_first_scene));
 
-    scene_threads.push_back(std::thread([=](AScene *scene) {
+    scene_threads.push_back(std::thread([&](AScene *scene) {
         if (scene == nullptr) return;
         if (scene->enable() && scene->visible())
         {
@@ -97,14 +97,12 @@ void SceneManager::RenderScenes(IRenderer* renderer)
 
 void SceneManager::RemoveScene(int id)
 {
-    std::unordered_map<int, AScene*>::iterator it = this->m_scenes.find(id);
+    decltype(this->m_scenes)::iterator it = this->m_scenes.find(id);
     if (it != this->m_scenes.end())
     {
         if (this->m_scenes[id] != nullptr)
         {
             this->m_scenes.erase(this->m_scenes.find(id));
-            delete this->m_scenes[id];
-            this->m_scenes[id] = nullptr;
         }
     }
 }
@@ -112,10 +110,10 @@ void SceneManager::RemoveScene(int id)
 void SceneManager::Transition(int id)
 {
     this->m_mutex.lock();
-    std::unordered_map<int, AScene*>::iterator it = this->m_scenes.find(id);
+    decltype(this->m_scenes)::iterator it = this->m_scenes.find(id);
     if (it != this->m_scenes.end())
     {
-        AScene *scene = this->m_scenes[id];
+        AScene *scene = this->m_scenes[id].get();
         if (scene == nullptr)
         {
             return;
@@ -166,12 +164,10 @@ SceneManager::SceneManager()
 SceneManager::~SceneManager()
 {
     LayerManager::ResetInstance();
-    std::unordered_map<int, AScene*>::iterator it = this->m_scenes.begin();
+    decltype(this->m_scenes)::iterator it = this->m_scenes.begin();
     while (it != this->m_scenes.end())
     {
         this->m_scenes.erase(it);
-        delete it->second;
-        it->second = nullptr;
         ++it;
     }
     std::cout << __FUNCTION__ << std::endl;
