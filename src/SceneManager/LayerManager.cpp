@@ -1,6 +1,7 @@
 #include "LayerManager.h"
 #include <ALayer.h>
 #include <iostream>
+#include <Manager.h>
 LayerManager *LayerManager::s_instance = nullptr;
 LayerManager::LayerManager()
 {
@@ -9,6 +10,7 @@ LayerManager::LayerManager()
 
 LayerManager::~LayerManager()
 {
+    EntityManager::ResetInstance();
     std::cout << __FUNCTION__ << std::endl;
 }
 void LayerManager::Layers(int sceneID, std::vector<std::shared_ptr<ALayer>>& layers)

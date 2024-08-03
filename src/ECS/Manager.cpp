@@ -1,7 +1,6 @@
 #include "Manager.h"
 #include <iostream>
 
-
 EntityManager *EntityManager::s_instance = nullptr;
 EntityManager *EntityManager::Instance()
 {
@@ -28,24 +27,24 @@ EntityManager::~EntityManager()
     std::cout << __FUNCTION__ << std::endl;
 }
 
-void EntityManager::LoadEntity(AEntity *entity, void* scene)
+void EntityManager::LoadEntity(AEntity *entity, int layerID)
 {
     if (entity != nullptr)
     {
-        this->m_entities[scene][entity->id()] = entity;
+        this->m_entities[layerID][entity->id()] = entity;
     }
 }
 
-std::unordered_map<int, AEntity *> &EntityManager::GetEntities(void *scene)
+std::unordered_map<int, AEntity *> &EntityManager::GetEntities(int layerID)
 {
-    return this->m_entities[scene];
+    return this->m_entities[layerID];
 }
 
-void EntityManager::DestroyEntity(AEntity *entity, void* scene)
+void EntityManager::DestroyEntity(AEntity *entity, int layerID)
 {
     if (entity != nullptr)
     {
-        this->m_entities[scene].erase(this->m_entities[scene].find(entity->id()));
+        this->m_entities[layerID].erase(this->m_entities[layerID].find(entity->id()));
         delete entity;
         entity = nullptr;
     }
@@ -53,7 +52,7 @@ void EntityManager::DestroyEntity(AEntity *entity, void* scene)
 
 void EntityManager::DestroyEntities()
 {
-    std::unordered_map<void*, std::unordered_map<int, AEntity*>>::iterator it = this->m_entities.begin();
+    std::unordered_map<int, std::unordered_map<int, AEntity*>>::iterator it = this->m_entities.begin();
     while (it != this->m_entities.end())
     {
         std::unordered_map<int, AEntity*>::iterator tmpIt = it->second.begin();

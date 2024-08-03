@@ -5,8 +5,6 @@
 #include <unordered_map>
 #include <vector>
 #include "AEntity.h"
-
-
 class EntityManager
 {
 public:
@@ -19,15 +17,15 @@ public:
     ~EntityManager();
 
 public:
-    void LoadEntity(AEntity* entity, void* scene);
-    std::unordered_map<int, AEntity*>& GetEntities(void* scene);
-    void DestroyEntity(AEntity* entity, void* scene);
+    void LoadEntity(AEntity* entity, int layerID);
+    std::unordered_map<int, AEntity*>& GetEntities(int layerID);
+    void DestroyEntity(AEntity* entity, int layerID);
     void DestroyEntities();
 
 private:
     static EntityManager* s_instance;
     EntityManager();
-    std::unordered_map<void*, std::unordered_map<int, AEntity*>> m_entities;
+    std::unordered_map<int, std::unordered_map<int, AEntity*>> m_entities;
 
 };
 

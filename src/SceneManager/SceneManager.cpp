@@ -4,10 +4,8 @@
 #include <vector>
 #include <thread>
 #include <iostream>
-#include <stdio.h>
-#include <Manager.h>
-#include <Engine3D.h>
-#include <Engine2D.h>
+#include <LayerManager.h>
+
 SceneManager *SceneManager::s_instance = nullptr;
 SceneManager *SceneManager::Instance()
 {
@@ -167,6 +165,7 @@ SceneManager::SceneManager()
 
 SceneManager::~SceneManager()
 {
+    LayerManager::ResetInstance();
     std::unordered_map<int, AScene*>::iterator it = this->m_scenes.begin();
     while (it != this->m_scenes.end())
     {
@@ -175,6 +174,5 @@ SceneManager::~SceneManager()
         it->second = nullptr;
         ++it;
     }
-    EntityManager::ResetInstance();
     std::cout << __FUNCTION__ << std::endl;
 }

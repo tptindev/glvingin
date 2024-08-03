@@ -1,18 +1,38 @@
 #ifndef LAYERIDS_H
 #define LAYERIDS_H
 
-enum LAYER_ID
+class LayerIDs
 {
-    LAYER_0,
-    LAYER_1,
-    LAYER_2,
-    LAYER_3,
-    LAYER_4,
-    LAYER_5,
-    LAYER_6,
-    LAYER_7,
-    LAYER_8,
-    LAYER_9,
+public:
+    enum MenuScene{
+        MENU_LAYER_MIN,
+        MENU_LAYER_0,
+        MENU_LAYER_1,
+        MENU_LAYER_2,
+        MENU_LAYER_3,
+        MENU_LAYER_4,
+        MENU_LAYER_5,
+        MENU_LAYER_6,
+        MENU_LAYER_7,
+        MENU_LAYER_8,
+        MENU_LAYER_9,
+        MENU_LAYER_MAX
+    };
+
+    enum GameScene{
+        GAME_LAYER_MIN = MENU_LAYER_MAX,
+        GAME_LAYER_0,
+        GAME_LAYER_1,
+        GAME_LAYER_2,
+        GAME_LAYER_3,
+        GAME_LAYER_4,
+        GAME_LAYER_5,
+        GAME_LAYER_6,
+        GAME_LAYER_7,
+        GAME_LAYER_8,
+        GAME_LAYER_9,
+        GAME_LAYER_MAX
+    };
 };
 
 #endif // LAYERIDS_H
