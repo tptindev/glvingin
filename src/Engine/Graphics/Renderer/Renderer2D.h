@@ -9,6 +9,7 @@ class Renderer2D : public IRenderer
 {
 public:
     Renderer2D();
+    SDL_Renderer *renderer() const;
 
     // ARenderer interface
 public:

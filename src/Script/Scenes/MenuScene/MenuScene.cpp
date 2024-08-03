@@ -1,12 +1,10 @@
 #include "MenuScene.h"
 #include <GLFW/glfw3.h>
 #include <iostream>
-#include <SceneManager.h>
 #include <SceneIDs.h>
-#include "Entities/MenuBackground.h"
-#include "Entities/StartButton.h"
-#include "Entities/SettingButton.h"
-#include "Entities/ExitButton.h"
+#include <LayerManager.h>
+#include "Layers/BackgroundLayer.h"
+#include "Layers/UILayer.h"
 
 MenuScene::MenuScene()
 {
@@ -24,6 +22,8 @@ MenuScene::~MenuScene()
 
 void MenuScene::Initialize()
 {
+    LayerManager::Instance()->AddLayer(std::make_shared<BackgroundLayer>(), this->id());
+    LayerManager::Instance()->AddLayer(std::make_shared<UILayer>(), this->id());
 }
 
 void MenuScene::HandleEvents()

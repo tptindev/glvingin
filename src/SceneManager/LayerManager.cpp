@@ -51,7 +51,7 @@ void LayerManager::UpdateLayers(float deltaTime, int sceneID)
     this->Layers(sceneID, layers);
     for(int i = 0; i < static_cast<int>(layers.size()); i++)
     {
-        layers.at(i)->update(deltaTime);
+        layers.at(i)->Update(deltaTime);
     }
 }
 
@@ -61,7 +61,7 @@ void LayerManager::RenderLayers(int sceneID)
     this->Layers(sceneID, layers);
     for(int i = 0; i < static_cast<int>(layers.size()); i++)
     {
-        layers.at(i)->render(nullptr);
+        layers.at(i)->Render(nullptr);
     }
 }
 
@@ -71,7 +71,7 @@ void LayerManager::CleanupLayers(int sceneID)
     this->Layers(sceneID, layers);
     for(int i = 0; i < static_cast<int>(layers.size()); i++)
     {
-        layers.at(i)->cleanup();
+        layers.at(i)->Cleanup();
     }
 }
 

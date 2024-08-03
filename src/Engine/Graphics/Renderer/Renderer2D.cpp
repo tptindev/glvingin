@@ -36,3 +36,8 @@ void Renderer2D::Destroy()
 {
     SDL_DestroyRenderer(this->m_renderer);
 }
+
+SDL_Renderer *Renderer2D::renderer() const
+{
+    return m_renderer;
+}

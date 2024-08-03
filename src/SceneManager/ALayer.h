@@ -6,10 +6,10 @@ class ALayer
 {
 public:
     virtual ~ALayer() = default;
-    virtual void init() = 0;
-    virtual void update(float deltaTime) = 0;
-    virtual void render(IRenderer* renderer) = 0;
-    virtual void cleanup() = 0;
+    virtual void Initialize() = 0;
+    virtual void Update(float deltaTime) = 0;
+    virtual void Render(IRenderer* renderer) = 0;
+    virtual void Cleanup() = 0;
 
     int id() const;
     void setId(int newId);
