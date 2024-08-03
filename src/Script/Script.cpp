@@ -34,7 +34,7 @@ Script::Script()
 
 void Script::Initialize()
 {
-    SceneManager::Instance()->LoadScene(std::shared_ptr<MenuScene>(), true);
-    SceneManager::Instance()->LoadScene(std::shared_ptr<SettingScene>());
-    SceneManager::Instance()->LoadScene(std::shared_ptr<GameScene>());
+    SceneManager::Instance()->LoadScene(std::make_shared<MenuScene>(), true);
+    SceneManager::Instance()->LoadScene(std::make_shared<SettingScene>());
+    SceneManager::Instance()->LoadScene(std::make_shared<GameScene>());
 }
