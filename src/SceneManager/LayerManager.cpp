@@ -1,6 +1,7 @@
 #include "LayerManager.h"
-#include <ALayer.h>
 #include <iostream>
+#include <algorithm>
+#include <ALayer.h>
 #include <Manager.h>
 LayerManager *LayerManager::s_instance = nullptr;
 LayerManager::LayerManager()
@@ -34,6 +35,9 @@ void LayerManager::Layers(int sceneID, std::vector<std::shared_ptr<ALayer>> &lay
             layers.emplace_back(it->second);
             it++;
         }
+        std::sort(layers.begin(), layers.end(), [](std::shared_ptr<ALayer> a, std::shared_ptr<ALayer> b) -> bool{
+            return a->id() < b->id();
+        });
     }
     return;
 }
@@ -70,31 +74,37 @@ void LayerManager::RemoveLayer(std::shared_ptr<ALayer> layer, int sceneID)
 
 void LayerManager::InitializedLayers(int sceneID)
 {
-    std::vector<std::shared_ptr<ALayer>> layers;
-    this->Layers(sceneID, layers);
-    for(int i = 0; i < static_cast<int>(layers.size()); i++)
+    if (this->m_layerBuffer.empty())
     {
-        layers.at(i)->Initialize();
+        this->Layers(sceneID, this->m_layerBuffer);
+    }
+    for(int i = 0; i < static_cast<int>(this->m_layerBuffer.size()); i++)
+    {
+        this->m_layerBuffer.at(i)->Initialize();
     }
 }
 
 void LayerManager::UpdateLayers(float deltaTime, int sceneID)
 {
-    std::vector<std::shared_ptr<ALayer>> layers;
-    this->Layers(sceneID, layers);
-    for(int i = 0; i < static_cast<int>(layers.size()); i++)
+    if (this->m_layerBuffer.empty())
     {
-        layers.at(i)->Update(deltaTime);
+        this->Layers(sceneID, this->m_layerBuffer);
+    }
+    for(int i = 0; i < static_cast<int>(this->m_layerBuffer.size()); i++)
+    {
+        this->m_layerBuffer.at(i)->Update(deltaTime);
     }
 }
 
 void LayerManager::RenderLayers(int sceneID)
 {
-    std::vector<std::shared_ptr<ALayer>> layers;
-    this->Layers(sceneID, layers);
-    for(int i = 0; i < static_cast<int>(layers.size()); i++)
+    if (this->m_layerBuffer.empty())
     {
-        layers.at(i)->Render(nullptr);
+        this->Layers(sceneID, this->m_layerBuffer);
+    }
+    for(int i = 0; i < static_cast<int>(this->m_layerBuffer.size()); i++)
+    {
+        this->m_layerBuffer.at(i)->Render(nullptr);
     }
 }
 

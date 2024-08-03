@@ -31,6 +31,8 @@ private:
         int,
         std::unordered_map<int, std::shared_ptr<ALayer>>
         > m_layers;
+
+    std::vector<std::shared_ptr<ALayer>> m_layerBuffer;
 };
 
 #endif // LAYERMANAGER_H

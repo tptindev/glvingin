@@ -89,7 +89,7 @@ bool Engine2D::Initialize(const char* title)
     {
         return false;
     }
-    if (!this->m_winWrapper->CreateWindow(640, 480, title))
+    if (!this->m_winWrapper->CreateWindow(1360, 786, title))
     {
         return false;
     }

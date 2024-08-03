@@ -29,8 +29,8 @@ void BackgroundLayer::Update(float deltaTime)
 
 void BackgroundLayer::Render(IRenderer *renderer)
 {
-    ITexture* texture = TextureManager::Instance()->GetTextureByID(MENU_BG_ID);
-    Renderer2D::Instance()->Render(texture, {0,0}, 2048, 2048, false);
+    ITexture* bgTexture = TextureManager::Instance()->GetTextureByID(MENU_BG_ID);
+    Renderer2D::Instance()->Render(bgTexture, {0,0}, 2048, 2048, false);
 }
 
 void BackgroundLayer::Cleanup()
