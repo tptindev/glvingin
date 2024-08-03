@@ -1,10 +1,36 @@
 #include "Renderer3D.h"
+#include <iostream>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <GLWindowWrapper.h>
+Renderer3D *Renderer3D::s_instance = nullptr;
 Renderer3D::Renderer3D()
 {
+    std::cout << __FUNCTION__ << std::endl;
+}
 
+Renderer3D *Renderer3D::Instance()
+{
+    if (Renderer3D::s_instance == nullptr)
+    {
+        Renderer3D::s_instance = new Renderer3D();
+    }
+    return Renderer3D::s_instance;
+}
+
+void Renderer3D::ResetInstance()
+{
+    if (Renderer3D::s_instance != nullptr)
+    {
+        delete Renderer3D::s_instance;
+        Renderer3D::s_instance = nullptr;
+    }
+    return;
+}
+
+Renderer3D::~Renderer3D()
+{
+    std::cout << __FUNCTION__ << std::endl;
 }
 
 bool Renderer3D::Initialize(IWindowWrapper* window)

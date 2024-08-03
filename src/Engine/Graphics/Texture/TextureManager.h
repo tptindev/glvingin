@@ -2,6 +2,7 @@
 #define TEXTUREMANAGER_H
 
 #include <unordered_map>
+#include <memory>
 #include "ATexture.h"
 
 class TextureManager
@@ -15,7 +16,7 @@ public:
     static void ResetInstance();
     ~TextureManager();
 
-    void Load(int id, const char* path);
+    void Load(std::shared_ptr<ATexture> buffer, int id, const char* path);
     void Render();
     void RenderFrame();
     void Clean();
@@ -24,7 +25,7 @@ private:
     static TextureManager *s_instance;
     TextureManager();
 
-    std::unordered_map<int, ATexture*> m_textures;
+    std::unordered_map<int, std::shared_ptr<ATexture>> m_textures;
 };
 
 #endif // TEXTUREMANAGER_H

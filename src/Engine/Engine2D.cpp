@@ -25,12 +25,6 @@ Engine2D::Engine2D()
 
 Engine2D::~Engine2D()
 {
-    if (this->m_renderer2d != nullptr)
-    {
-        delete this->m_renderer2d;
-        this->m_renderer2d = nullptr;
-    }
-    
     if (this->m_winWrapper != nullptr)
     {
         delete this->m_winWrapper;
@@ -100,7 +94,7 @@ bool Engine2D::Initialize(const char* title)
         return false;
     }
 
-    this->m_renderer2d = new Renderer2D();
+    this->m_renderer2d = Renderer2D::Instance();
     if (this->m_renderer2d == nullptr)
     {
         return false;
@@ -145,6 +139,7 @@ void Engine2D::Quit()
     SDL_Quit();
     this->m_renderer2d->Destroy();
     this->m_winWrapper->DestroyWindow();
+    Renderer2D::ResetInstance();
 }
 
 void Engine2D::GetDesktopResolution(int &width, int &height)

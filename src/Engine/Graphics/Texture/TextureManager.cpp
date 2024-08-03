@@ -35,9 +35,12 @@ TextureManager::~TextureManager()
  * @brief TextureManager::Load
  * Load a texture from file and store it with an ID
  */
-void TextureManager::Load(int id, const char *path)
+void TextureManager::Load(std::shared_ptr<ATexture> buffer, int id, const char *path)
 {
-    this->m_textures[id] = nullptr;
+    if (buffer->Create(path))
+    {
+        this->m_textures[id] = buffer;
+    }
 }
 
 /**

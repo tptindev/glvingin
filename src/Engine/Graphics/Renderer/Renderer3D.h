@@ -6,7 +6,13 @@ class GLWindowWrapper;
 class Renderer3D : public IRenderer
 {
 public:
-    Renderer3D();
+    Renderer3D(const Renderer3D &) = delete;
+    Renderer3D(Renderer3D &&) = delete;
+    Renderer3D &operator=(const Renderer3D &) = delete;
+    Renderer3D &operator=(Renderer3D &&) = delete;
+    static Renderer3D* Instance();
+    static void ResetInstance();
+    ~Renderer3D();
 
     // ARenderer interface
 public:
@@ -17,6 +23,8 @@ public:
     void Destroy() override;
 
 private:
+    static Renderer3D* s_instance;
+    Renderer3D();
     GLWindowWrapper* m_winWrapper{nullptr};
 };
 

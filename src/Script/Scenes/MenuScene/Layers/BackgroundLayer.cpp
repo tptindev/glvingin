@@ -1,6 +1,8 @@
 #include "BackgroundLayer.h"
 #include <iostream>
 #include <LayerIDs.h>
+#include <TextureManager.h>
+#include <SDLTexture.h>
 
 BackgroundLayer::BackgroundLayer()
 {
@@ -15,7 +17,7 @@ BackgroundLayer::~BackgroundLayer()
 
 void BackgroundLayer::Initialize()
 {
-
+    TextureManager::Instance()->Load(std::make_shared<SDLTexture>(), 0, "res/Images/bg.png");
 }
 
 void BackgroundLayer::Update(float deltaTime)

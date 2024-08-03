@@ -88,7 +88,7 @@ bool Engine3D::Initialize(const char* title)
         return false;
     }
 
-    this->m_renderer3d = new Renderer3D();
+    this->m_renderer3d = Renderer3D::Instance();
     if (!this->m_renderer3d->Initialize(this->m_winWrapper))
     {
         return false;
@@ -126,6 +126,7 @@ void Engine3D::Quit()
     SceneManager::ResetInstance();
     this->m_renderer3d->Destroy();
     this->m_winWrapper->DestroyWindow();
+    Renderer3D::ResetInstance();
 }
 
 void Engine3D::GetDesktopResolution(int &width, int &height)

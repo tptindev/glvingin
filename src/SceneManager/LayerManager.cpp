@@ -13,6 +13,10 @@ LayerManager::~LayerManager()
     EntityManager::ResetInstance();
     std::cout << __FUNCTION__ << std::endl;
 }
+
+ALayer *LayerManager::Layer(int id, int sceneID)
+{
+}
 void LayerManager::Layers(int sceneID, std::vector<std::shared_ptr<ALayer>>& layers)
 {
     std::unordered_map<int, std::vector<std::shared_ptr<ALayer>>>::iterator it = this->m_layers.find(sceneID);
@@ -24,6 +28,7 @@ void LayerManager::Layers(int sceneID, std::vector<std::shared_ptr<ALayer>>& lay
 
 void LayerManager::AddLayer(std::shared_ptr<ALayer> layer, int sceneID)
 {
+    layer->Initialize();
     this->m_layers[sceneID].push_back(layer);
 }
 

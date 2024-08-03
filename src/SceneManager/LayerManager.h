@@ -16,6 +16,7 @@ public:
     static void ResetInstance();
     ~LayerManager();
 
+    ALayer* Layer(int id, int sceneID);
     void Layers(int sceneID, std::vector<std::shared_ptr<ALayer>>& layers);
     void AddLayer(std::shared_ptr<ALayer> layer, int sceneID);
     void RemoveLayer(std::shared_ptr<ALayer> layer, int sceneID);
