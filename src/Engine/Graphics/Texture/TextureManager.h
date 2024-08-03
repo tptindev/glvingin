@@ -3,7 +3,8 @@
 
 #include <unordered_map>
 #include <memory>
-#include "ATexture.h"
+#include <glm/glm.hpp>
+#include "ITexture.h"
 
 class TextureManager
 {
@@ -16,16 +17,15 @@ public:
     static void ResetInstance();
     ~TextureManager();
 
-    void Load(std::shared_ptr<ATexture> buffer, int id, const char* path);
-    void Render();
-    void RenderFrame();
+    ITexture* GetTextureByID(int id) const;
+    void Load(std::shared_ptr<ITexture> buffer, int id, const char* path);
     void Clean();
 
 private:
     static TextureManager *s_instance;
     TextureManager();
 
-    std::unordered_map<int, std::shared_ptr<ATexture>> m_textures;
+    std::unordered_map<int, std::shared_ptr<ITexture>> m_textures;
 };
 
 #endif // TEXTUREMANAGER_H

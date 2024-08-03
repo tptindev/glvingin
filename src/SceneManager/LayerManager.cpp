@@ -16,37 +16,65 @@ LayerManager::~LayerManager()
 
 ALayer *LayerManager::Layer(int id, int sceneID)
 {
+    return nullptr;
 }
-void LayerManager::Layers(int sceneID, std::vector<std::shared_ptr<ALayer>>& layers)
+void LayerManager::Layers(int sceneID, std::vector<std::shared_ptr<ALayer>> &layers)
 {
-    std::unordered_map<int, std::vector<std::shared_ptr<ALayer>>>::iterator it = this->m_layers.find(sceneID);
-    if (it != this->m_layers.end())
+
+    decltype(this->m_layers)::iterator found = this->m_layers.find(sceneID);
+    if (found == this->m_layers.end())
     {
-        layers = it->second;
+        return;
     }
+    else
+    {
+        decltype(found->second)::iterator it = found->second.begin();
+        while (it != found->second.end())
+        {
+            layers.emplace_back(it->second);
+            it++;
+        }
+    }
+    return;
 }
 
 void LayerManager::AddLayer(std::shared_ptr<ALayer> layer, int sceneID)
 {
-    layer->Initialize();
-    this->m_layers[sceneID].push_back(layer);
+    if (layer != nullptr)
+    {
+        this->m_layers[sceneID][layer->id()] = layer;
+    }
+    return;
 }
 
 void LayerManager::RemoveLayer(std::shared_ptr<ALayer> layer, int sceneID)
 {
-    std::unordered_map<int, std::vector<std::shared_ptr<ALayer>>>::iterator it = this->m_layers.find(sceneID);
-    if (it == this->m_layers.end())
+    decltype(this->m_layers)::iterator found = this->m_layers.find(sceneID);
+    if (found == this->m_layers.end())
     {
         return;
     }
-    for (std::vector<std::shared_ptr<ALayer>>::iterator it = this->m_layers.at(sceneID).begin();
-         it != this->m_layers.at(sceneID).end();
-         it++)
+    else
     {
-        if (layer->id() == (*it)->id())
+        decltype(found->second)::iterator it = found->second.begin();
+        while (it != found->second.end())
         {
-            this->m_layers[sceneID].erase(it);
+            if (layer->id() == it->second->id())
+            {
+                this->m_layers[sceneID].erase(it);
+            }
+            it++;
         }
+    }
+}
+
+void LayerManager::InitializedLayers(int sceneID)
+{
+    std::vector<std::shared_ptr<ALayer>> layers;
+    this->Layers(sceneID, layers);
+    for(int i = 0; i < static_cast<int>(layers.size()); i++)
+    {
+        layers.at(i)->Initialize();
     }
 }
 
@@ -98,4 +126,3 @@ void LayerManager::ResetInstance()
     }
     return;
 }
-#include "LayerManager.h"

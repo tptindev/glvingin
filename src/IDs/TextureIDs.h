@@ -3,7 +3,7 @@
 
 enum TEXTURE_ID
 {
-
+    MENU_BG_ID
 };
 
 #endif // TEXTUREIDS_H

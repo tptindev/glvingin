@@ -24,6 +24,7 @@ void MenuScene::Initialize()
 {
     LayerManager::Instance()->AddLayer(std::make_shared<BackgroundLayer>(), this->id());
     LayerManager::Instance()->AddLayer(std::make_shared<UILayer>(), this->id());
+    LayerManager::Instance()->InitializedLayers(this->id());
 }
 
 void MenuScene::HandleEvents()

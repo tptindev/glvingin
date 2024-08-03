@@ -31,34 +31,21 @@ TextureManager::~TextureManager()
     std::cout << __FUNCTION__ << std::endl;
 }
 
+ITexture *TextureManager::GetTextureByID(int id) const
+{
+    return this->m_textures.at(id).get();
+}
+
 /**
  * @brief TextureManager::Load
  * Load a texture from file and store it with an ID
  */
-void TextureManager::Load(std::shared_ptr<ATexture> buffer, int id, const char *path)
+void TextureManager::Load(std::shared_ptr<ITexture> buffer, int id, const char *path)
 {
     if (buffer->Create(path))
     {
         this->m_textures[id] = buffer;
     }
-}
-
-/**
- * @brief TextureManager::Render
- * Render a texture to the screen
- */
-void TextureManager::Render()
-{
-    
-}
-
-/**
- * @brief TextureManager::RenderFrame
- * Render a portion of a texture (useful for sprite sheets)
- */
-void TextureManager::RenderFrame()
-{
-    
 }
 
 /**

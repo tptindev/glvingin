@@ -16,20 +16,21 @@ SDLTexture::~SDLTexture()
 bool SDLTexture::Create(const char *path)
 {
     SDL_Surface *surface = IMG_Load(path);
-    if (!surface) {
+    if (surface == nullptr)
+    {
         return false;
     }
-    this->m_texture =SDL_CreateTextureFromSurface(Renderer2D::Instance()->renderer(), surface);
+    this->m_data = SDL_CreateTextureFromSurface(Renderer2D::Instance()->renderer(), surface);
     SDL_FreeSurface(surface);
     return true;
 }
 
 void SDLTexture::Destroy()
 {
-    SDL_DestroyTexture(this->m_texture);
+    SDL_DestroyTexture(this->m_data);
 }
 
-SDL_Texture *SDLTexture::texture() const
+SDL_Texture *SDLTexture::data() const
 {
-    return m_texture;
+    return m_data;
 }

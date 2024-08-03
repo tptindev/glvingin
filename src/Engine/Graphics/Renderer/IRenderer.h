@@ -1,8 +1,9 @@
 #ifndef IRENDERER_H
 #define IRENDERER_H
 
+#include <glm/glm.hpp>
 class IWindowWrapper;
-class ATexture;
+class ITexture;
 class IRenderer
 {
 public:
@@ -12,7 +13,8 @@ public:
     virtual void Clear() = 0;
     virtual void Present() = 0;
     virtual void Destroy() = 0;
-    virtual void RenderTexture(ATexture* texture) {};
+    virtual void Render(ITexture* texture, glm::ivec2 position, int width, int height, bool fip) {}
+    virtual void RenderFrame(ITexture* texture, glm::ivec2 position, int frameWidth, int frameHeight, glm::ivec2 coord, bool flip = false, float rotation = 0.0f) {}
 
 };
 

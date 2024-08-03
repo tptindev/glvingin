@@ -7,7 +7,6 @@ class Renderer2D;
 class SceneManager;
 class Engine2D: public IEngine
 {
-    friend SceneManager;
 public:
     Engine2D(const Engine2D &) = delete;
     Engine2D(Engine2D &&) = delete;

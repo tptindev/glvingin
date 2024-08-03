@@ -1,14 +1,14 @@
 #ifndef SDLTEXTURE_H
 #define SDLTEXTURE_H
 
-#include "ATexture.h"
+#include "ITexture.h"
 struct SDL_Texture;
-class SDLTexture : public ATexture
+class SDLTexture : public ITexture
 {
 public:
     SDLTexture();
     ~SDLTexture();
-    SDL_Texture *texture() const;
+    SDL_Texture *data() const;
 
     // ATexture interface
 public:
@@ -16,7 +16,7 @@ public:
     void Destroy() override;
 
 private:
-    SDL_Texture *m_texture;
+    SDL_Texture *m_data;
 
 };
 

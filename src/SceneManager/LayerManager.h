@@ -20,13 +20,17 @@ public:
     void Layers(int sceneID, std::vector<std::shared_ptr<ALayer>>& layers);
     void AddLayer(std::shared_ptr<ALayer> layer, int sceneID);
     void RemoveLayer(std::shared_ptr<ALayer> layer, int sceneID);
+    void InitializedLayers(int sceneID);
     void UpdateLayers(float deltaTime, int sceneID);
     void RenderLayers(int sceneID);
     void CleanupLayers(int sceneID);
 private:
     static LayerManager *s_instance;
     LayerManager();
-    std::unordered_map<int, std::vector<std::shared_ptr<ALayer>>> m_layers;
+    std::unordered_map<
+        int,
+        std::unordered_map<int, std::shared_ptr<ALayer>>
+        > m_layers;
 };
 
 #endif // LAYERMANAGER_H

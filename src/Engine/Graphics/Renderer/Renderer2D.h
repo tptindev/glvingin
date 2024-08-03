@@ -4,6 +4,7 @@
 #include "IRenderer.h"
 
 struct SDL_Renderer;
+class ITexture;
 class SDLWindowWrapper;
 class Renderer2D : public IRenderer
 {
@@ -25,7 +26,9 @@ public:
     void Clear() override;
     void Present() override;
     void Destroy() override;
-    void RenderTexture(ATexture *texture) override;
+    void Render(ITexture* texture, glm::ivec2 position, int width, int height, bool fip) override;
+    void RenderFrame(ITexture* texture, glm::ivec2 position, int frameWidth, int frameHeight, glm::ivec2 coord, bool flip = false, float rotation = 0.0f) override;
+
 
 private:
     static Renderer2D* s_instance;
