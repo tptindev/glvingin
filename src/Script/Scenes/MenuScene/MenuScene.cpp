@@ -28,6 +28,6 @@ void MenuScene::Initialize()
     LayerManager::Instance()->InitializedLayers(this->id());
 }
 
-void MenuScene::HandleEvents()
+void MenuScene::HandleEvent()
 {
 }

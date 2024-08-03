@@ -1,4 +1,5 @@
 #include "Script.h"
+#include <memory>
 #include <SceneManager.h>
 #include "Scenes/MenuScene/MenuScene.h"
 #include "Scenes/SettingScene/SettingScene.h"

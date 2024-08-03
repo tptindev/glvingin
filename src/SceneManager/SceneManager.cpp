@@ -148,7 +148,7 @@ void SceneManager::SetEventHandle(AScene *scene)
         scene->setEnable(true);
         if (scene->enable())
         {
-            scene->HandleEvents();
+            scene->HandleEvent();
         }
     }
 }

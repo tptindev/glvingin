@@ -22,7 +22,7 @@ void GameScene::Initialize()
 {
 }
 
-void GameScene::HandleEvents()
+void GameScene::HandleEvent()
 {
 
 }

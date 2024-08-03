@@ -11,7 +11,7 @@ public:
     // AScene interface
 public:
     void Initialize() override;
-    void HandleEvents() override;
+    void HandleEvent() override;
 };
 
 #endif // GAMESCENE_H

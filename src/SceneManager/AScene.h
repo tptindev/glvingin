@@ -25,7 +25,7 @@ public:
     int height() const;
     void setHeight(int newHeight);
     virtual void Initialize() = 0;
-    virtual void HandleEvents() = 0;
+    virtual void HandleEvent() = 0;
     virtual void Update(float deltaTime);
     virtual void Render(IRenderer* renderer);
     virtual void Cleanup();

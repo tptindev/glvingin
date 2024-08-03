@@ -19,7 +19,7 @@ BackgroundLayer::~BackgroundLayer()
 
 void BackgroundLayer::Initialize()
 {
-    TextureManager::Instance()->Load(std::make_shared<SDLTexture>(), MENU_BG_ID, "./res/Images/bg.png");
+    TextureManager::Instance()->Load(std::make_shared<SDLTexture>(), MENU_BG_TEXTURE_ID, "./res/Images/bg.png");
 }
 
 void BackgroundLayer::Update(float deltaTime)
@@ -29,8 +29,8 @@ void BackgroundLayer::Update(float deltaTime)
 
 void BackgroundLayer::Render(IRenderer *renderer)
 {
-    ITexture* bgTexture = TextureManager::Instance()->GetTextureByID(MENU_BG_ID);
-    Renderer2D::Instance()->Render(bgTexture, {0,0}, 2048, 2048, false);
+    ITexture* bgTexture = TextureManager::Instance()->GetTextureByID(MENU_BG_TEXTURE_ID);
+    Renderer2D::Instance()->Render(bgTexture, {0,0}, 1360, 786, false);
 }
 
 void BackgroundLayer::Cleanup()

@@ -7,6 +7,7 @@
 #include <SceneManager.h>
 #include <SDLWindowWrapper.h>
 #include <Renderer2D.h>
+#include <TextureManager.h>
 
 Engine2D *Engine2D::s_instance = nullptr;
 Engine2D *Engine2D::Instance()
@@ -133,10 +134,12 @@ void Engine2D::Loop()
 
 void Engine2D::Quit()
 {
-    SceneManager::ResetInstance();
     TTF_Quit();
     IMG_Quit();
     SDL_Quit();
+    SceneManager::ResetInstance();
+    TextureManager::Instance()->Clean();
+    TextureManager::Instance()->ResetInstance();
     this->m_renderer2d->Destroy();
     this->m_winWrapper->DestroyWindow();
     Renderer2D::ResetInstance();

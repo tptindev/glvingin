@@ -42,7 +42,8 @@ ITexture *TextureManager::GetTextureByID(int id) const
  */
 void TextureManager::Load(std::shared_ptr<ITexture> buffer, int id, const char *path)
 {
-    if (buffer->Create(path))
+    decltype(this->m_textures)::iterator it = this->m_textures.find(id);
+    if (it == this->m_textures.end() && buffer->Create(path))
     {
         this->m_textures[id] = buffer;
     }
@@ -54,5 +55,10 @@ void TextureManager::Load(std::shared_ptr<ITexture> buffer, int id, const char *
  */
 void TextureManager::Clean()
 {
-    
+    decltype(this->m_textures)::iterator it = this->m_textures.begin();
+    while (it != this->m_textures.end())
+    {
+        it->second->Destroy();
+        it++;
+    }
 }

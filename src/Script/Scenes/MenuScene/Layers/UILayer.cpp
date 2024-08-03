@@ -5,6 +5,8 @@
 #include <SDLTexture.h>
 #include <TextureIDs.h>
 #include <Renderer2D.h>
+#include <Widget/SDLButton.h>
+#include <Widget/SDLButtonIMG.h>
 
 UILayer::UILayer()
 {
@@ -19,7 +21,12 @@ UILayer::~UILayer()
 
 void UILayer::Initialize()
 {
-    TextureManager::Instance()->Load(std::make_shared<SDLTexture>(), EMIU_IMG_ID, "./res/Images/eiu.png");
+    TextureManager::Instance()->Load(std::make_shared<SDLTexture>(), MENU_BG_TEXTURE_ID, "./res/Images/bg.png");
+    this->m_btnStart = std::make_shared<SDLButton>(50, 50, 125, 50);
+    this->m_btnStart->Initialize();
+
+    this->m_btnAbout = std::make_shared<SDLButtonIMG>(MENU_BTN_ABOUT_TEXTURE_ID, "./res/Images/bg.png", 50, 120, 125, 50);
+    this->m_btnAbout->Initialize();
 }
 
 void UILayer::Update(float deltaTime)
@@ -29,8 +36,8 @@ void UILayer::Update(float deltaTime)
 
 void UILayer::Render(IRenderer *renderer)
 {
-    ITexture* eiuTexture = TextureManager::Instance()->GetTextureByID(EMIU_IMG_ID);
-    Renderer2D::Instance()->Render(eiuTexture, {0,0}, 721, 1002, false);
+    this->m_btnStart->Render();
+    this->m_btnAbout->Render();
 }
 
 void UILayer::Cleanup()

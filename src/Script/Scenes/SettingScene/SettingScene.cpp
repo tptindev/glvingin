@@ -22,6 +22,6 @@ void SettingScene::Initialize()
 
 }
 
-void SettingScene::HandleEvents()
+void SettingScene::HandleEvent()
 {
 }
