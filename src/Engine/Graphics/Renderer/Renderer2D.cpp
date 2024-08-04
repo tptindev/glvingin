@@ -66,16 +66,7 @@ SDL_Renderer *Renderer2D::renderer() const
     return m_renderer;
 }
 
-/**
- * @brief Renderer2D::Render
- * @param texture
- * @param position
- * @param width
- * @param height
- * @param fip
- * Render a texture to the screen
- */
-void Renderer2D::Render(ITexture *texture, glm::ivec2 position, int width, int height, bool fip)
+void Renderer2D::Render(ITexture *texture, glm::ivec2 position, int width, int height)
 {
     if (texture == nullptr) return;
     SDLTexture* sdlTexture = static_cast<SDLTexture*>(texture);
@@ -84,19 +75,20 @@ void Renderer2D::Render(ITexture *texture, glm::ivec2 position, int width, int h
     SDL_RenderCopy(this->m_renderer, sdlTexture->data(), &srcRect, &destRect);
 }
 
-/**
- * @brief Renderer2D::RenderFrame
- * @param texture
- * @param position
- * @param frameWidth
- * @param frameHeight
- * @param coord
- * @param flip
- * @param rotation
- * Render a portion of a texture (useful for sprite sheets)
- */
-void Renderer2D::RenderFrame(ITexture* texture, glm::ivec2 position, int frameWidth, int frameHeight, glm::ivec2 coord, bool flip, float rotation)
+void Renderer2D::RenderFrame(ITexture* texture, glm::ivec2 position, int frameWidth, int frameHeight, glm::ivec2 coord, std::bitset<2> flip, float rotation)
 {
+    if (texture == nullptr) return;
+
+    SDL_RendererFlip sdlFlip = SDL_FLIP_NONE;
+    if (flip[0] == 1)
+    {
+        sdlFlip = SDL_FLIP_HORIZONTAL;
+    }
+    else if (flip[1] == 1)
+    {
+        sdlFlip = SDL_FLIP_VERTICAL;
+    }
+
     SDLTexture* sdlTexture = static_cast<SDLTexture*>(texture);
     int frameX = frameWidth * coord.x;
     int frameY = frameHeight * coord.y;
@@ -108,5 +100,5 @@ void Renderer2D::RenderFrame(ITexture* texture, glm::ivec2 position, int frameWi
         frameWidth,
         frameHeight
     };
-    SDL_RenderCopyEx(this->m_renderer, sdlTexture->data(), &srcRect, &destRect, 0, NULL, SDL_FLIP_NONE);
+    SDL_RenderCopyEx(this->m_renderer, sdlTexture->data(), &srcRect, &destRect, 0, NULL, sdlFlip);
 }

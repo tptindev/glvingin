@@ -48,7 +48,7 @@ ITexture *TextureManager::GetTextureByID(int id)
 void TextureManager::Load(std::shared_ptr<ITexture> buffer, int id, const char *path)
 {
     decltype(this->m_textures)::iterator it = this->m_textures.find(id);
-    if (it == this->m_textures.end() && buffer->Create(path))
+    if (it == this->m_textures.end() && buffer->CreateFromIMG(path))
     {
         this->m_textures[id] = buffer;
     }

@@ -12,7 +12,8 @@ public:
 
     // ATexture interface
 public:
-    bool Create(const char *path) override;
+    bool CreateFromIMG(const char *path) override;
+    bool CreateFromText(const char *text) override;
     void Destroy() override;
 
 private:

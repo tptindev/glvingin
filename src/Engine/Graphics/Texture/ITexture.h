@@ -6,7 +6,8 @@ class ITexture
 public:
     ~ITexture() = default;
     
-    virtual bool Create(const char* path) = 0;
+    virtual bool CreateFromIMG(const char* path) = 0;
+    virtual bool CreateFromText(const char* text) = 0;
     virtual void Destroy() = 0;
 };
 

@@ -18,4 +18,6 @@ target_include_directories(engine_module PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/Graphics/Window
     ${CMAKE_CURRENT_SOURCE_DIR}/Graphics/Renderer
     ${CMAKE_CURRENT_SOURCE_DIR}/Graphics/Texture
+    ${CMAKE_CURRENT_SOURCE_DIR}/Graphics/Font
+
 )

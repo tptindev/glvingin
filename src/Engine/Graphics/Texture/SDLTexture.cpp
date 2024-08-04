@@ -13,7 +13,7 @@ SDLTexture::~SDLTexture()
     std::cout << __FUNCTION__ << std::endl;
 }
 
-bool SDLTexture::Create(const char *path)
+bool SDLTexture::CreateFromIMG(const char *path)
 {
     SDL_Surface *surface = IMG_Load(path);
     if (surface == nullptr)
@@ -22,6 +22,11 @@ bool SDLTexture::Create(const char *path)
     }
     this->m_data = SDL_CreateTextureFromSurface(Renderer2D::Instance()->renderer(), surface);
     SDL_FreeSurface(surface);
+    return true;
+}
+
+bool SDLTexture::CreateFromText(const char *text)
+{
     return true;
 }
 
