@@ -6,6 +6,7 @@
 #include <glm/glm.hpp>
 #include "ITexture.h"
 
+class AFont;
 class TextureManager
 {
 public:
@@ -18,7 +19,8 @@ public:
     ~TextureManager();
 
     ITexture* GetTextureByID(int id);
-    void Load(std::shared_ptr<ITexture> buffer, int id, const char* path);
+    void LoadIMG(std::shared_ptr<ITexture> buffer, int id, const char* path);
+    void LoadTxt(std::shared_ptr<ITexture> buffer, int id, const char* text, AFont* font, uint8_t r = 255, uint8_t g = 255, uint8_t b = 255, uint8_t a = 255);
     void Clean();
 
 private:

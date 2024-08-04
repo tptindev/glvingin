@@ -24,6 +24,9 @@ public:
     bool visible() const;
     void setVisible(bool newVisible);
 
+    bool clip() const;
+    void setClip(bool newClip);
+
 private:
     int m_x{0};
     int m_y{0};
@@ -31,6 +34,7 @@ private:
     int m_height{0};
     bool m_enable{true};
     bool m_visible{true};
+    bool m_clip{false};
 };
 
 #endif // AWIDGET_H

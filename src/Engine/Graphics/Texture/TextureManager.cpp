@@ -45,10 +45,19 @@ ITexture *TextureManager::GetTextureByID(int id)
  * @brief TextureManager::Load
  * Load a texture from file and store it with an ID
  */
-void TextureManager::Load(std::shared_ptr<ITexture> buffer, int id, const char *path)
+void TextureManager::LoadIMG(std::shared_ptr<ITexture> buffer, int id, const char *path)
 {
     decltype(this->m_textures)::iterator it = this->m_textures.find(id);
     if (it == this->m_textures.end() && buffer->CreateFromIMG(path))
+    {
+        this->m_textures[id] = buffer;
+    }
+}
+
+void TextureManager::LoadTxt(std::shared_ptr<ITexture> buffer, int id, const char* text, AFont* font, uint8_t r, uint8_t g, uint8_t b, uint8_t a)
+{
+    decltype(this->m_textures)::iterator it = this->m_textures.find(id);
+    if (it == this->m_textures.end() && buffer->CreateFromText(text, font, r, g, b, a))
     {
         this->m_textures[id] = buffer;
     }

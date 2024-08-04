@@ -36,7 +36,7 @@ Renderer2D::~Renderer2D()
 
 bool Renderer2D::Initialize(IWindowWrapper* window)
 {
-    this->m_winWrapper = static_cast<SDLWindowWrapper*>(window);
+    this->m_winWrapper = dynamic_cast<SDLWindowWrapper*>(window);
     this->m_renderer = SDL_CreateRenderer(this->m_winWrapper->window(), -1, SDL_RENDERER_ACCELERATED);
     return (window != nullptr) && (this->m_renderer != nullptr);
 }
@@ -69,7 +69,7 @@ SDL_Renderer *Renderer2D::renderer() const
 void Renderer2D::Render(ITexture *texture, glm::ivec2 position, int width, int height)
 {
     if (texture == nullptr) return;
-    SDLTexture* sdlTexture = static_cast<SDLTexture*>(texture);
+    SDLTexture* sdlTexture = dynamic_cast<SDLTexture*>(texture);
     SDL_Rect srcRect = {0, 0, width, height};
     SDL_Rect destRect = {position.x, position.y, width, height};
     SDL_RenderCopy(this->m_renderer, sdlTexture->data(), &srcRect, &destRect);
@@ -89,7 +89,7 @@ void Renderer2D::RenderFrame(ITexture* texture, glm::ivec2 position, int frameWi
         sdlFlip = SDL_FLIP_VERTICAL;
     }
 
-    SDLTexture* sdlTexture = static_cast<SDLTexture*>(texture);
+    SDLTexture* sdlTexture = dynamic_cast<SDLTexture*>(texture);
     int frameX = frameWidth * coord.x;
     int frameY = frameHeight * coord.y;
 

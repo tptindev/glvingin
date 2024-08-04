@@ -19,3 +19,13 @@ void AFont::setFontSize(int newFontSize)
 {
     m_fontSize = newFontSize;
 }
+
+const char *AFont::fontFilePath() const
+{
+    return m_fontFilePath;
+}
+
+void AFont::setFontFilePath(const char *newFontFilePath)
+{
+    m_fontFilePath = newFontFilePath;
+}

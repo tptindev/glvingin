@@ -2,8 +2,8 @@
 #include <TextureManager.h>
 #include <SDLTexture.h>
 #include <Renderer2D.h>
-SDLImage::SDLImage(const char *source, int x, int y, int w, int h, bool clip)
-    : m_source(source), m_clip(clip)
+SDLImage::SDLImage(const char *source, int x, int y, int w, int h)
+    : m_source(source)
 {
     this->setX(x);
     this->setY(y);
@@ -22,7 +22,7 @@ void SDLImage::Initialize()
 
 void SDLImage::Completed()
 {
-    TextureManager::Instance()->Load(std::make_shared<SDLTexture>(), this->m_textureID, this->m_source);
+    TextureManager::Instance()->LoadIMG(std::make_shared<SDLTexture>(), this->m_textureID, this->m_source);
 }
 
 void SDLImage::HandleEvent()

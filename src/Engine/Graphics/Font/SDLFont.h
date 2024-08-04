@@ -7,17 +7,16 @@
 class SDLFont : public AFont
 {
 public:
-    SDLFont(const char* fontName, int fontSize);
-
+    explicit SDLFont(const char* fontName, const char* fontFilePath, int fontSize);
+    ~SDLFont();
     // AFont interface
 public:
     bool OpenFont() override;
     void CloseFont() override;
-
-    TTF_Font *data() const;
+    void *Data() override;
 
 private:
-    TTF_Font* m_data;
+    TTF_Font* m_data{nullptr};
 };
 
 #endif // SDLFONT_H

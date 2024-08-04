@@ -14,22 +14,21 @@ FontManager::~FontManager()
     std::cout << __FUNCTION__ << std::endl;
 }
 
-AFont* FontManager::Load(std::shared_ptr<AFont> buffer, const char* fontName, const char *fontFilePath, int fontSize)
+AFont* FontManager::Load(std::shared_ptr<AFont> font)
 {
     char stream[32];
-    sprintf(stream, "%s_%d", fontName, fontSize);
+    sprintf(stream, "%s_%d", font->fontName(), font->fontSize());
     decltype(this->m_fonts)::iterator it = this->m_fonts.find(stream);
     if (it != this->m_fonts.end())
     {
         return it->second.get();
     }
-    if (!buffer->OpenFont())
+    if (!font->OpenFont())
     {
-        buffer.reset();
         return nullptr;
     }
-    this->m_fonts[fontName] = buffer;
-    return buffer.get();
+    this->m_fonts[stream] = font;
+    return font.get();
 }
 
 AFont *FontManager::GetFont(const char *fontName, int fontSize)

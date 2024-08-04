@@ -35,7 +35,7 @@ Renderer3D::~Renderer3D()
 
 bool Renderer3D::Initialize(IWindowWrapper* window)
 {
-    this->m_winWrapper = static_cast<GLWindowWrapper*>(window);
+    this->m_winWrapper = dynamic_cast<GLWindowWrapper*>(window);
     return (window != nullptr);
 }
 

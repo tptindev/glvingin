@@ -13,7 +13,9 @@ target_link_libraries(engine_module PRIVATE
 # Include directories, if needed
 target_include_directories(engine_module PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/Timer
     ${CMAKE_CURRENT_SOURCE_DIR}/Event
+    ${CMAKE_CURRENT_SOURCE_DIR}/Audio
     ${CMAKE_CURRENT_SOURCE_DIR}/Graphics
     ${CMAKE_CURRENT_SOURCE_DIR}/Graphics/Window
     ${CMAKE_CURRENT_SOURCE_DIR}/Graphics/Renderer

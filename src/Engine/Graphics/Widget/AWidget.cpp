@@ -58,3 +58,13 @@ void AWidget::setVisible(bool newVisible)
 {
     m_visible = newVisible;
 }
+
+bool AWidget::clip() const
+{
+    return m_clip;
+}
+
+void AWidget::setClip(bool newClip)
+{
+    m_clip = newClip;
+}

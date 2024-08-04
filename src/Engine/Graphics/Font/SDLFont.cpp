@@ -1,14 +1,20 @@
 #include "SDLFont.h"
 
-SDLFont::SDLFont(const char* fontName, int fontSize)
+SDLFont::SDLFont(const char* fontName, const char* fontFilePath, int fontSize)
 {
     this->setFontName(fontName);
+    this->setFontFilePath(fontFilePath);
     this->setFontSize(fontSize);
+}
+
+SDLFont::~SDLFont()
+{
+
 }
 
 bool SDLFont::OpenFont()
 {
-    this->m_data = TTF_OpenFont(this->fontName(), this->fontSize());
+    this->m_data = TTF_OpenFont(this->fontFilePath(), this->fontSize());
     if (this->m_data == nullptr)
     {
         return false;
@@ -24,7 +30,7 @@ void SDLFont::CloseFont()
     }
 }
 
-TTF_Font *SDLFont::data() const
+void *SDLFont::Data()
 {
-    return m_data;
+    return reinterpret_cast<void*>(m_data);
 }

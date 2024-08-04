@@ -7,7 +7,7 @@
 class SDLImage : public AWidget
 {
 public:
-    explicit SDLImage(const char *source, int x, int y, int w, int h, bool clip = false);
+    explicit SDLImage(const char *source, int x, int y, int w, int h);
     ~SDLImage();
 
     // AWidget interface

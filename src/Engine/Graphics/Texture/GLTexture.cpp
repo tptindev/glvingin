@@ -10,7 +10,7 @@ bool GLTexture::CreateFromIMG(const char *path)
     return false;
 }
 
-bool GLTexture::CreateFromText(const char *text)
+bool GLTexture::CreateFromText(const char* text, AFont* font, uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
     return false;
 }

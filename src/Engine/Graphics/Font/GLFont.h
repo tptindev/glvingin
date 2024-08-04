@@ -11,6 +11,7 @@ public:
     // AFont interface
 public:
     bool OpenFont() override;
+    void *Data() override;
     void CloseFont() override;
 };
 

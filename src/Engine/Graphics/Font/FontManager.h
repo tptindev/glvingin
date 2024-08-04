@@ -15,7 +15,7 @@ public:
     static void ResetInstance();
     ~FontManager();
 
-    AFont* Load(std::shared_ptr<AFont> buffer, const char* fontName, const char* fontFilePath, int fontSize);
+    AFont* Load(std::shared_ptr<AFont> font);
     AFont* GetFont(const char* fontName, int fontSize);
     void Clean();
 
