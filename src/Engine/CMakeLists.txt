@@ -1,4 +1,4 @@
-set(LINKER_LIBRARY "-lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf -lglfw3 -lglew32 -lgdi32 -lopengl32 -lglm")
+set(LINKER_LIBRARY "-lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf -lglfw3 -lglew32 -lglm -lgdi32 -lopengl32")
 
 file(GLOB_RECURSE SOURCE_FILES "*.h" "*.cpp")
 
