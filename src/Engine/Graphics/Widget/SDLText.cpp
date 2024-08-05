@@ -8,7 +8,10 @@
 SDLText::SDLText(const char *text, int x, int y, int w, int h)
     :m_text{text}
 {
-
+    this->setX(x);
+    this->setY(y);
+    this->setWidth(w);
+    this->setHeight(h);
 }
 
 SDLText::~SDLText()
@@ -24,10 +27,9 @@ void SDLText::setColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
     this->m_color.a = a;
 }
 
-void SDLText::setFont(const char *fontName, int fontSize)
+void SDLText::setFont(int fontID)
 {
-    if (fontName == nullptr || fontSize == 0) return;
-    this->m_font = dynamic_cast<SDLFont*>(FontManager::Instance()->GetFont(fontName, fontSize));
+    this->m_font = dynamic_cast<SDLFont*>(FontManager::Instance()->GetFont(fontID));
 }
 
 void SDLText::Initialize()
@@ -57,7 +59,7 @@ void SDLText::HandleEvent()
 void SDLText::Render()
 {
     ITexture* texture = TextureManager::Instance()->GetTextureByID(this->m_textureID);
-    Renderer2D::Instance()->Render(texture, {this->x(),this->y()}, this->width(), this->height());
+    Renderer2D::Instance()->Render(texture, this->x(),this->y(), this->width(), this->height());
 }
 
 void SDLText::setTextureID(int newTextureID)

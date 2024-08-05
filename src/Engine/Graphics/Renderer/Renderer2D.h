@@ -26,8 +26,9 @@ public:
     void Clear() override;
     void Present() override;
     void Destroy() override;
-    void Render(ITexture* texture, glm::ivec2 position, int width, int height) override;
-    void RenderFrame(ITexture* texture, glm::ivec2 position, int frameWidth, int frameHeight, glm::ivec2 coord, std::bitset<2> flip, float rotation = 0.0f) override;
+    void Render(ITexture* itexture, int x, int y, float scale) override;
+    void Render(ITexture* itexture, int x, int y, int width, int height) override;
+    void RenderFrame(ITexture* itexture, int x, int y, int frameWidth, int frameHeight, int col, int row, std::bitset<2> flip, float rotation = 0.0f) override;
 
 
 private:

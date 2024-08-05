@@ -61,23 +61,34 @@ void Renderer2D::Destroy()
     SDL_DestroyRenderer(this->m_renderer);
 }
 
+void Renderer2D::Render(ITexture *itexture, int x, int y, float scale)
+{
+    if (itexture == nullptr) return;
+    SDLTexture* texture = dynamic_cast<SDLTexture*>(itexture);
+    // Get the original texture size
+    int width, height;
+    SDL_QueryTexture(texture->data(), NULL, NULL, &width, &height);
+    SDL_FRect destRect = {(float)x, (float)y, (float)width * scale, (float)height * scale};
+    SDL_RenderCopyF(this->m_renderer, texture->data(), NULL, &destRect);
+}
+
 SDL_Renderer *Renderer2D::renderer() const
 {
     return m_renderer;
 }
 
-void Renderer2D::Render(ITexture *texture, glm::ivec2 position, int width, int height)
+void Renderer2D::Render(ITexture* itexture, int x, int y, int width, int height)
 {
-    if (texture == nullptr) return;
-    SDLTexture* sdlTexture = dynamic_cast<SDLTexture*>(texture);
+    if (itexture == nullptr) return;
+    SDLTexture* texture = dynamic_cast<SDLTexture*>(itexture);
     SDL_Rect srcRect = {0, 0, width, height};
-    SDL_Rect destRect = {position.x, position.y, width, height};
-    SDL_RenderCopy(this->m_renderer, sdlTexture->data(), &srcRect, &destRect);
+    SDL_Rect destRect = {x, y, width, height};
+    SDL_RenderCopy(this->m_renderer, texture->data(), &srcRect, &destRect);
 }
 
-void Renderer2D::RenderFrame(ITexture* texture, glm::ivec2 position, int frameWidth, int frameHeight, glm::ivec2 coord, std::bitset<2> flip, float rotation)
+void Renderer2D::RenderFrame(ITexture* itexture, int x, int y, int frameWidth, int frameHeight, int col, int row, std::bitset<2> flip, float rotation)
 {
-    if (texture == nullptr) return;
+    if (itexture == nullptr) return;
 
     SDL_RendererFlip sdlFlip = SDL_FLIP_NONE;
     if (flip[0] == 1)
@@ -89,16 +100,16 @@ void Renderer2D::RenderFrame(ITexture* texture, glm::ivec2 position, int frameWi
         sdlFlip = SDL_FLIP_VERTICAL;
     }
 
-    SDLTexture* sdlTexture = dynamic_cast<SDLTexture*>(texture);
-    int frameX = frameWidth * coord.x;
-    int frameY = frameHeight * coord.y;
+    SDLTexture* texture = dynamic_cast<SDLTexture*>(itexture);
+    int frameX = frameWidth * col;
+    int frameY = frameHeight * row;
 
     SDL_Rect srcRect = {frameX, frameY, frameWidth, frameHeight};
     SDL_Rect destRect = {
-        position.x,
-        position.y,
+        x,
+        y,
         frameWidth,
         frameHeight
     };
-    SDL_RenderCopyEx(this->m_renderer, sdlTexture->data(), &srcRect, &destRect, 0, NULL, sdlFlip);
+    SDL_RenderCopyEx(this->m_renderer, texture->data(), &srcRect, &destRect, 0, NULL, sdlFlip);
 }

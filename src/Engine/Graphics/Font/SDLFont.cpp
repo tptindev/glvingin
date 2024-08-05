@@ -1,8 +1,8 @@
 #include "SDLFont.h"
 
-SDLFont::SDLFont(const char* fontName, const char* fontFilePath, int fontSize)
+SDLFont::SDLFont(int id, const char* fontFilePath, int fontSize)
 {
-    this->setFontName(fontName);
+    this->setId(id);
     this->setFontFilePath(fontFilePath);
     this->setFontSize(fontSize);
 }

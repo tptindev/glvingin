@@ -1,7 +1,7 @@
 #include "SDLButton.h"
 #include <iostream>
 #include <Renderer2D.h>
-
+#include "SDLText.h"
 SDLButton::SDLButton()
 {
     std::cout << __FUNCTION__ << std::endl;
@@ -15,12 +15,6 @@ SDLButton::SDLButton(int x, int y, int w, int h)
     this->setHeight(h);
 
     this->m_rect = {x, y, w, h};
-    this->m_bgColor[0] = {0xFF,0xFF,0xFF,0xFF};
-    this->m_txtColor[0] = {0x0,0x0,0x0,0xFF};
-    this->m_bgColor[1] = {0x0,0x0,0x0,0xFF};
-    this->m_txtColor[1] = {0xFF,0xFF,0xFF,0xFF};
-    this->m_bgColor[2] = {0xFF,0xFF,0xFF,0xFF};
-    this->m_txtColor[2] = {0x0,0x0,0x0,0xFF};
 
     std::cout << __FUNCTION__ << std::endl;
 }
@@ -30,34 +24,55 @@ SDLButton::~SDLButton()
     std::cout << __FUNCTION__ << std::endl;
 }
 
-void SDLButton::setNormal(SDL_Color bgColor, SDL_Color txtColor)
+void SDLButton::setBorderWidth(int width)
 {
-    this->m_bgColor[this->m_state.normal] = bgColor;
-    this->m_txtColor[this->m_state.normal] = txtColor;
+    this->m_borderWidth = width;
 }
 
-void SDLButton::setPressed(SDL_Color bgColor, SDL_Color txtColor)
+void SDLButton::setNormal(SDL_Color bgColor)
 {
-    this->m_bgColor[this->m_state.pressed] = bgColor;
-    this->m_txtColor[this->m_state.pressed] = txtColor;
+    this->m_bgColorState[NORMAL] = bgColor;
 }
 
-void SDLButton::setReleased(SDL_Color bgColor, SDL_Color txtColor)
+void SDLButton::setPressed(SDL_Color bgColor)
 {
-    this->m_bgColor[this->m_state.released] = bgColor;
-    this->m_txtColor[this->m_state.released] = txtColor;
+    this->m_bgColorState[PRESSED] = bgColor;
+}
+
+void SDLButton::setReleased(SDL_Color bgColor)
+{
+    this->m_bgColorState[RELEASED] = bgColor;
+}
+
+void SDLButton::setNormal(SDL_Color bgColor, SDL_Color borderColor)
+{
+    this->m_bgColorState[NORMAL] = bgColor;
+    this->m_borderColorState[NORMAL] = borderColor;
+}
+
+void SDLButton::setPressed(SDL_Color bgColor, SDL_Color borderColor)
+{
+    this->m_bgColorState[PRESSED] = bgColor;
+    this->m_borderColorState[PRESSED] = borderColor;
+}
+
+void SDLButton::setReleased(SDL_Color bgColor, SDL_Color borderColor)
+{
+    this->m_bgColorState[RELEASED] = bgColor;
+    this->m_borderColorState[RELEASED] = borderColor;
+}
+
+void SDLButton::attachText(std::shared_ptr<SDLText> text)
+{
+    this->m_text = text;
 }
 
 void SDLButton::Initialize()
 {
-    this->m_state.normal = 0;
-    this->m_state.pressed = 1;
-    this->m_state.released = 2;
 }
 
 void SDLButton::Completed()
 {
-    this->m_currentState = this->m_state.normal;
 }
 
 void SDLButton::HandleEvent()
@@ -67,14 +82,13 @@ void SDLButton::HandleEvent()
 
 void SDLButton::Render()
 {
-//    SDL_SetRenderDrawColor(
-//        Renderer2D::Instance()->renderer(),
-//        this->m_bgColor[this->m_currentState].r,
-//        this->m_bgColor[this->m_currentState].g,
-//        this->m_bgColor[this->m_currentState].b,
-//        this->m_bgColor[this->m_currentState].a
-//        );
-//    SDL_RenderFillRect(Renderer2D::Instance()->renderer(), &this->m_rect);
+    if (this->m_text != nullptr)
+    {
+        this->m_text->Render();
+    }
+
+    SDL_SetRenderDrawColor(Renderer2D::Instance()->renderer(), 0, 0, 0, 0);
+    SDL_RenderFillRect(Renderer2D::Instance()->renderer(), &this->m_rect);
 }
 
 void SDLButton::setCurrentState(int newCurrentState)

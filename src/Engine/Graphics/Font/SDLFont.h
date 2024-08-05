@@ -7,7 +7,7 @@
 class SDLFont : public AFont
 {
 public:
-    explicit SDLFont(const char* fontName, const char* fontFilePath, int fontSize);
+    explicit SDLFont(int id, const char* fontFilePath, int fontSize);
     ~SDLFont();
     // AFont interface
 public:

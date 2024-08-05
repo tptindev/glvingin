@@ -31,20 +31,21 @@ bool SDLTexture::CreateFromIMG(const char *path)
 
 bool SDLTexture::CreateFromText(const char* text, AFont* font, uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
+    if (font == nullptr) return false;
     if (this->m_data != nullptr) return false;
     SDL_Color color = { r, g, b, a };
-    TTF_Font* sdlFont = reinterpret_cast<TTF_Font*>(dynamic_cast<SDLFont*>(font)->Data());
+    TTF_Font* sdlFont = reinterpret_cast<TTF_Font*>(font->Data());
     SDL_Surface* surface = TTF_RenderText_Solid(
         sdlFont,
         text,
         color);
-    if (surface == nullptr)
+    if (surface != nullptr)
     {
-        return false;
+        this->m_data = SDL_CreateTextureFromSurface(Renderer2D::Instance()->renderer(), surface);
+        SDL_FreeSurface(surface);
+        return true;
     }
-    this->m_data = SDL_CreateTextureFromSurface(Renderer2D::Instance()->renderer(), surface);
-    SDL_FreeSurface(surface);
-    return true;
+    return false;
 }
 
 void SDLTexture::Destroy()

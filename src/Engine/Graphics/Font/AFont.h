@@ -8,8 +8,9 @@ public:
     virtual bool OpenFont() = 0;
     virtual void CloseFont() = 0;
     virtual void* Data() = 0;
-    const char *fontName() const;
-    void setFontName(const char *newFontName);
+
+    int id() const;
+    void setId(int newId);
 
     int fontSize() const;
     void setFontSize(int newFontSize);
@@ -18,8 +19,10 @@ public:
     const char *fontFilePath() const;
     void setFontFilePath(const char *newFontFilePath);
 
+
+
 private:
-    const char* m_fontName;
+    int m_id;
     const char* m_fontFilePath;
     int m_fontSize;
 };

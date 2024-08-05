@@ -11,14 +11,19 @@ FontManager::FontManager()
 
 FontManager::~FontManager()
 {
+    decltype(this->m_fonts)::iterator it = this->m_fonts.begin();
+    while (it != this->m_fonts.end())
+    {
+        it->second->CloseFont();
+        it++;
+    }
+
     std::cout << __FUNCTION__ << std::endl;
 }
 
 AFont* FontManager::Load(std::shared_ptr<AFont> font)
 {
-    char stream[32];
-    sprintf(stream, "%s_%d", font->fontName(), font->fontSize());
-    decltype(this->m_fonts)::iterator it = this->m_fonts.find(stream);
+    decltype(this->m_fonts)::iterator it = this->m_fonts.find(font->id());
     if (it != this->m_fonts.end())
     {
         return it->second.get();
@@ -27,15 +32,13 @@ AFont* FontManager::Load(std::shared_ptr<AFont> font)
     {
         return nullptr;
     }
-    this->m_fonts[stream] = font;
+    this->m_fonts[font->id()] = font;
     return font.get();
 }
 
-AFont *FontManager::GetFont(const char *fontName, int fontSize)
+AFont *FontManager::GetFont(int fontID)
 {
-    char stream[32];
-    sprintf(stream, "%s_%d", fontName, fontSize);
-    decltype(this->m_fonts)::iterator it = this->m_fonts.find(stream);
+    decltype(this->m_fonts)::iterator it = this->m_fonts.find(fontID);
     if (it != this->m_fonts.end())
     {
         return it->second.get();

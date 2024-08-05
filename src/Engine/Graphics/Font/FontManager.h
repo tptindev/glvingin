@@ -16,14 +16,14 @@ public:
     ~FontManager();
 
     AFont* Load(std::shared_ptr<AFont> font);
-    AFont* GetFont(const char* fontName, int fontSize);
+    AFont* GetFont(int fontID);
     void Clean();
 
 private:
     static FontManager *s_instance;
     FontManager();
 
-    std::unordered_map<const char*, std::shared_ptr<AFont>> m_fonts;
+    std::unordered_map<int, std::shared_ptr<AFont>> m_fonts;
 };
 
 #endif // FONTMANAGER_H

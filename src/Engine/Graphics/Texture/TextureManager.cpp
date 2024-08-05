@@ -41,6 +41,11 @@ ITexture *TextureManager::GetTextureByID(int id)
     return nullptr;
 }
 
+size_t TextureManager::Total() const
+{
+    return this->m_textures.size();
+}
+
 /**
  * @brief TextureManager::Load
  * Load a texture from file and store it with an ID

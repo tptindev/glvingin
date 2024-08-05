@@ -1,8 +1,11 @@
 #include "Script.h"
 #include <memory>
+#include <iostream>
 #include <SDLFont.h>
+#include <FontIDs.h>
 #include <FontManager.h>
 #include <SceneManager.h>
+#include <TextureManager.h>
 #include "Scenes/MenuScene/MenuScene.h"
 #include "Scenes/SettingScene/SettingScene.h"
 #include "Scenes/GameScene/GameScene.h"
@@ -36,7 +39,19 @@ Script::Script()
 
 void Script::Initialize()
 {
-    FontManager::Instance()->Load(std::make_shared<SDLFont>("RainyHearts", "./res/Fonts/rainyhearts/rainyhearts.ttf", 16));
+    FontManager::Instance()->Load(
+        std::make_shared<SDLFont>(
+            FONT_RAINYHEARTS_16,
+            "./res/Fonts/rainyhearts.ttf",
+            16)
+        );
+    FontManager::Instance()->Load(
+        std::make_shared<SDLFont>(
+            FONT_CRUX_21,
+            "./res/Fonts/crux.otf",
+            21)
+        );
+
     SceneManager::Instance()->LoadScene(std::make_shared<MenuScene>(), true);
     SceneManager::Instance()->LoadScene(std::make_shared<SettingScene>());
     SceneManager::Instance()->LoadScene(std::make_shared<GameScene>());
