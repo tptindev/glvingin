@@ -28,9 +28,9 @@ void BackgroundLayer::Initialize()
     this->m_bg->setScale(0.5f);
     this->m_bg->Completed();
 
-    this->m_hello = std::make_shared<SDLText>("van lang", 200, 400, 100, 50);
+    this->m_hello = std::make_shared<SDLText>("Van Lang", 200, 400);
     this->m_hello->Initialize();
-    this->m_hello->setFont(FONT_CRUX_21);
+    this->m_hello->setFont(FONT_RAINYHEARTS_32);
     this->m_hello->setColor(0x0, 0x0, 0x0, 0xFF);
     this->m_hello->setTextureID(TextureIDs::MENU_BG_TEXT_HELLO);
     this->m_hello->Completed();

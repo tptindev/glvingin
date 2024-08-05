@@ -48,6 +48,11 @@ bool SDLTexture::CreateFromText(const char* text, AFont* font, uint8_t r, uint8_
     return false;
 }
 
+void SDLTexture::GetInfo(uint32_t *format, int* access, int *width, int *height)
+{
+    SDL_QueryTexture(this->m_data, format, access, width, height);
+}
+
 void SDLTexture::Destroy()
 {
     SDL_DestroyTexture(this->m_data);

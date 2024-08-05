@@ -15,6 +15,11 @@ bool GLTexture::CreateFromText(const char* text, AFont* font, uint8_t r, uint8_t
     return false;
 }
 
+void GLTexture::GetInfo(uint32_t *format, int* access, int *width, int *height)
+{
+
+}
+
 void GLTexture::Destroy()
 {
 

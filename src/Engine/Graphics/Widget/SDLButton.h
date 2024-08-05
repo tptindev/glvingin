@@ -25,10 +25,13 @@ public:
     void setNormal(SDL_Color bgColor);
     void setPressed(SDL_Color bgColor);
     void setReleased(SDL_Color bgColor);
-    void setNormal(SDL_Color bgColor, SDL_Color borderColor);
-    void setPressed(SDL_Color bgColor, SDL_Color borderColor);
-    void setReleased(SDL_Color bgColor, SDL_Color borderColor);
-    void attachText(std::shared_ptr<SDLText> text);
+    void setNormal(SDL_Color bgColor, SDL_Color textColor);
+    void setPressed(SDL_Color bgColor, SDL_Color textColor);
+    void setReleased(SDL_Color bgColor, SDL_Color textColor);
+    void setNormal(SDL_Color bgColor, SDL_Color borderColor, SDL_Color textColor = {0x0, 0x0, 0x0, 0xFF});
+    void setPressed(SDL_Color bgColor, SDL_Color borderColor, SDL_Color textColor = {0x0, 0x0, 0x0, 0xFF});
+    void setReleased(SDL_Color bgColor, SDL_Color borderColor, SDL_Color textColor = {0x0, 0x0, 0x0, 0xFF});
+    void attachText(int textureID, int fontID, const char* text);
     void setCurrentState(int newCurrentState);
 
     // AWidget interface
@@ -46,6 +49,7 @@ private:
     SDL_Rect m_rect;
     std::unordered_map<int, SDL_Color> m_bgColorState;
     std::unordered_map<int, SDL_Color> m_borderColorState;
+    std::unordered_map<int, SDL_Color> m_textColorState;
     int m_borderWidth;
     std::shared_ptr<SDLText> m_text;
 };

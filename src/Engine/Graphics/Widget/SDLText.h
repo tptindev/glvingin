@@ -8,6 +8,7 @@
 class SDLText : public AWidget
 {
 public:
+    explicit SDLText(const char *text, int x, int y);
     explicit SDLText(const char *text, int x, int y, int w, int h);
     ~SDLText();
 
@@ -23,9 +24,13 @@ public:
     void Render() override;
 
 
+    float scale() const;
+    void setScale(float newScale);
+
 private:
     int m_textureID;
     const char* m_text;
+    float m_scale{1};
     SDLFont* m_font{nullptr};
     SDL_Color m_color{0x0, 0x0, 0x0, 0xFF};
 };

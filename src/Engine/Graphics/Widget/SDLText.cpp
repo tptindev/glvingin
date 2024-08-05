@@ -5,6 +5,13 @@
 #include <TextureManager.h>
 #include <Renderer2D.h>
 
+SDLText::SDLText(const char *text, int x, int y)
+    :m_text{text}
+{
+    this->setX(x);
+    this->setY(y);
+}
+
 SDLText::SDLText(const char *text, int x, int y, int w, int h)
     :m_text{text}
 {
@@ -49,6 +56,15 @@ void SDLText::Completed()
         this->m_color.b,
         this->m_color.a
         );
+
+    if (this->width() * this->height() == 0)
+    {
+        int width = 0;
+        int height = 0;
+        TextureManager::Instance()->QueryTexture(this->m_textureID, NULL, NULL, &width, &height);
+        this->setWidth(width);
+        this->setHeight(height);
+    }
 }
 
 void SDLText::HandleEvent()
@@ -60,6 +76,16 @@ void SDLText::Render()
 {
     ITexture* texture = TextureManager::Instance()->GetTextureByID(this->m_textureID);
     Renderer2D::Instance()->Render(texture, this->x(),this->y(), this->width(), this->height());
+}
+
+float SDLText::scale() const
+{
+    return m_scale;
+}
+
+void SDLText::setScale(float newScale)
+{
+    m_scale = newScale;
 }
 
 void SDLText::setTextureID(int newTextureID)

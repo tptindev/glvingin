@@ -68,6 +68,12 @@ void TextureManager::LoadTxt(std::shared_ptr<ITexture> buffer, int id, const cha
     }
 }
 
+void TextureManager::QueryTexture(int textureID, uint32_t *format, int *access, int *w, int *h)
+{
+    ITexture* texture = this->GetTextureByID(textureID);
+    texture->GetInfo(format, access, w, h);
+}
+
 /**
  * @brief TextureManager::Clean
  * Clean up all loaded textures

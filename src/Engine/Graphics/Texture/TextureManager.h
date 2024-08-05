@@ -22,6 +22,7 @@ public:
     size_t Total() const;
     void LoadIMG(std::shared_ptr<ITexture> buffer, int id, const char* path);
     void LoadTxt(std::shared_ptr<ITexture> buffer, int id, const char* text, AFont* font, uint8_t r = 255, uint8_t g = 255, uint8_t b = 255, uint8_t a = 255);
+    void QueryTexture(int textureID, uint32_t * format, int *access,int *w, int *h);
     void Clean();
 
 private:

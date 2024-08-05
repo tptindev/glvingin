@@ -44,29 +44,60 @@ void SDLButton::setReleased(SDL_Color bgColor)
     this->m_bgColorState[RELEASED] = bgColor;
 }
 
-void SDLButton::setNormal(SDL_Color bgColor, SDL_Color borderColor)
+void SDLButton::setNormal(SDL_Color bgColor, SDL_Color textColor)
+{
+    this->m_bgColorState[NORMAL] = bgColor;
+    this->m_textColorState[NORMAL] = textColor;
+}
+
+void SDLButton::setPressed(SDL_Color bgColor, SDL_Color textColor)
+{
+    this->m_bgColorState[PRESSED] = bgColor;
+    this->m_textColorState[PRESSED] = textColor;
+}
+
+void SDLButton::setReleased(SDL_Color bgColor, SDL_Color textColor)
+{
+    this->m_bgColorState[RELEASED] = bgColor;
+    this->m_textColorState[RELEASED] = textColor;
+}
+
+void SDLButton::setNormal(SDL_Color bgColor, SDL_Color borderColor, SDL_Color textColor)
 {
     this->m_bgColorState[NORMAL] = bgColor;
     this->m_borderColorState[NORMAL] = borderColor;
+    this->m_textColorState[NORMAL] = textColor;
 }
 
-void SDLButton::setPressed(SDL_Color bgColor, SDL_Color borderColor)
+void SDLButton::setPressed(SDL_Color bgColor, SDL_Color borderColor, SDL_Color textColor)
 {
     this->m_bgColorState[PRESSED] = bgColor;
     this->m_borderColorState[PRESSED] = borderColor;
+    this->m_textColorState[PRESSED] = textColor;
 }
 
-void SDLButton::setReleased(SDL_Color bgColor, SDL_Color borderColor)
+void SDLButton::setReleased(SDL_Color bgColor, SDL_Color borderColor, SDL_Color textColor)
 {
     this->m_bgColorState[RELEASED] = bgColor;
     this->m_borderColorState[RELEASED] = borderColor;
+    this->m_textColorState[RELEASED] = textColor;
 }
 
-void SDLButton::attachText(std::shared_ptr<SDLText> text)
+void SDLButton::attachText(int textureID, int fontID, const char* text)
 {
-    text->setX(this->x() + text->x());
-    text->setY(this->y() + text->y());
-    this->m_text = text;
+    this->m_text = std::make_shared<SDLText>("Start", 0, 0);
+    this->m_text->Initialize();
+    this->m_text->setFont(fontID);
+    this->m_text->setColor(
+        this->m_textColorState[this->m_currentState].r,
+        this->m_textColorState[this->m_currentState].g,
+        this->m_textColorState[this->m_currentState].b,
+        this->m_textColorState[this->m_currentState].a
+        );
+    this->m_text->setTextureID(textureID);
+    this->m_text->Completed();
+    this->m_text->setX(this->x() + this->m_text->x() + this->m_text->width() / 2);
+    this->m_text->setY(this->y() + this->m_text->y() + this->m_text->height() / 2);
 }
 
 void SDLButton::Initialize()
