@@ -29,19 +29,24 @@ void SDLButton::setBorderWidth(int width)
     this->m_borderWidth = width;
 }
 
-void SDLButton::setNormal(SDL_Color bgColor)
+void SDLButton::setNormal(SDL_Color color)
 {
-    this->m_bgColorState[NORMAL] = bgColor;
+    this->m_bgColorState[NORMAL] = color;
+    this->m_borderColorState[NORMAL] = color;
+    this->m_textColorState[NORMAL] = color;}
+
+void SDLButton::setPressed(SDL_Color color)
+{
+    this->m_bgColorState[PRESSED] = color;
+    this->m_borderColorState[PRESSED] = color;
+    this->m_textColorState[PRESSED] = color;
 }
 
-void SDLButton::setPressed(SDL_Color bgColor)
+void SDLButton::setReleased(SDL_Color color)
 {
-    this->m_bgColorState[PRESSED] = bgColor;
-}
-
-void SDLButton::setReleased(SDL_Color bgColor)
-{
-    this->m_bgColorState[RELEASED] = bgColor;
+    this->m_bgColorState[RELEASED] = color;
+    this->m_borderColorState[RELEASED] = color;
+    this->m_textColorState[RELEASED] = color;
 }
 
 void SDLButton::setNormal(SDL_Color bgColor, SDL_Color textColor)
@@ -85,7 +90,7 @@ void SDLButton::setReleased(SDL_Color bgColor, SDL_Color borderColor, SDL_Color 
 
 void SDLButton::attachText(int textureID, int fontID, const char* text)
 {
-    this->m_text = std::make_shared<SDLText>("Start", 0, 0);
+    this->m_text = std::make_shared<SDLText>(text, 0, 0);
     this->m_text->Initialize();
     this->m_text->setFont(fontID);
     this->m_text->setColor(
@@ -96,8 +101,8 @@ void SDLButton::attachText(int textureID, int fontID, const char* text)
         );
     this->m_text->setTextureID(textureID);
     this->m_text->Completed();
-    this->m_text->setX(this->x() + this->m_text->x() + this->m_text->width() / 2);
-    this->m_text->setY(this->y() + this->m_text->y() + this->m_text->height() / 2);
+    this->m_text->setX(this->x() + this->width() / 2  - this->m_text->width() / 2);
+    this->m_text->setY(this->y() + this->height() / 2 - this->m_text->height() / 2);
 }
 
 void SDLButton::Initialize()
