@@ -22,7 +22,7 @@ BackgroundLayer::~BackgroundLayer()
 
 void BackgroundLayer::Initialize()
 {
-    this->m_bg = std::make_shared<SDLImage>("./res/Images/bg.png", 0, 0);
+    this->m_bg = std::make_shared<SDLImage>("./res/Images/bg.png", 0, 0, 1360, 786);
     this->m_bg->Initialize();
     this->m_bg->setTextureID(TextureIDs::MENU_BG_TEXTURE_ID);
     this->m_bg->setScale(0.5f);

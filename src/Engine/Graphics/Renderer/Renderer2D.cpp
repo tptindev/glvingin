@@ -81,9 +81,8 @@ void Renderer2D::Render(ITexture* itexture, int x, int y, int width, int height)
 {
     if (itexture == nullptr) return;
     SDLTexture* texture = dynamic_cast<SDLTexture*>(itexture);
-    SDL_Rect srcRect = {0, 0, width, height};
     SDL_Rect destRect = {x, y, width, height};
-    SDL_RenderCopy(this->m_renderer, texture->data(), &srcRect, &destRect);
+    SDL_RenderCopy(this->m_renderer, texture->data(), NULL, &destRect);
 }
 
 void Renderer2D::RenderFrame(ITexture* itexture, int x, int y, int frameWidth, int frameHeight, int col, int row, std::bitset<2> flip, float rotation)

@@ -64,11 +64,14 @@ void SDLButton::setReleased(SDL_Color bgColor, SDL_Color borderColor)
 
 void SDLButton::attachText(std::shared_ptr<SDLText> text)
 {
+    text->setX(this->x() + text->x());
+    text->setY(this->y() + text->y());
     this->m_text = text;
 }
 
 void SDLButton::Initialize()
 {
+    this->m_currentState = NORMAL;
 }
 
 void SDLButton::Completed()
@@ -82,13 +85,21 @@ void SDLButton::HandleEvent()
 
 void SDLButton::Render()
 {
+    SDL_Renderer* renderer = Renderer2D::Instance()->renderer();
+    SDL_Color &bgColor = this->m_bgColorState[this->m_currentState];
+    // Set the background color and fill the button's rectangle
+    SDL_SetRenderDrawColor(renderer, bgColor.r, bgColor.g, bgColor.b, bgColor.a);
+    SDL_RenderFillRect(renderer, &this->m_rect);
+
+    SDL_Color &borderColor = this->m_borderColorState[this->m_currentState];
+    // Set the border color and draw the button's border
+    SDL_SetRenderDrawColor(renderer, borderColor.r, borderColor.g, borderColor.b, borderColor.a);
+    SDL_RenderDrawRect(renderer, &this->m_rect);
+
     if (this->m_text != nullptr)
     {
         this->m_text->Render();
     }
-
-    SDL_SetRenderDrawColor(Renderer2D::Instance()->renderer(), 0, 0, 0, 0);
-    SDL_RenderFillRect(Renderer2D::Instance()->renderer(), &this->m_rect);
 }
 
 void SDLButton::setCurrentState(int newCurrentState)
