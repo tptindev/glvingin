@@ -5,6 +5,7 @@
 #include <ALayer.h>
 
 class SDLButton;
+class SDLButtonIMG;
 class UILayer : public ALayer
 {
 public:
@@ -19,8 +20,10 @@ public:
     void Cleanup() override;
 
 private:
-    std::shared_ptr<SDLButton> m_btnStart;
-    std::shared_ptr<SDLButton> m_btnAbout;
+    std::shared_ptr<SDLButtonIMG> m_btnStart;
+    std::shared_ptr<SDLButtonIMG> m_btnSetting;
+    std::shared_ptr<SDLButtonIMG> m_btnAbout;
+    std::shared_ptr<SDLButtonIMG> m_btnQuit;
 };
 
 #endif // UILAYER_H

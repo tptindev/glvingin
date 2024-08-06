@@ -2,15 +2,27 @@
 #include <TextureManager.h>
 #include <SDLTexture.h>
 #include <Renderer2D.h>
-SDLImage::SDLImage(const char *source, int x, int y)
-    : m_source(source)
+SDLImage::SDLImage(int textureID, const char *source)
+    : m_textureID(textureID), m_source(source)
+{
+
+}
+
+SDLImage::SDLImage(int textureID, const char *source, float scale)
+    : m_textureID(textureID), m_source(source), m_scale(scale)
+{
+
+}
+
+SDLImage::SDLImage(int textureID, const char *source, int x, int y)
+    : m_textureID(textureID), m_source(source)
 {
     this->setX(x);
     this->setY(y);
 }
 
-SDLImage::SDLImage(const char *source, int x, int y, int w, int h)
-    : m_source(source)
+SDLImage::SDLImage(int textureID, const char *source, int x, int y, int w, int h)
+    : m_textureID(textureID), m_source(source)
 {
     this->setX(x);
     this->setY(y);
@@ -40,7 +52,7 @@ void SDLImage::HandleEvent()
 void SDLImage::Render()
 {
     ITexture* texture = TextureManager::Instance()->GetTextureByID(this->m_textureID);
-    if (this->m_scale > 1.0f || (this->width() * this->height()) == 0)
+    if (this->m_scale != 1.0f || (this->width() * this->height()) == 0)
     {
         Renderer2D::Instance()->Render(texture, this->x(),this->y(), this->m_scale);
     }
@@ -48,11 +60,6 @@ void SDLImage::Render()
     {
         Renderer2D::Instance()->Render(texture, this->x(),this->y(), this->width(), this->height());
     }
-}
-
-void SDLImage::setTextureID(int newTextureID)
-{
-    m_textureID = newTextureID;
 }
 
 float SDLImage::scale() const
@@ -63,4 +70,14 @@ float SDLImage::scale() const
 void SDLImage::setScale(float newScale)
 {
     m_scale = newScale;
+}
+
+int SDLImage::textureID() const
+{
+    return m_textureID;
+}
+
+void SDLImage::setTextureID(int newTextureID)
+{
+    m_textureID = newTextureID;
 }

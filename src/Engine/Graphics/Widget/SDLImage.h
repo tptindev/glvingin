@@ -7,8 +7,10 @@
 class SDLImage : public AWidget
 {
 public:
-    explicit SDLImage(const char *source, int x, int y);
-    explicit SDLImage(const char *source, int x, int y, int w, int h);
+    explicit SDLImage(int textureID, const char *source);
+    explicit SDLImage(int textureID, const char *source, float scale);
+    explicit SDLImage(int textureID, const char *source, int x, int y);
+    explicit SDLImage(int textureID, const char *source, int x, int y, int w, int h);
     ~SDLImage();
 
     // AWidget interface
@@ -18,10 +20,11 @@ public:
     void HandleEvent() override;
     void Render() override;
 
-    void setTextureID(int newTextureID);
-
     float scale() const;
     void setScale(float newScale);
+
+    int textureID() const;
+    void setTextureID(int newTextureID);
 
 private:
     int m_textureID;

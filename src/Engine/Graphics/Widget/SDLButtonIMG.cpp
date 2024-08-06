@@ -3,6 +3,7 @@
 #include <TextureManager.h>
 #include <SDLTexture.h>
 #include <Renderer2D.h>
+#include "SDLText.h"
 SDLButtonIMG::SDLButtonIMG():SDLButton(0, 0, 0, 0)
 {
     std::cout << __FUNCTION__ << std::endl;
@@ -20,28 +21,45 @@ SDLButtonIMG::~SDLButtonIMG()
 
 void SDLButtonIMG::setNormal(std::shared_ptr<SDLImage> image_ptr)
 {
-    this->m_bgImgState[NORMAL] = image_ptr.get();
+    image_ptr->Initialize();
+    image_ptr->setX(this->x());
+    image_ptr->setY(this->y());
+    image_ptr->setWidth(this->width());
+    image_ptr->setHeight(this->height());
+    image_ptr->Completed();
+    this->m_bgImgState[NORMAL] = image_ptr;
 }
 
 void SDLButtonIMG::setPressed(std::shared_ptr<SDLImage> image_ptr)
 {
-    this->m_bgImgState[PRESSED] = image_ptr.get();
+    image_ptr->Initialize();
+    image_ptr->setX(this->x());
+    image_ptr->setY(this->y());
+    image_ptr->setWidth(this->width());
+    image_ptr->setHeight(this->height());
+    image_ptr->Completed();
+    this->m_bgImgState[PRESSED] = image_ptr;
 }
 
 void SDLButtonIMG::setReleased(std::shared_ptr<SDLImage> image_ptr)
 {
-    this->m_bgImgState[RELEASED] = image_ptr.get();
+    image_ptr->Initialize();
+    image_ptr->setX(this->x());
+    image_ptr->setY(this->y());
+    image_ptr->setWidth(this->width());
+    image_ptr->setHeight(this->height());
+    image_ptr->Completed();
+    this->m_bgImgState[RELEASED] = image_ptr;
 }
 
 void SDLButtonIMG::Initialize()
 {
+    this->m_currentState = NORMAL;
 }
 
 void SDLButtonIMG::Completed()
 {
-//    TextureManager::Instance()->Load(std::make_shared<SDLTexture>(), this->m_state.normal, this->m_imgFilePath);
-//    TextureManager::Instance()->Load(std::make_shared<SDLTexture>(), this->m_state.pressed, this->m_imgFilePath);
-//    TextureManager::Instance()->Load(std::make_shared<SDLTexture>(), this->m_state.released, this->m_imgFilePath);
+
 }
 
 void SDLButtonIMG::HandleEvent()
@@ -51,6 +69,11 @@ void SDLButtonIMG::HandleEvent()
 
 void SDLButtonIMG::Render()
 {
-//    ITexture* texture = TextureManager::Instance()->GetTextureByID(this->m_currentState);
-//    Renderer2D::Instance()->Render(texture, {this->x(),this->y()}, this->width(), this->height());
+    int textureID = this->m_bgImgState[this->m_currentState]->textureID();
+    ITexture* texture = TextureManager::Instance()->GetTextureByID(textureID);
+    Renderer2D::Instance()->Render(texture, this->x(),this->y());
+    if (this->text() != nullptr)
+    {
+        this->text()->Render();
+    }
 }

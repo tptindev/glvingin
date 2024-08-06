@@ -20,7 +20,7 @@ public:
      * @param y
      * @param scale
      */
-    virtual void Render(ITexture* itexture, int x, int y, float scale) {}
+    virtual void Render(ITexture* itexture, int x, int y, float scale = 1.0f) {}
     /**
      * @brief Render
      * @param itexture

@@ -8,12 +8,10 @@
 #include <Renderer2D.h>
 SDLTexture::SDLTexture()
 {
-    std::cout << __FUNCTION__ << std::endl;
 }
 
 SDLTexture::~SDLTexture()
 {
-    std::cout << __FUNCTION__ << std::endl;
 }
 
 bool SDLTexture::CreateFromIMG(const char *path)

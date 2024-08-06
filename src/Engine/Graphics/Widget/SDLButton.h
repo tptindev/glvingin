@@ -32,6 +32,7 @@ public:
     void setPressed(SDL_Color bgColor, SDL_Color borderColor, SDL_Color textColor);
     void setReleased(SDL_Color bgColor, SDL_Color borderColor, SDL_Color textColor);
     void attachText(int textureID, int fontID, const char* text);
+    SDLText* text() const;
     void setCurrentState(int newCurrentState);
 
     // AWidget interface
@@ -40,6 +41,7 @@ public:
     void Completed() override;
     void HandleEvent() override;
     void Render() override;
+
 
 
 protected:

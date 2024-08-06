@@ -85,4 +85,5 @@ void Script::Initialize()
     SceneManager::Instance()->LoadScene(std::make_shared<MenuScene>(), true);
     SceneManager::Instance()->LoadScene(std::make_shared<SettingScene>());
     SceneManager::Instance()->LoadScene(std::make_shared<GameScene>());
+    std::cout << TextureManager::Instance()->Total() << std::endl;
 }

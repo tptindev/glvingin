@@ -5,15 +5,15 @@
 #include <TextureManager.h>
 #include <Renderer2D.h>
 
-SDLText::SDLText(const char *text, int x, int y)
-    :m_text{text}
+SDLText::SDLText(int textureID, const char *text, int x, int y)
+    :m_textureID(textureID), m_text{text}
 {
     this->setX(x);
     this->setY(y);
 }
 
-SDLText::SDLText(const char *text, int x, int y, int w, int h)
-    :m_text{text}
+SDLText::SDLText(int textureID, const char *text, int x, int y, int w, int h)
+    :m_textureID(textureID), m_text{text}
 {
     this->setX(x);
     this->setY(y);
@@ -86,6 +86,11 @@ float SDLText::scale() const
 void SDLText::setScale(float newScale)
 {
     m_scale = newScale;
+}
+
+int SDLText::textureID() const
+{
+    return m_textureID;
 }
 
 void SDLText::setTextureID(int newTextureID)

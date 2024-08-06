@@ -90,7 +90,7 @@ void SDLButton::setReleased(SDL_Color bgColor, SDL_Color borderColor, SDL_Color 
 
 void SDLButton::attachText(int textureID, int fontID, const char* text)
 {
-    this->m_text = std::make_shared<SDLText>(text, 0, 0);
+    this->m_text = std::make_shared<SDLText>(textureID, text, 0, 0);
     this->m_text->Initialize();
     this->m_text->setFont(fontID);
     this->m_text->setColor(
@@ -99,7 +99,6 @@ void SDLButton::attachText(int textureID, int fontID, const char* text)
         this->m_textColorState[this->m_currentState].b,
         this->m_textColorState[this->m_currentState].a
         );
-    this->m_text->setTextureID(textureID);
     this->m_text->Completed();
     this->m_text->setX(this->x() + this->width() / 2  - this->m_text->width() / 2);
     this->m_text->setY(this->y() + this->height() / 2 - this->m_text->height() / 2);
@@ -139,6 +138,11 @@ void SDLButton::Render()
     {
         this->m_text->Render();
     }
+}
+
+SDLText* SDLButton::text() const
+{
+    return m_text.get();
 }
 
 void SDLButton::setCurrentState(int newCurrentState)
