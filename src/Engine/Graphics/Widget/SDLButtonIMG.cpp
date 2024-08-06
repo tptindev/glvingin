@@ -18,6 +18,21 @@ SDLButtonIMG::~SDLButtonIMG()
     std::cout << __FUNCTION__ << std::endl;
 }
 
+void SDLButtonIMG::setNormal(std::shared_ptr<SDLImage> image_ptr)
+{
+    this->m_bgImgState[NORMAL] = image_ptr.get();
+}
+
+void SDLButtonIMG::setPressed(std::shared_ptr<SDLImage> image_ptr)
+{
+    this->m_bgImgState[PRESSED] = image_ptr.get();
+}
+
+void SDLButtonIMG::setReleased(std::shared_ptr<SDLImage> image_ptr)
+{
+    this->m_bgImgState[RELEASED] = image_ptr.get();
+}
+
 void SDLButtonIMG::Initialize()
 {
 }

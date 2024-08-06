@@ -59,6 +59,24 @@ void Script::Initialize()
         );
     FontManager::Instance()->Load(
         std::make_shared<SDLFont>(
+            FONT_RAINYHEARTS_64,
+            "./res/Fonts/rainyhearts.ttf",
+            64)
+        );
+    FontManager::Instance()->Load(
+        std::make_shared<SDLFont>(
+            FONT_RAINYHEARTS_72,
+            "./res/Fonts/rainyhearts.ttf",
+            72)
+        );
+    FontManager::Instance()->Load(
+        std::make_shared<SDLFont>(
+            FONT_RAINYHEARTS_80,
+            "./res/Fonts/rainyhearts.ttf",
+            80)
+        );
+    FontManager::Instance()->Load(
+        std::make_shared<SDLFont>(
             FONT_CRUX_21,
             "./res/Fonts/crux.otf",
             21)

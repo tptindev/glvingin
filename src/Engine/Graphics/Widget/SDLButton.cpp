@@ -127,10 +127,13 @@ void SDLButton::Render()
     SDL_SetRenderDrawColor(renderer, bgColor.r, bgColor.g, bgColor.b, bgColor.a);
     SDL_RenderFillRect(renderer, &this->m_rect);
 
-    SDL_Color &borderColor = this->m_borderColorState[this->m_currentState];
-    // Set the border color and draw the button's border
-    SDL_SetRenderDrawColor(renderer, borderColor.r, borderColor.g, borderColor.b, borderColor.a);
-    SDL_RenderDrawRect(renderer, &this->m_rect);
+    if (this->m_borderWidth > 0)
+    {
+        SDL_Color &borderColor = this->m_borderColorState[this->m_currentState];
+        // Set the border color and draw the button's border
+        SDL_SetRenderDrawColor(renderer, borderColor.r, borderColor.g, borderColor.b, borderColor.a);
+        SDL_RenderDrawRect(renderer, &this->m_rect);
+    }
 
     if (this->m_text != nullptr)
     {

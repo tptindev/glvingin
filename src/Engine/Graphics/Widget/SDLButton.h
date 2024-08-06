@@ -51,7 +51,8 @@ private:
     std::unordered_map<int, SDL_Color> m_borderColorState;
     std::unordered_map<int, SDL_Color> m_textColorState;
     std::shared_ptr<SDLText> m_text;
-    int m_borderWidth;
+    int m_borderWidth{0};
+    int m_radius{0};
 };
 
 #endif // SDLBUTTON_H
