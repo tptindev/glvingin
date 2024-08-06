@@ -145,6 +145,26 @@ void SDLButton::Render()
     }
 }
 
+void SDLButton::OnClicked()
+{
+    
+}
+
+void SDLButton::OnPressed()
+{
+    
+}
+
+void SDLButton::OnLongPressed()
+{
+    
+}
+
+void SDLButton::OnReleased()
+{
+    
+}
+
 SDLText* SDLButton::Text() const
 {
     return m_text.get();

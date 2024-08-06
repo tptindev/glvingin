@@ -75,15 +75,16 @@ void Script::Initialize()
             "./res/Fonts/rainyhearts.ttf",
             80)
         );
+
     FontManager::Instance()->Load(
         std::make_shared<SDLFont>(
-            FONT_CRUX_21,
-            "./res/Fonts/crux.otf",
-            21)
+            FONT_BLUESCREEN_80,
+            "./res/Fonts/bluescreen.ttf",
+            80)
         );
 
     SceneManager::Instance()->LoadScene(std::make_shared<MenuScene>(), true);
     SceneManager::Instance()->LoadScene(std::make_shared<SettingScene>());
     SceneManager::Instance()->LoadScene(std::make_shared<GameScene>());
-    std::cout << TextureManager::Instance()->Total() << std::endl;
+    std::cout << "Total Textures: " << TextureManager::Instance()->Total() << std::endl;
 }

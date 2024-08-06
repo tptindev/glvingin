@@ -25,6 +25,13 @@ public:
     void HandleEvent() override;
     void Render() override;
 
+    // AEventListener interface
+public:
+    void OnClicked() override;
+    void OnPressed() override;
+    void OnLongPressed() override;
+    void OnReleased() override;
+
 private:
     std::unordered_map<int, std::shared_ptr<SDLImage>> m_bgImgState;
 };

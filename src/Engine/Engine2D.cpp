@@ -8,6 +8,7 @@
 #include <SDLWindowWrapper.h>
 #include <Renderer2D.h>
 #include <TextureManager.h>
+#include <SDLEventDispatcher.h>
 
 Engine2D *Engine2D::s_instance = nullptr;
 Engine2D *Engine2D::Instance()
@@ -134,6 +135,7 @@ void Engine2D::Loop()
 
 void Engine2D::Quit()
 {
+    SDLEventDispatcher::ResetInstance();
     SceneManager::ResetInstance();
     TextureManager::Instance()->Clean();
     TextureManager::Instance()->ResetInstance();

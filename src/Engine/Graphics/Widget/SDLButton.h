@@ -5,10 +5,11 @@
 #include <unordered_map>
 #include <SDL2/SDL.h>
 #include "AWidget.h"
+#include "AEventListener.h"
 
 class SDLText;
 
-class SDLButton : public AWidget
+class SDLButton : public AWidget, AEventListener
 {
 public:
     enum SDLButtonState
@@ -44,7 +45,12 @@ public:
     void HandleEvent() override;
     void Render() override;
 
-
+    // AEventListener interface
+public:
+    void OnClicked() override;
+    void OnPressed() override;
+    void OnLongPressed() override;
+    void OnReleased() override;
 
 protected:
     int m_currentState;
