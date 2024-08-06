@@ -7,6 +7,7 @@
 #include "AWidget.h"
 
 class SDLText;
+
 class SDLButton : public AWidget
 {
 public:
@@ -21,19 +22,20 @@ public:
     SDLButton(int x, int y, int w, int h);
     virtual ~SDLButton();
 
-    void setBorderWidth(int width);
-    void setNormal(SDL_Color color);
-    void setPressed(SDL_Color color);
-    void setReleased(SDL_Color color);
-    void setNormal(SDL_Color bgColor, SDL_Color textColor);
-    void setPressed(SDL_Color bgColor, SDL_Color textColor);
-    void setReleased(SDL_Color bgColor, SDL_Color textColor);
-    void setNormal(SDL_Color bgColor, SDL_Color borderColor, SDL_Color textColor);
-    void setPressed(SDL_Color bgColor, SDL_Color borderColor, SDL_Color textColor);
-    void setReleased(SDL_Color bgColor, SDL_Color borderColor, SDL_Color textColor);
-    void attachText(int textureID, int fontID, const char* text);
-    SDLText* text() const;
-    void setCurrentState(int newCurrentState);
+    void SetBorderWidth(int width);
+    void SetNormal(SDL_Color color);
+    void SetPressed(SDL_Color color);
+    void SetReleased(SDL_Color color);
+    void SetNormal(SDL_Color bgColor, SDL_Color textColor);
+    void SetPressed(SDL_Color bgColor, SDL_Color textColor);
+    void SetReleased(SDL_Color bgColor, SDL_Color textColor);
+    void SetNormal(SDL_Color bgColor, SDL_Color borderColor, SDL_Color textColor);
+    void SetPressed(SDL_Color bgColor, SDL_Color borderColor, SDL_Color textColor);
+    void SetReleased(SDL_Color bgColor, SDL_Color borderColor, SDL_Color textColor);
+    void AttachText(int textureID, int fontID, const char* text);
+    void AttachSound(int soundID);
+    SDLText* Text() const;
+    void SetCurrentState(int newCurrentState);
 
     // AWidget interface
 public:

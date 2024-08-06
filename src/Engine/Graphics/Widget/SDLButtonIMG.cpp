@@ -19,7 +19,7 @@ SDLButtonIMG::~SDLButtonIMG()
     std::cout << __FUNCTION__ << std::endl;
 }
 
-void SDLButtonIMG::setNormal(std::shared_ptr<SDLImage> image_ptr)
+void SDLButtonIMG::SetNormal(std::shared_ptr<SDLImage> image_ptr, SDL_Color textColor)
 {
     image_ptr->Initialize();
     image_ptr->setX(this->x());
@@ -27,10 +27,14 @@ void SDLButtonIMG::setNormal(std::shared_ptr<SDLImage> image_ptr)
     image_ptr->setWidth(this->width());
     image_ptr->setHeight(this->height());
     image_ptr->Completed();
+    if (this->Text() != nullptr)
+    {
+        this->Text()->setColor(textColor.r, textColor.g, textColor.b, textColor.a);
+    }
     this->m_bgImgState[NORMAL] = image_ptr;
 }
 
-void SDLButtonIMG::setPressed(std::shared_ptr<SDLImage> image_ptr)
+void SDLButtonIMG::SetPressed(std::shared_ptr<SDLImage> image_ptr, SDL_Color textColor)
 {
     image_ptr->Initialize();
     image_ptr->setX(this->x());
@@ -38,10 +42,14 @@ void SDLButtonIMG::setPressed(std::shared_ptr<SDLImage> image_ptr)
     image_ptr->setWidth(this->width());
     image_ptr->setHeight(this->height());
     image_ptr->Completed();
+    if (this->Text() != nullptr)
+    {
+        this->Text()->setColor(textColor.r, textColor.g, textColor.b, textColor.a);
+    }
     this->m_bgImgState[PRESSED] = image_ptr;
 }
 
-void SDLButtonIMG::setReleased(std::shared_ptr<SDLImage> image_ptr)
+void SDLButtonIMG::SetReleased(std::shared_ptr<SDLImage> image_ptr, SDL_Color textColor)
 {
     image_ptr->Initialize();
     image_ptr->setX(this->x());
@@ -49,6 +57,10 @@ void SDLButtonIMG::setReleased(std::shared_ptr<SDLImage> image_ptr)
     image_ptr->setWidth(this->width());
     image_ptr->setHeight(this->height());
     image_ptr->Completed();
+    if (this->Text() != nullptr)
+    {
+        this->Text()->setColor(textColor.r, textColor.g, textColor.b, textColor.a);
+    }
     this->m_bgImgState[RELEASED] = image_ptr;
 }
 
@@ -72,8 +84,8 @@ void SDLButtonIMG::Render()
     int textureID = this->m_bgImgState[this->m_currentState]->textureID();
     ITexture* texture = TextureManager::Instance()->GetTextureByID(textureID);
     Renderer2D::Instance()->Render(texture, this->x(),this->y());
-    if (this->text() != nullptr)
+    if (this->Text() != nullptr)
     {
-        this->text()->Render();
+        this->Text()->Render();
     }
 }

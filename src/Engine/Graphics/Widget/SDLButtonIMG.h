@@ -3,6 +3,7 @@
 
 #include <unordered_map>
 #include <memory>
+#include <SDL2/SDL_pixels.h>
 #include "SDLButton.h"
 #include "SDLImage.h"
 
@@ -13,9 +14,9 @@ public:
     explicit SDLButtonIMG(int x, int y, int w = 0, int h = 0);
     ~SDLButtonIMG();
 
-    void setNormal(std::shared_ptr<SDLImage> image_ptr);
-    void setPressed(std::shared_ptr<SDLImage> image_ptr);
-    void setReleased(std::shared_ptr<SDLImage> image_ptr);
+    void SetNormal(std::shared_ptr<SDLImage> image_ptr, SDL_Color textColor = { 255, 255, 255, 255});
+    void SetPressed(std::shared_ptr<SDLImage> image_ptr, SDL_Color textColor = { 255, 255, 255, 255});
+    void SetReleased(std::shared_ptr<SDLImage> image_ptr, SDL_Color textColor = { 255, 255, 255, 255});
 
     // AWidget interface
 public:
