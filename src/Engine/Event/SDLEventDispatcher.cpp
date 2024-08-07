@@ -1,30 +1,25 @@
 #include "SDLEventDispatcher.h"
 #include <algorithm>
 #include <iostream>
+#include <Engine2D.h>
+
 SDLEventDispatcher *SDLEventDispatcher::s_instance = nullptr;
 SDLEventDispatcher::SDLEventDispatcher()
 {
     std::cout << __FUNCTION__ << std::endl;
 }
 
-void SDLEventDispatcher::AddListener(AEventListener *listener)
+void SDLEventDispatcher::Listen()
 {
-    decltype(this->m_listener)::iterator it = std::find(this->m_listener.begin(), this->m_listener.end(), listener);
-    if (it != this->m_listener.end())
-    {
-        this->m_listener.push_back(listener);
+    while(SDL_PollEvent(&this->m_event)){
+        switch(this->m_event.type){
+        case SDL_QUIT:
+            Engine2D::Running() = false;
+            break;
+        case SDL_MOUSEBUTTONDOWN:
+            break;
+        }
     }
-    return;
-}
-
-void SDLEventDispatcher::RemoveListener(AEventListener* listener)
-{
-
-}
-
-void SDLEventDispatcher::Dispatch()
-{
-
 }
 
 SDLEventDispatcher::~SDLEventDispatcher()

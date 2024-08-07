@@ -1,6 +1,7 @@
 #ifndef SDLEVENTDISPATCHER_H
 #define SDLEVENTDISPATCHER_H
 
+#include <SDL2/SDL_events.h>
 #include "AEventDispatcher.h"
 
 class SDLEventDispatcher : public AEventDispatcher
@@ -18,10 +19,10 @@ public:
 public:
     static SDLEventDispatcher* s_instance;
     SDLEventDispatcher();
+    void Listen() override;
 
-    void AddListener(AEventListener *listener) override;
-    void RemoveListener(AEventListener* listener) override;
-    void Dispatch() override;
+private:
+    SDL_Event m_event;
 };
 
 #endif // SDLEVENTDISPATCHER_H

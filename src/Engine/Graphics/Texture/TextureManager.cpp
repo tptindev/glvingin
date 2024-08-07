@@ -61,6 +61,7 @@ void TextureManager::LoadIMG(std::shared_ptr<ITexture> buffer, int id, const cha
 
 void TextureManager::LoadTxt(std::shared_ptr<ITexture> buffer, int id, const char* text, AFont* font, uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
+    if (font == nullptr) return;
     decltype(this->m_textures)::iterator it = this->m_textures.find(id);
     if (it == this->m_textures.end() && buffer->CreateFromText(text, font, r, g, b, a))
     {

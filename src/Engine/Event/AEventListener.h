@@ -5,6 +5,7 @@ class AEventListener
 {
 public:
     virtual ~AEventListener() = default;
+    virtual void OnHovered();
     virtual void OnTouched();
     virtual void OnClicked();
     virtual void OnPressed();

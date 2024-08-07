@@ -2,6 +2,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_mixer.h>
 #include <iostream>
 #include <functional>
 #include <SceneManager.h>
@@ -11,6 +12,7 @@
 #include <SDLEventDispatcher.h>
 
 Engine2D *Engine2D::s_instance = nullptr;
+bool Engine2D::s_running = false;
 Engine2D *Engine2D::Instance()
 {
     if (Engine2D::s_instance == nullptr)
@@ -66,6 +68,11 @@ void Engine2D::ResetInstance()
     return;
 }
 
+bool &Engine2D::Running()
+{
+    return Engine2D::s_running;
+}
+
 bool Engine2D::Initialize(const char* title)
 {
     this->m_title = title;
@@ -82,6 +89,11 @@ bool Engine2D::Initialize(const char* title)
     }
 
     if (TTF_Init() < 0)
+    {
+        return false;
+    }
+
+    if (Mix_Init(MIX_INIT_WAVPACK | MIX_INIT_MP3) == 0)
     {
         return false;
     }
@@ -114,20 +126,15 @@ bool Engine2D::Initialize(const char* title)
 
     this->Connections();
 
-    this->m_running = true;
+    this->s_running = true;
     return true;
 }
 
 void Engine2D::Loop()
 {
-    SDL_Event e;
-    while (m_running == true)
+    while (s_running == true)
     {
-        while (SDL_PollEvent(&e) != 0) {
-            if (e.type == SDL_QUIT) {
-                m_running = false;
-            }
-        }
+        SDLEventDispatcher::Instance()->Listen();
         this->Update(0.0f);
         this->Render();
     }

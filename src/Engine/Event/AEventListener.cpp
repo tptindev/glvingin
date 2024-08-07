@@ -5,6 +5,11 @@ void AEventListener::OnClicked()
 
 }
 
+void AEventListener::OnHovered()
+{
+
+}
+
 void AEventListener::OnTouched()
 {
 

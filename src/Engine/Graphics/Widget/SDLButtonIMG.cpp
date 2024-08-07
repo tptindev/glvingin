@@ -89,23 +89,3 @@ void SDLButtonIMG::Render()
         this->Text()->Render();
     }
 }
-
-void SDLButtonIMG::OnClicked()
-{
-    
-}
-
-void SDLButtonIMG::OnPressed()
-{
-    
-}
-
-void SDLButtonIMG::OnLongPressed()
-{
-    
-}
-
-void SDLButtonIMG::OnReleased()
-{
-    
-}

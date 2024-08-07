@@ -1,9 +1,11 @@
 #include "SDLButton.h"
 #include <iostream>
 #include <Renderer2D.h>
+#include <SDLEventDispatcher.h>
 #include "SDLText.h"
 SDLButton::SDLButton()
 {
+    SDLEventDispatcher::Instance()->AddListener(this);
     std::cout << __FUNCTION__ << std::endl;
 }
 
@@ -15,7 +17,7 @@ SDLButton::SDLButton(int x, int y, int w, int h)
     this->setHeight(h);
 
     this->m_rect = {x, y, w, h};
-
+    SDLEventDispatcher::Instance()->AddListener(this);
     std::cout << __FUNCTION__ << std::endl;
 }
 
@@ -143,26 +145,6 @@ void SDLButton::Render()
     {
         this->m_text->Render();
     }
-}
-
-void SDLButton::OnClicked()
-{
-    
-}
-
-void SDLButton::OnPressed()
-{
-    
-}
-
-void SDLButton::OnLongPressed()
-{
-    
-}
-
-void SDLButton::OnReleased()
-{
-    
 }
 
 SDLText* SDLButton::Text() const

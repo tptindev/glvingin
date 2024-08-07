@@ -14,6 +14,7 @@ public:
     Engine2D &operator=(Engine2D &&) = delete;
     static Engine2D *Instance();
     static void ResetInstance();
+    static bool &Running();
     ~Engine2D();
 
     // IEngine interface
@@ -36,10 +37,10 @@ private:
 
 private:
     const char* m_title;
+    static bool s_running;
     SDLWindowWrapper* m_winWrapper{nullptr};
     Renderer2D* m_renderer2d{nullptr};
     SceneManager* m_sceneManager{nullptr};
-    bool m_running{false};
 
 
 };

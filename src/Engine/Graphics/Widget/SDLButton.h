@@ -45,13 +45,6 @@ public:
     void HandleEvent() override;
     void Render() override;
 
-    // AEventListener interface
-public:
-    void OnClicked() override;
-    void OnPressed() override;
-    void OnLongPressed() override;
-    void OnReleased() override;
-
 protected:
     int m_currentState;
 

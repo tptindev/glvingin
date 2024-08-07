@@ -7,9 +7,11 @@ class AEventListener;
 class AEventDispatcher
 {
 public:
-    virtual void AddListener(AEventListener* listener) = 0;
-    virtual void RemoveListener(AEventListener* listener) = 0;
-    virtual void Dispatch() = 0;
+    virtual ~AEventDispatcher() = default;
+    virtual void Listen() = 0;
+    void AddListener(AEventListener* listener);
+    void RemoveListener(AEventListener* listener);
+    void Dispatch();
 
 protected:
     std::vector<AEventListener*> m_listener;
