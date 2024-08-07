@@ -3,18 +3,18 @@
 
 #include <vector>
 
-class AEventListener;
+class IEventListener;
 class AEventDispatcher
 {
 public:
     virtual ~AEventDispatcher() = default;
     virtual void Listen() = 0;
-    void AddListener(AEventListener* listener);
-    void RemoveListener(AEventListener* listener);
+    void AddListener(IEventListener* listener);
+    void RemoveListener(IEventListener* listener);
     void Dispatch();
 
 protected:
-    std::vector<AEventListener*> m_listener;
+    std::vector<IEventListener*> m_listener;
 };
 
 #endif // AEVENTDISPATCHER_H

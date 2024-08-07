@@ -20,7 +20,6 @@ public:
 
 private:
     std::shared_ptr<SDLImage> m_bg{nullptr};
-    std::shared_ptr<SDLText> m_hello{nullptr};
 };
 
 #endif // BACKGROUNDLAYER_H

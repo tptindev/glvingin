@@ -76,13 +76,6 @@ void Script::Initialize()
             80)
         );
 
-    FontManager::Instance()->Load(
-        std::make_shared<SDLFont>(
-            FONT_BLUESCREEN_80,
-            "./res/Fonts/bluescreen.ttf",
-            80)
-        );
-
     SceneManager::Instance()->LoadScene(std::make_shared<MenuScene>(), true);
     SceneManager::Instance()->LoadScene(std::make_shared<SettingScene>());
     SceneManager::Instance()->LoadScene(std::make_shared<GameScene>());

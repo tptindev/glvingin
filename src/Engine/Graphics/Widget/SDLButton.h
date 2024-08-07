@@ -9,7 +9,7 @@
 
 class SDLText;
 
-class SDLButton : public AWidget, AEventListener
+class SDLButton : public AWidget, public IEventListener
 {
 public:
     enum SDLButtonState

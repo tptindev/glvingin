@@ -11,12 +11,17 @@ SDLEventDispatcher::SDLEventDispatcher()
 
 void SDLEventDispatcher::Listen()
 {
+    int x = 0;
+    int y = 0;
+    SDL_GetMouseState(&x, &y);
+    std::cout << x << ":" << y << std::endl;
     while(SDL_PollEvent(&this->m_event)){
         switch(this->m_event.type){
         case SDL_QUIT:
             Engine2D::Running() = false;
             break;
-        case SDL_MOUSEBUTTONDOWN:
+        default:
+            this->Dispatch();
             break;
         }
     }

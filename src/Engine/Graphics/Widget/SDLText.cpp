@@ -4,6 +4,7 @@
 #include <FontManager.h>
 #include <TextureManager.h>
 #include <Renderer2D.h>
+#include <iostream>
 
 SDLText::SDLText(int textureID, const char *text, int x, int y)
     :m_textureID(textureID), m_text{text}
