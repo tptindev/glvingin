@@ -5,7 +5,7 @@
 #include <unordered_map>
 #include <SDL2/SDL.h>
 #include "AWidget.h"
-#include "AEventListener.h"
+#include "IEventListener.h"
 
 class SDLText;
 
@@ -45,6 +45,10 @@ public:
     void HandleEvent() override;
     void Render() override;
 
+    // IEventListener interface
+public:
+    void OnMouseStateChanged(const int &x, const int &y, int type, int button, int state, int clicks) override;
+
 protected:
     int m_currentState;
 
@@ -56,6 +60,8 @@ private:
     std::shared_ptr<SDLText> m_text;
     int m_borderWidth{0};
     int m_radius{0};
+
+
 };
 
 #endif // SDLBUTTON_H

@@ -147,6 +147,26 @@ void SDLButton::Render()
     }
 }
 
+void SDLButton::OnMouseStateChanged(const int &x, const int &y, int type, int button, int state, int clicks)
+{
+    if ((this->x() < x && this->y() < y) && (x < this->x() + this->width() && y < this->y() + this->height()))
+    {
+        this->m_currentState = PRESSED;
+        if (type == SDL_MOUSEBUTTONDOWN)
+        {
+
+        }
+        else if (type == SDL_MOUSEBUTTONUP)
+        {
+            this->m_currentState = RELEASED;
+        }
+    }
+    else
+    {
+        this->m_currentState = NORMAL;
+    }
+}
+
 SDLText* SDLButton::Text() const
 {
     return m_text.get();
