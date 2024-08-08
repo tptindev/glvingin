@@ -35,7 +35,15 @@ void SDLButton::SetNormal(SDL_Color color)
 {
     this->m_bgColorState[NORMAL] = color;
     this->m_borderColorState[NORMAL] = color;
-    this->m_textColorState[NORMAL] = color;}
+    this->m_textColorState[NORMAL] = color;
+}
+
+void SDLButton::SetActive(SDL_Color color)
+{
+    this->m_bgColorState[ACTIVE] = color;
+    this->m_borderColorState[ACTIVE] = color;
+    this->m_textColorState[ACTIVE] = color;
+}
 
 void SDLButton::SetPressed(SDL_Color color)
 {
@@ -57,6 +65,12 @@ void SDLButton::SetNormal(SDL_Color bgColor, SDL_Color textColor)
     this->m_textColorState[NORMAL] = textColor;
 }
 
+void SDLButton::SetActive(SDL_Color bgColor, SDL_Color textColor)
+{
+    this->m_bgColorState[ACTIVE] = bgColor;
+    this->m_textColorState[ACTIVE] = textColor;
+}
+
 void SDLButton::SetPressed(SDL_Color bgColor, SDL_Color textColor)
 {
     this->m_bgColorState[PRESSED] = bgColor;
@@ -74,6 +88,13 @@ void SDLButton::SetNormal(SDL_Color bgColor, SDL_Color borderColor, SDL_Color te
     this->m_bgColorState[NORMAL] = bgColor;
     this->m_borderColorState[NORMAL] = borderColor;
     this->m_textColorState[NORMAL] = textColor;
+}
+
+void SDLButton::SetActive(SDL_Color bgColor, SDL_Color borderColor, SDL_Color textColor)
+{
+    this->m_bgColorState[ACTIVE] = bgColor;
+    this->m_borderColorState[ACTIVE] = borderColor;
+    this->m_textColorState[ACTIVE] = textColor;
 }
 
 void SDLButton::SetPressed(SDL_Color bgColor, SDL_Color borderColor, SDL_Color textColor)
@@ -127,20 +148,28 @@ void SDLButton::HandleEvent()
 
 void SDLButton::Render()
 {
-    SDL_Renderer* renderer = Renderer2D::Instance()->renderer();
-    SDL_Color &bgColor = this->m_bgColorState[this->m_currentState];
-    // Set the background color and fill the button's rectangle
-    SDL_SetRenderDrawColor(renderer, bgColor.r, bgColor.g, bgColor.b, bgColor.a);
-    SDL_RenderFillRect(renderer, &this->m_rect);
-
-    if (this->m_borderWidth > 0)
+    decltype(this->m_bgColorState)::iterator it = this->m_bgColorState.find(this->m_currentState);
+    if (it != this->m_bgColorState.end())
     {
-        SDL_Color &borderColor = this->m_borderColorState[this->m_currentState];
-        // Set the border color and draw the button's border
-        SDL_SetRenderDrawColor(renderer, borderColor.r, borderColor.g, borderColor.b, borderColor.a);
-        SDL_RenderDrawRect(renderer, &this->m_rect);
-    }
+        SDL_Renderer* renderer = Renderer2D::Instance()->renderer();
+        SDL_Color &bgColor = this->m_bgColorState[this->m_currentState];
+        // Set the background color and fill the button's rectangle
+        SDL_SetRenderDrawColor(renderer, bgColor.r, bgColor.g, bgColor.b, bgColor.a);
+        SDL_RenderFillRect(renderer, &this->m_rect);
 
+        if (this->m_borderWidth > 0)
+        {
+            decltype(this->m_borderColorState)::iterator it = this->m_borderColorState.find(this->m_currentState);
+            if (it !=this->m_borderColorState.end())
+            {
+                SDL_Color &borderColor = this->m_borderColorState[this->m_currentState];
+                // Set the border color and draw the button's border
+                SDL_SetRenderDrawColor(renderer, borderColor.r, borderColor.g, borderColor.b, borderColor.a);
+                SDL_RenderDrawRect(renderer, &this->m_rect);
+            }
+        }
+
+    }
     if (this->m_text != nullptr)
     {
         this->m_text->Render();
@@ -149,12 +178,12 @@ void SDLButton::Render()
 
 void SDLButton::OnMouseStateChanged(const int &x, const int &y, int type, int button, int state, int clicks)
 {
-    if ((this->x() < x && this->y() < y) && (x < this->x() + this->width() && y < this->y() + this->height()))
+    if ((this->x() <= x && this->y() <= y) && (x <= this->x() + this->width() && y <= this->y() + this->height()))
     {
-        this->m_currentState = PRESSED;
+        this->m_currentState = ACTIVE;
         if (type == SDL_MOUSEBUTTONDOWN)
         {
-
+            this->m_currentState = PRESSED;
         }
         else if (type == SDL_MOUSEBUTTONUP)
         {

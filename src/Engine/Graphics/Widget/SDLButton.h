@@ -15,8 +15,10 @@ public:
     enum SDLButtonState
     {
         NORMAL,
+        ACTIVE,
         PRESSED,
-        RELEASED
+        RELEASED,
+        UNKNOW
     };
 
     SDLButton();
@@ -25,12 +27,15 @@ public:
 
     void SetBorderWidth(int width);
     void SetNormal(SDL_Color color);
+    void SetActive(SDL_Color color);
     void SetPressed(SDL_Color color);
     void SetReleased(SDL_Color color);
     void SetNormal(SDL_Color bgColor, SDL_Color textColor);
+    void SetActive(SDL_Color bgColor, SDL_Color textColor);
     void SetPressed(SDL_Color bgColor, SDL_Color textColor);
     void SetReleased(SDL_Color bgColor, SDL_Color textColor);
     void SetNormal(SDL_Color bgColor, SDL_Color borderColor, SDL_Color textColor);
+    void SetActive(SDL_Color bgColor, SDL_Color borderColor, SDL_Color textColor);
     void SetPressed(SDL_Color bgColor, SDL_Color borderColor, SDL_Color textColor);
     void SetReleased(SDL_Color bgColor, SDL_Color borderColor, SDL_Color textColor);
     void AttachText(int textureID, int fontID, const char* text);

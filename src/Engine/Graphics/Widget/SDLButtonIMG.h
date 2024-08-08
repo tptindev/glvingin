@@ -15,6 +15,7 @@ public:
     ~SDLButtonIMG();
 
     void SetNormal(std::shared_ptr<SDLImage> image_ptr, SDL_Color textColor = { 255, 255, 255, 255});
+    void SetActive(std::shared_ptr<SDLImage> image_ptr, SDL_Color textColor = { 255, 255, 255, 255});
     void SetPressed(std::shared_ptr<SDLImage> image_ptr, SDL_Color textColor = { 255, 255, 255, 255});
     void SetReleased(std::shared_ptr<SDLImage> image_ptr, SDL_Color textColor = { 255, 255, 255, 255});
 

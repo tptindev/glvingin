@@ -27,11 +27,26 @@ void SDLButtonIMG::SetNormal(std::shared_ptr<SDLImage> image_ptr, SDL_Color text
     image_ptr->setWidth(this->width());
     image_ptr->setHeight(this->height());
     image_ptr->Completed();
+    this->m_bgImgState[NORMAL] = image_ptr;
     if (this->Text() != nullptr)
     {
         this->Text()->setColor(textColor.r, textColor.g, textColor.b, textColor.a);
     }
-    this->m_bgImgState[NORMAL] = image_ptr;
+}
+
+void SDLButtonIMG::SetActive(std::shared_ptr<SDLImage> image_ptr, SDL_Color textColor)
+{
+    image_ptr->Initialize();
+    image_ptr->setX(this->x());
+    image_ptr->setY(this->y());
+    image_ptr->setWidth(this->width());
+    image_ptr->setHeight(this->height());
+    image_ptr->Completed();
+    this->m_bgImgState[ACTIVE] = image_ptr;
+    if (this->Text() != nullptr)
+    {
+        this->Text()->setColor(textColor.r, textColor.g, textColor.b, textColor.a);
+    }
 }
 
 void SDLButtonIMG::SetPressed(std::shared_ptr<SDLImage> image_ptr, SDL_Color textColor)
@@ -42,11 +57,11 @@ void SDLButtonIMG::SetPressed(std::shared_ptr<SDLImage> image_ptr, SDL_Color tex
     image_ptr->setWidth(this->width());
     image_ptr->setHeight(this->height());
     image_ptr->Completed();
+    this->m_bgImgState[PRESSED] = image_ptr;
     if (this->Text() != nullptr)
     {
         this->Text()->setColor(textColor.r, textColor.g, textColor.b, textColor.a);
     }
-    this->m_bgImgState[PRESSED] = image_ptr;
 }
 
 void SDLButtonIMG::SetReleased(std::shared_ptr<SDLImage> image_ptr, SDL_Color textColor)
@@ -57,11 +72,11 @@ void SDLButtonIMG::SetReleased(std::shared_ptr<SDLImage> image_ptr, SDL_Color te
     image_ptr->setWidth(this->width());
     image_ptr->setHeight(this->height());
     image_ptr->Completed();
+    this->m_bgImgState[RELEASED] = image_ptr;
     if (this->Text() != nullptr)
     {
         this->Text()->setColor(textColor.r, textColor.g, textColor.b, textColor.a);
     }
-    this->m_bgImgState[RELEASED] = image_ptr;
 }
 
 void SDLButtonIMG::Initialize()
@@ -81,9 +96,13 @@ void SDLButtonIMG::HandleEvent()
 
 void SDLButtonIMG::Render()
 {
-    int textureID = this->m_bgImgState[this->m_currentState]->textureID();
-    ITexture* texture = TextureManager::Instance()->GetTextureByID(textureID);
-    Renderer2D::Instance()->Render(texture, this->x(),this->y());
+    decltype(this->m_bgImgState)::iterator it = this->m_bgImgState.find(this->m_currentState);
+    if (it != this->m_bgImgState.end())
+    {
+        int textureID = it->second->textureID();
+        ITexture* texture = TextureManager::Instance()->GetTextureByID(textureID);
+        Renderer2D::Instance()->Render(texture, this->x(),this->y());
+    }
     if (this->Text() != nullptr)
     {
         this->Text()->Render();

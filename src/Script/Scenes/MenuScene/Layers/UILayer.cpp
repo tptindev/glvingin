@@ -28,6 +28,7 @@ void UILayer::Initialize()
     this->m_btnStart->Initialize();
     this->m_btnStart->AttachText(TextureIDs::MENU_BTN_START_LBL, FONT_RAINYHEARTS_32, "Start");
     this->m_btnStart->SetNormal(std::make_shared<SDLImage>(TextureIDs::MENU_BTN_NORMAL_TEXTURE_ID, "./res/Images/released.png"));
+    this->m_btnStart->SetActive(std::make_shared<SDLImage>(TextureIDs::MENU_BTN_ACTIVE_TEXTURE_ID, "./res/Images/pressed.png"));
     this->m_btnStart->SetPressed(std::make_shared<SDLImage>(TextureIDs::MENU_BTN_PRESSED_TEXTURE_ID, "./res/Images/pressed.png"));
     this->m_btnStart->SetReleased(std::make_shared<SDLImage>(TextureIDs::MENU_BTN_RELEASED_TEXTURE_ID, "./res/Images/released.png"));
     this->m_btnStart->Completed();
@@ -36,6 +37,7 @@ void UILayer::Initialize()
     this->m_btnSetting->Initialize();
     this->m_btnSetting->AttachText(TextureIDs::MENU_BTN_SETTING_LBL, FONT_RAINYHEARTS_32, "Setting");
     this->m_btnSetting->SetNormal(std::make_shared<SDLImage>(TextureIDs::MENU_BTN_NORMAL_TEXTURE_ID, "./res/Images/released.png"));
+    this->m_btnSetting->SetActive(std::make_shared<SDLImage>(TextureIDs::MENU_BTN_ACTIVE_TEXTURE_ID, "./res/Images/pressed.png"));
     this->m_btnSetting->SetPressed(std::make_shared<SDLImage>(TextureIDs::MENU_BTN_PRESSED_TEXTURE_ID, "./res/Images/pressed.png"));
     this->m_btnSetting->SetReleased(std::make_shared<SDLImage>(TextureIDs::MENU_BTN_RELEASED_TEXTURE_ID, "./res/Images/released.png"));
     this->m_btnSetting->Completed();
@@ -44,6 +46,7 @@ void UILayer::Initialize()
     this->m_btnAbout->Initialize();
     this->m_btnAbout->AttachText(TextureIDs::MENU_BTN_ABOUT_LBL, FONT_RAINYHEARTS_32, "About");
     this->m_btnAbout->SetNormal(std::make_shared<SDLImage>(TextureIDs::MENU_BTN_NORMAL_TEXTURE_ID, "./res/Images/released.png"));
+    this->m_btnAbout->SetActive(std::make_shared<SDLImage>(TextureIDs::MENU_BTN_ACTIVE_TEXTURE_ID, "./res/Images/pressed.png"));
     this->m_btnAbout->SetPressed(std::make_shared<SDLImage>(TextureIDs::MENU_BTN_PRESSED_TEXTURE_ID, "./res/Images/pressed.png"));
     this->m_btnAbout->SetReleased(std::make_shared<SDLImage>(TextureIDs::MENU_BTN_RELEASED_TEXTURE_ID, "./res/Images/released.png"));
     this->m_btnAbout->Completed();
@@ -52,6 +55,7 @@ void UILayer::Initialize()
     this->m_btnQuit->Initialize();
     this->m_btnQuit->AttachText(TextureIDs::MENU_BTN_QUIT_LBL, FONT_RAINYHEARTS_32, "Quit");
     this->m_btnQuit->SetNormal(std::make_shared<SDLImage>(TextureIDs::MENU_BTN_NORMAL_TEXTURE_ID, "./res/Images/released.png"));
+    this->m_btnQuit->SetActive(std::make_shared<SDLImage>(TextureIDs::MENU_BTN_ACTIVE_TEXTURE_ID, "./res/Images/pressed.png"));
     this->m_btnQuit->SetPressed(std::make_shared<SDLImage>(TextureIDs::MENU_BTN_PRESSED_TEXTURE_ID, "./res/Images/pressed.png"));
     this->m_btnQuit->SetReleased(std::make_shared<SDLImage>(TextureIDs::MENU_BTN_RELEASED_TEXTURE_ID, "./res/Images/released.png"));
     this->m_btnQuit->Completed();
